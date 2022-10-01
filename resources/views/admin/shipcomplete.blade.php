@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\OrderItems;
 @endphp
 
-<div class="bg-white mx-3 " style="margin-top:15%;  border-top:1px #dddddd solid; ">
+<div class="bg-white mx-3 " style="margin-top: 150px; border-top:1px #dddddd solid; ">
   <a href="" style="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none " style="border-bottom:1px #dddddd solid;">
     <span class="fs-5 fw-bold text-center w-100">To Ship</span>
   </a>
@@ -55,6 +55,19 @@ use App\Models\OrderItems;
             {{-- <td>
               <a href="/feedback/" class="btn userloggedbtn text-success ">Add Feedback</a>
             </td> --}}
+            <td>{{$info->tracknum}}</td>
+            {!! Form::open(['action'=>['App\Http\Controllers\ShippedController@update',$info->id],
+            'method'=>'POST', 'enctype'=>'multipart/form-data']) !!}
+            {{-- <td>
+              <a href="/feedback/" class="btn userloggedbtn text-success ">Add Feedback</a>
+            </td> --}}
+            <td>
+              {{Form::hidden('id',$info->id)}}
+              {{Form::hidden('_method','PUT')}}
+              {{Form::submit('Mark as Delivered',['class'=>'btn userloggedbtn text-success ','style'=>'border-radius:0%;'])}}
+              {!! Form::close() !!}
+              {{-- <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > Track Order</a> --}}
+            </td>
         @endforeach
         @else
           <td colspan="8" class="text-center"> 

@@ -1,7 +1,7 @@
 @php
     use App\Models\Biddings;  
 @endphp
-<a href="/admin/auctionlist" class="d-flex flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+<a href="/admin/auctionlist" style="margin-top: 150px;" class=" border d-flex flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
     <span class="fs-5 fw-bold text-center w-100">Auction List</span>
 </a>
 <div class="bg-white mb-5" style="margin:0%; width: 500px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">

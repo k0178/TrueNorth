@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Inventory;
 use App\Models\Funds;
+use App\Models\Biddings;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -23,6 +24,9 @@ class reportsController extends Controller
     {   
         $title = "Admin | Inventory Reports";
         $data = Inventory::orderBy('category','desc')->get();
+        // $maxbid_item = Biddings::select('*')->max('bidamt')->first();
+        // $maxbid_item = Biddings::select('prodname, bidamt')
+        //     ->max('bidamt');
         return view('reports.invRep',compact('title'))->with('data',$data);
         // $pdf = Pdf::loadView('reports.invRep');
         // return $pdf->stream();

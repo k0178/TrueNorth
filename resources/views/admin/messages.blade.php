@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('content')
 
-    <div class="border mx-5 " style="margin-top:15%;">
+    <div class="border mx-5 " style="margin-top: 150px;">
         <div class="d-flex  flex-shrink-0 p-3 align-items-center  link-dark text-decoration-none border-bottom">
             <span class="fs-5 fw-bold  w-100">Messages</span>
         </div>

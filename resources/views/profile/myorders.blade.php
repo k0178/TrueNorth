@@ -52,6 +52,10 @@ use App\Models\Auction;
                 <td>{{\Carbon\Carbon::parse($info->del_date)->isoFormat('MMM D, YYYY')}}</td>
                 @if($info->del_stat == "Pending")
                   <td class="text-warning">{{$info->del_stat}}</td>
+                @elseif($info->del_stat == "Shipped")
+                  <td class="text-success">{{$info->del_stat}}</td>
+                @elseif($info->del_stat == "Delivered")
+                <td class="text-success">{{$info->del_stat}}</td>
                 @endif
                 
                 <td>{{$info->tracknum}}</td>
@@ -59,7 +63,7 @@ use App\Models\Auction;
                   <a href="/feedback/" class="btn userloggedbtn text-success ">Add Feedback</a>
                 </td> --}}
                 <td>
-                  <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > Track Order</a>
+                  <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > <i class="bi bi-truck text-success">Track Order</i></a>
                 </td>
             @endforeach
             @else

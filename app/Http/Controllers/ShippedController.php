@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderItems;
 use App\Models\Order;
+use Session;
 class ShippedController extends Controller
 {
     /**
@@ -80,7 +81,12 @@ class ShippedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Order::where('id',$id)
+        ->update([
+            'del_stat'=>'Delivered'
+        ]);
+        Session::flash('success', "Order Successfully updated.");
+        return redirect()->back();
     }
 
     /**

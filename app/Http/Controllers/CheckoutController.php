@@ -119,7 +119,6 @@ class CheckoutController extends Controller
         $data->del_address =  Auth::user()->address;
         $data->zipcode = Auth::user()->zipcode;
         $data->total = $request->input('total_amt');
-        $data->tracknum = 'JNTEXPH'.rand(111111,999999);
         $data->del_date = Carbon::now()->addDays(7);
         $data->del_stat = 'Pending';
         $data->refnum = $request->refnum;
@@ -170,7 +169,7 @@ class CheckoutController extends Controller
             $data->del_address =  Auth::user()->address;
             $data->zipcode = Auth::user()->zipcode;
             $data->total = $request->total_amt;
-            $data->tracknum = 'JNTEXPH'.rand(111111,999999);
+            
             $data->del_date = Carbon::now()->addDays(7);
             $data->del_stat = 'Pending';
             $data->refnum = $request->refnum;

@@ -1,7 +1,7 @@
 @php
     use App\Models\Messages;
 @endphp
-<div class="border mx-5 mb-5 mt-4 ">
+<div class="border mx-5 mb-5  " style="margin-top: 150px;">
     <div class="d-flex  flex-shrink-0 p-3 r  link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold  w-100">Messages</span>
     </div>

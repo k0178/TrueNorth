@@ -5,6 +5,7 @@
   <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
       <span class="fs-5 fw-bold text-center w-100">Inventory Reports</span>
   </a>
+
 <div class="d-flex ">
   <table class="table table-striped">
       <thead>

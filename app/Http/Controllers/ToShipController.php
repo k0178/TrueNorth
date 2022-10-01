@@ -81,9 +81,11 @@ class ToShipController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $tracknum = 'JNTEXPH'.$id.rand(111111,999999);
         $data = Order::where('id',$id)
         ->update([
-            'del_stat'=>'Shipped'
+            'del_stat'=>'Shipped',
+            'tracknum'=> $tracknum
         ]);
 
         return back();

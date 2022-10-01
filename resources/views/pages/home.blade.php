@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 
-<div class="show text-center pt-4"><h4><b>True North Garments</b></h4>
-    <p><a href ="/store" style="font-size: small;">View Store</a></p>
+<div class="show text-center pt-4"><h4><b>TRUE NORTH GARMENTS</b></h4>
+    <p><a href ="/store" style="font-size: small;">VIEW STORE</a></p>
 </div>
   <div id="carouselExampleIndicators" class="carousel slide pb-5" data-ride="carousel">
       <div class="carousel-inner">

@@ -24,6 +24,7 @@
           <th scope="col">Name</th>
           <th scope="col">Reference Number</th>
           <th scope="col">Amount</th>
+          <th scope="col">Type</th>
           <th scope="col">Time of Request</th>
         </tr>
       </thead>
@@ -37,14 +38,15 @@
               <th scope="row">{{$rep->uname}}</th>
               <td>{{$rep->refnum}}</td>
               <td>{{$rep->amount}}</td>
-              <td>{{$rep->created_at}}</td>
+              <td>{{$rep->type}}</td>
+              <td>{{\Carbon\Carbon::parse($rep->created_at)->toDayDateTimeString()}}</td>
           </tr>
           @endforeach
         @else
         <tr class="text-center">
           <td colspan="100">      
               <p class="h3">
-                No Records Found!
+                No Records Found.
               </p>
           </td>
         </tr>  
