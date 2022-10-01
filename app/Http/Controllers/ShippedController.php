@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\OrderItems;
+use App\Models\Order;
 class ShippedController extends Controller
 {
     /**
@@ -14,11 +15,16 @@ class ShippedController extends Controller
     public function index()
     {
         $title = "Admin | Shipped";
+        $data = Order::orderBy('created_at','DESC')
+                    ->where('del_stat','=','Shipped')
+                    ->paginate(20);
+       
+
         if(Auth::user()->user_type == 1){
             return redirect('/home');
         }
         else{
-            return view('admin.shipcomplete', compact('title'));
+            return view('admin.shipcomplete', compact('title','data'));
             }
     }
 

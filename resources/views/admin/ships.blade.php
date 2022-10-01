@@ -18,11 +18,8 @@ use App\Models\OrderItems;
           <th scope="col">User ID</th>
           <th scope="col">Items</th>
           <th scope="col">Delivery Address </th>
-          <th scope="col">Zip Code </th>
           <th scope="col">Total</th>
           <th scope="col">Reference Number</th>
-          <th scope="col">Delivery Date</th>
-          <th scope="col">Order Date</th>
           <th scope="col">Status</th>
           <th scope="col">Tracking Number</th>
         </tr>
@@ -45,21 +42,26 @@ use App\Models\OrderItems;
               @endforeach
             </td>
             <td>{{$info->del_address}}</td>
-            <td>{{$info->zipcode}}</td>
+         
             <td>{{number_format($info->total,2)}}</td>
             <td>{{$info->refnum}}</td>
-            <td>{{\Carbon\Carbon::parse($info->del_date)->isoFormat('MMM D, YYYY')}}</td>
-            <td>{{\Carbon\Carbon::parse($info->created_at)->isoFormat('MMM D, YYYY')}}</td>
+        
             @if($info->del_stat == "Pending")
               <td class="text-warning">{{$info->del_stat}}</td>
             @endif
             
             <td>{{$info->tracknum}}</td>
+            {!! Form::open(['action'=>['App\Http\Controllers\ToShipController@update',$info->id],
+            'method'=>'POST', 'enctype'=>'multipart/form-data']) !!}
             {{-- <td>
               <a href="/feedback/" class="btn userloggedbtn text-success ">Add Feedback</a>
             </td> --}}
             <td>
-              <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > Track Order</a>
+              {{Form::hidden('id',$info->id)}}
+              {{Form::hidden('_method','PUT')}}
+              {{Form::submit('Mark as Shipped',['class'=>'btn userloggedbtn text-success ','style'=>'border-radius:0%;'])}}
+              {!! Form::close() !!}
+              {{-- <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > Track Order</a> --}}
             </td>
         @endforeach
         @else
@@ -71,4 +73,5 @@ use App\Models\OrderItems;
       </tbody>
     </table>   
 </div>
+<div class="justify-content-center  w-100 d-flex ">{{$data->links()}}</div>
 @endsection

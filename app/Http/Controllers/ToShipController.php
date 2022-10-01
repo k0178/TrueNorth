@@ -17,7 +17,8 @@ class ToShipController extends Controller
     {
         $title = "Admin | To Ship";
         $data = Order::orderBy('created_at','DESC')
-                    ->get();
+                    ->where('del_stat','=','Pending')
+                    ->paginate(15);
        
 
         if(Auth::user()->user_type == 1){
@@ -80,7 +81,13 @@ class ToShipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Order::where('id',$id)
+        ->update([
+            'del_stat'=>'Shipped'
+        ]);
+
+        return back();
+        
     }
 
     /**

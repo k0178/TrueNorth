@@ -39,6 +39,6 @@ class fundController extends Controller
         User::where('id', Auth::user()->id)
             ->update(['memberpmt'=>'Pending']);
 
-        return '/profile';
+        return back();
     }
 }

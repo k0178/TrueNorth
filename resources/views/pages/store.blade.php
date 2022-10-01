@@ -7,7 +7,7 @@
                 <div class="carousel-item active">
                   <div class="container">
                     <div class="row">
-
+                      @if (count($products)>0)
                       @foreach ($products as $item)
                       <div class="col-lg-4 mb-5">
                         <div class="card" style="border-radius: 0%;  height:480px;">
@@ -28,6 +28,10 @@
                         </div>
                       </div>
                       @endforeach
+                      @else
+                          <p>No items yet..</p>
+                      @endif
+                      
                       
                     </div>
                   </div>

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 
-<div class="show text-center pt-4"><h4><b>2022 RELEASES AND COLLECTION</b></h4>
-    <p><a href ="/store" style="font-size: small;">SHOW MORE</a></p>
+<div class="show text-center pt-4"><h4><b>True North Garments</b></h4>
+    <p><a href ="/store" style="font-size: small;">View Store</a></p>
 </div>
   <div id="carouselExampleIndicators" class="carousel slide pb-5" data-ride="carousel">
       <div class="carousel-inner">
@@ -30,7 +30,7 @@
   <div class="row justify-content-center align-items-center m-auto pb-4 pt-5 px-3">
     <div class ="col" style="text-align:left;">
       <a href="/store">SEE MORE</a>
-    </div>
+    </div>`
     <div class = "col" style=" text-align:right;">
       <h3>What's New! </h3>
     </div>
