@@ -1,0 +1,411 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+*{
+    
+  font-family: 'Rubik', sans-serif;
+    color: black;
+}
+
+/*modals*/
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+}
+
+.mdl_container{
+  position:fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.mdl_container.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+.mdl{
+  background-color:#ffffff;
+  width: 50%;
+  max-width: 100%;
+  padding: 30px 50px;
+  text-align: center;
+}
+
+
+/*modals*/
+.list-group-flush .active{ 
+  background-color: #f0eeee ; 
+  color:black;
+}
+
+
+
+
+
+
+html {
+	height: 100%;
+}
+
+body {
+	
+	height: 100%;
+} 
+
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  margin-top: 50px;
+
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+  margin-left: 150px; /* Same as the width of the sidebar */
+ 
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+* a:link{
+  color: rgb(0, 0, 0) ; 
+  text-decoration: none;
+}
+* a:hover{
+  text-decoration: underline ;
+  text-underline-offset: 4px;
+  color: rgb(0, 0, 0)!important;
+}
+* a{
+  color: rgb(107, 107, 107)!important; 
+    font-size: small;
+}
+
+.edit-prof:hover{
+  text-decoration: none ;
+}
+
+.userloggedbtn{
+  font-size: small;
+  color:  rgb(107, 107, 107);
+  border:none;
+  margin:0;
+  padding:0;
+}
+.userloggedbtn:focus{
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.userloggedbtn:hover{
+   color: #000000;
+   text-decoration: none;
+   text-underline-offset: 4px;
+}
+
+.save-prof:hover{
+  border: 1px #000000 solid;
+}
+
+.save-prof{
+  border:1px #706d6d solid;
+}
+
+.store-content{
+  display: flex;
+}
+
+
+.usermenu-container{
+  background-color: #f0eeee;
+}
+
+
+.search{
+  border: none;
+  border-radius: 0%;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #f0eeee;
+  border-bottom: #6b6b6b 1px solid;
+  font-size: small;
+}
+.search:focus{
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #f0eeee;
+}
+
+
+.search:focus input{
+  background: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+   padding: 10px;
+}
+
+
+
+.navbar a:link {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .navbar a:hover{
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+  }
+  .navbar a{
+      color: #6b6b6b;
+  }
+
+footer{
+  padding-left: 40px;
+  bottom: 0; 
+  position: relative; 
+  font-size: small;
+  width:100%;
+  left: 0;
+
+}
+
+#footer {
+  
+  color: #707070;
+  height: 2em;
+ 
+}
+.footer li{
+  padding-bottom: 5px;
+}
+footer .container-fluid .row .col{
+  text-align: right;
+    padding-bottom: 10px;
+    word-spacing: 35px;
+    padding-right: 40px;
+}
+
+.login .login-container input{
+    border: none; 
+    border-bottom: 2px solid rgb(0, 0, 0);
+    background: inherit;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+.login{
+background-color: #f0eeee;
+margin: auto;
+padding-bottom: 5%;
+padding-top: 5%;
+margin-top: 5%;
+margin-bottom: 5%;
+width:350px;
+max-width: 100%;
+justify-content: center;
+}
+
+.login .login-container{
+  text-align: center;
+}
+.login .button button{
+    border-radius: 0%;
+    
+}
+.login .button {
+  text-align: center;
+  
+}
+
+
+.login .login-container .fgpass {
+  
+   text-align: center;
+   font-size: small;
+   padding-top: 5px;
+}
+
+
+
+.login .login-container .keepsigned {
+   font-size: small;
+   padding-top: 10px;
+}
+
+.login .login-container .keepsigned label{
+    color: gray;
+ }
+
+ .login .login-container .policy p{
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-left: 50px;
+    font-size: small;
+    color: gray;
+}
+
+
+.login .reg p{
+   font-size: small;
+   padding-top: 5px;
+   color: gray;
+}
+
+
+
+  /* Register Area*/
+
+  .reg{
+    margin: auto;
+    background-color: #f0eeee;
+    width: 1000px;
+    max-width: 100%;
+    padding-top: 30px;
+  }
+  
+  .reg .reg-content{
+    padding-bottom: 10%;
+   
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+    color: #000000;
+  } 
+
+
+
+  .reg .reg-content label{
+    padding-bottom: 5px;
+    padding-top: 20px;
+  }
+  .reg .reg-content .reg-button .row input {
+    background-color: #000000;
+    border-radius: 0%;
+    
+  }
+
+  .reg .reg-content input{
+    border: none; 
+    border-bottom: 2px solid rgb(0, 0, 0);
+    background: inherit;
+    border-radius: 0%;
+  }
+
+
+  /*End Register Area*/
+
+ 
+
+.controls {
+    padding-top: 20px;
+}
+
+ /* Bidding Area*/
+.bidding .bidding-container{
+  background-color: #f0eeee;
+  margin: auto;
+  width: 1000px;
+  text-align: center;
+  }
+
+  .bidding .bidding-container .icon{
+    text-align: right;
+    padding-right: 15%;
+  }
+
+  .bidding .bidding-container .title{
+    text-align: left;
+    padding-left: 15%;
+  }
+
+  .bidding .item .item-pic{
+    text-align: left;
+   
+    padding-top: 5%;
+  }
+
+  .bidding .item .details {
+    text-align: left;
+  
+  }
+
+  .bidding .item .details-container{
+    text-align: left;
+  }
+  
+  .details .item-det h5{
+   color:grey;
+   
+  }
+
+  .item .item-container{
+    padding-top: 5%;
+    padding-left: 10%;
+  }
+
+  .bidding-det{
+    text-align: left;
+    margin-left: 20%;
+    padding-top: 10%;
+  }
+  .buy-now {
+    padding-top: 20px;
+  }
+  .bid-amt{
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+
+
+
+
+ /* End Bidding Area*/
+
+
+
+
+
