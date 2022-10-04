@@ -1,5 +1,5 @@
 @extends('layout.sidebar')
-{{-- --}}
+
 <div class="  text-center mt-5" style=" height: 100%;  width: 150px; border-right: 1px #f0eeee solid;">
   <div class=" sidebar-offcanvas h-100 overflow-auto " id="sidebar" role="navigation">
       

@@ -1,9 +1,10 @@
 @extends('layout.app')
 @section('title', 'Home | True North Garments')
 @section('content')
-<div class="container">
 
-<div class="show text-center pt-4"><h4><b>TRUE NORTH GARMENTS</b></h4>
+<div class="container">
+ 
+<div class="show text-center pt-4"><h2><b>TRUE NORTH GARMENTS</b></h2>
     <p><a href ="/store" style="font-size: small;">VIEW STORE</a></p>
 </div>
   <div id="carouselExampleIndicators" class="carousel slide pb-5" data-ride="carousel">
@@ -45,28 +46,31 @@
           <div class="row">
 
 @if(count($products)>0)
+<section id="portfolio" class="portfolio">
+  <div class="container ">
+    <div class="row portfolio-container">
   @foreach($products as $prod)
-        
-            <div class="col-lg-4 pb-5">
-              <div class="card" style="border-radius: 0%;  height:480px;">
-                <img
-                  src="/itemImages/{{$prod->itemImg}}"
-                  class="card-img-top  mx-auto" 
-                  style="border-radius: 0%;
-                  width: 300px;
-                  height: 300px;"
-                />
-                <div class="card-body">
-                    <h5 class="card-title"><b>{{$prod->prodName}}</b></h5>
-                    <h6 class="card-title">{{$prod->cond}}</h6>
-                </div>
-                <small>Ends on: <b>{{ Carbon\Carbon::parse($prod->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></small> 
-                <div class="pb-5">
-                  <b> <a href="/item/{{$prod->id}}"> VIEW AUCTION </a></b>
-                </div>
-              </div>
-            </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                      <div class="portfolio-wrap">
+                        <img src="/itemImages/{{$prod->itemImg}}" class="img-fluid border" alt="" style="width: 490px;
+                        height: 400px; ">
+                        <div class="portfolio-info ">
+                          <h4>{{$prod->prodName}}</h4>
+                          <p>Ends on: {{ Carbon\Carbon::parse($prod->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</p>
+                          <small style="color:white;">{{$prod->prodDeets}}</small>
+                          <div class="portfolio-links pt-5">
+                            
+                            <a href="/item/{{$prod->id}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$prod->prodName}}">VIEW AUCTION</a>
+                          </div>
+                        </div>
+                      </div>
+                      <h4 class="mt-3"><b>{{$prod->prodName}}</b></h4>
+                    </div>
+            {{-- </div> --}}
               @endforeach
+                  </div>
+                </div>
+              </section>
                 @else
                 <p> Auctions will arrive soon. </p>
             @endif
@@ -96,31 +100,31 @@
               </div>
 
               @if(count($products)>0)
+              <section id="portfolio" class="portfolio">
+                <div class="container ">
+                  <div class="row portfolio-container">
               @foreach($products as $prod)
-                        <div class="col-lg-4 pb-5">
-                          <div class="card" style="border-radius: 0%;  height:480px;">
-                            <img
-                              src="/itemImages/{{$prod->itemImg}}"
-                              class="card-img-top  mx-auto" 
-                              style="border-radius: 0%;
-                              width: 300px;
-                              height: 300px;"
-                            />
-                            <div class="card-body">
-                                <h5 class="card-title"><b>{{$prod->prodName}}</b></h5>
-                                <p class="card-text">{{$prod->prodDeets}}</p>
-                              
-                            </div>
-                            <div class="pb-5">
-                              <small>Ends on: <b>{{ Carbon\Carbon::parse($prod->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></small> 
-                              <br>
-                              <b> <a href="/item/{{$prod->id}}"> VIEW AUCTION </a></b>
-                            </div>
-                            
-                          </div>
-                        </div>
+              <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <img src="/itemImages/{{$prod->itemImg}}" class="img-fluid border" alt="" style="width: 490px;
+                  height: 400px; ">
+                  <div class="portfolio-info ">
+                    <h4>{{$prod->prodName}}</h4>
+                    <p>Ends on: {{ Carbon\Carbon::parse($prod->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</p>
+                    <small style="color:white;">{{$prod->prodDeets}}</small>
+                    <div class="portfolio-links pt-5">
+                      
+                      <a href="/item/{{$prod->id}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$prod->prodName}}">VIEW AUCTION</a>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="mt-3"><b>{{$prod->prodName}}</b></h4>
+              </div>
                     
                           @endforeach
+                        </div>
+                      </div>
+                    </section>
                             @else
                             <p> Auctions will arrive soon. </p>
                         @endif

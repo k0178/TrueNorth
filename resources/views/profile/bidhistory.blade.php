@@ -57,10 +57,10 @@
                 <div class="w-75 d-flex" style="border-right: 1px #dddddd solid; ">
                 <ul class="pe-3" style="list-style: none;  margin-top: auto; margin-bottom:auto;">
                     <small>
-                    <li><h6>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h6></li>
-                    <li><h6>Date: <b>{{\Carbon\Carbon::parse($info->created_at)->toDayDateTimeString()}} </b></h6></li>
-                    <li>Reference Num: <b>{{$info->refnum}}</b> </li>
-                    <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li>
+                        <li><h5>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h5></li>
+                        <li class="mb-1"> <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y h:i:s A')}} </b></li>
+                        <li>Reference #: <b>{{$info->refnum}}</b> </li>
+                        {{-- <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li> --}}
                     </small>
                 </ul>
                 </div>

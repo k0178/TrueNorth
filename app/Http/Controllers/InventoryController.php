@@ -119,6 +119,7 @@ class InventoryController extends Controller
 
             $my_max_bid = Biddings::where('user_id','=', Auth::user()->id)
                                     ->where('prod_id','=',$inventory)
+                                    ->where('retractstat',0)
                                     ->max('bidamt');
             
             $bid_data = Biddings::where('prod_id','=',$inventory)

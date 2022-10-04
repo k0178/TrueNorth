@@ -41,7 +41,7 @@ class AuctionController extends Controller
     {    $this->validate($request,[
         'endDate'=>'required',
     ]);
-    if($request->endDate < Carbon::now()){
+    if($request->endDate < Carbon::today()->toDateString()){
         Session::flash('error', "Invalid Date.");
         return redirect()->back()->withInput();
     }

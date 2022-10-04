@@ -21,18 +21,38 @@ class BiddingController extends Controller
     public function index(Request $request)
     {
         $title = "Biddings";
-        $data = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        $pending = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
         ->where('bidtransactions.user_id','=',Auth::user()->id)
         ->where('bidtransactions.bagstatus',0)
         ->where('bidtransactions.retractstat',0)
+        ->where('bidtransactions.winstatus','Pending')
         ->orderBy('bidtransactions.created_at','DESC')
         ->paginate(5);
 
+        $won = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        ->where('bidtransactions.user_id','=',Auth::user()->id)
+        ->where('bidtransactions.bagstatus',0)
+        ->where('bidtransactions.retractstat',0)
+        ->where('bidtransactions.winstatus','Won')
+        ->orderBy('bidtransactions.created_at','DESC')
+        ->paginate(5);
+
+        $lost = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        ->where('bidtransactions.user_id','=',Auth::user()->id)
+        ->where('bidtransactions.bagstatus',0)
+        ->where('bidtransactions.retractstat',0)
+        ->where('bidtransactions.winstatus','Lost')
+        ->orderBy('bidtransactions.created_at','DESC')
+        ->paginate(5);
+
+        // $winner = Biddings::select('*')
+        //                     ->where('prod_id',$request->input('id'))
+        //                     ->where('winstatus','Won')
+        //                     ->first();
+        
      
 
-        
-        return view('profile.biddings', compact('title'))
-                ->with('data',$data);
+        return view('profile.biddings', compact('title','pending','won','lost'));
 
        
     }
@@ -67,12 +87,9 @@ class BiddingController extends Controller
                                 ->max('bidamt');
         $prod= Auction::where('id','=',$request->id)->first();
         
-        if(($request->bid_amt) > $prod->buyPrice || ($request->bid_amt) == $prod->buyPrice ){
-            Session::flash('error', "Bid must be lower than the Buy Price.");
-            return redirect()->back()->withInput();
-        }
+    
 
-        elseif(Auth::user()->funds < $request->bid_amt){
+        if(Auth::user()->funds < $request->bid_amt){
             Session::flash('error', "Insufficient Funds. (Funds Needed: ".( $request->bid_amt - Auth::user()->funds ).')');
             return redirect()->back()->withInput();   
             
@@ -82,10 +99,6 @@ class BiddingController extends Controller
             Session::flash('error', "Insufficient Amount. (Starting Bid: ".( $prod->initialPrice).')');
             return redirect()->back()->withInput();
             } 
-        elseif(($request->bid_amt) < $highest_bid || ($request->bid_amt) == $highest_bid ){
-            Session::flash('error', "Bid must be higher than current max bid.");
-            return redirect()->back()->withInput();
-            }
     
         else{
             $data = new Biddings;
