@@ -230,11 +230,16 @@
                       
                         $winner = Biddings::where('bidtransactions.prod_id', '=', $info->prod_id)
                                           ->where('bidtransactions.winstatus', '=','Won')
-                                          ->first();
+                                          ->get();
+                  
                                         
                       @endphp
                                             
-                      <li><h5>Winner: <b>{{$winner}}</b></h5></li>
+                      <li><h5>Winner: <b>
+                        @foreach ($winner as $name)
+                            {{$name->uname}}
+                        @endforeach
+                      </b></h5></li>
                       {{-- <li>Winning Bid: <b>{{number_format($winner,2)}} PHP</b></li> --}}
                       {{-- <li class="mb-1"> <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y h:i:s A')}} </b></li>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li> --}}
