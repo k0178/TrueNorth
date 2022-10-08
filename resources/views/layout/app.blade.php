@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>{{$title}}</title>
     <script src="\js\app.js"></script>
+    <link rel="icon" href="/img/favicon.ico">
 </head>
 
 <body>

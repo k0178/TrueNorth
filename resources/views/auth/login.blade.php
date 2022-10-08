@@ -4,7 +4,7 @@
 <div class="container my-5 w-75">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="box-shadow: 0 0 8px 1px #ccc;" >
                 <div class="card-header"><b>{{ __('Login') }}</b></div>
 
                 <div class="card-body">

@@ -9,7 +9,7 @@ use App\Models\User;
 
 $ref_num = Auth::user()->id.date('ymdHis');
 $del_fee = 45;
-$total_amt = $item->buyPrice + $del_fee ;
+$total_amt = $total->bidamt + $del_fee ;
 @endphp
 <div class="bg-white my-5 mx-5 " style=" border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-bottom:1px #f0eeee solid;border-left:1px #f0eeee solid;">
     <a class=" d-flex flex-shrink-0 p-3 link-dark text-decoration-none  ">
@@ -30,7 +30,7 @@ $total_amt = $item->buyPrice + $del_fee ;
                         <ul class="pe-3" style="list-style: none;   margin-bottom:auto;">
                             <li><h5><b>{{$item->prodName}} </b></h5></li>
                             {{-- @if($price === null) --}}
-                            <li><h6>Buy Price:<b>{{number_format($item->buyPrice,2)}} PHP </b></h6></li>
+                            <li><h6>Price:<b> {{number_format($total->bidamt,2)}} PHP </b></h6></li>
                             {{-- @else
                             <li><h6>Buy Price:<b>{{number_format($price->bidamt,2)}} PHP</b></h6></li>
                             @endif --}}
@@ -73,7 +73,7 @@ $total_amt = $item->buyPrice + $del_fee ;
                         <ul class="" style="list-style: none;   margin-bottom:auto;">
                         <small>
                             {{-- @if($price === null) --}}
-                            <li><h6><b>{{number_format($item->buyPrice,2)}} PHP </b></h6></li>
+                            <li><h6><b>{{number_format($total->bidamt,2)}} PHP </b></h6></li>
                             {{-- @else
                             <li><h6><b>{{number_format($price->bidamt,2)}} PHP</b></h6></li>
                             @endif --}}
@@ -83,7 +83,7 @@ $total_amt = $item->buyPrice + $del_fee ;
                 </div>
                 <hr>
                 <div align="right" class="w-100 px-3">
-                    <label><h5>Sub-Total: <b>{{number_format($item->buyPrice,2)}}</b></h5> </label><br>
+                    <label><h5>Sub-Total: <b>{{number_format($total->bidamt,2)}}</b></h5> </label><br>
                     @php
                        
                     @endphp

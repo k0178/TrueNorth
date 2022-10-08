@@ -54,7 +54,8 @@ if(distance < 0){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">                        
+                        
                             <h4 class="mb-3">Starting Bid: <b>{{number_format($item->initialPrice,2)}} PHP</b></h4>
                             <h5>Category: <b>{{$item->category}}</b></h5>
                             <h5>Condition: <b>{{$item->cond}}</b> </h5>
@@ -68,77 +69,77 @@ if(distance < 0){
                                 <h5>Auction Ends on:<b> {{ Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></h5>
                                 <p id="end_date" class=""></p>
                             @endif
-                           
                             <div class="">
-                                {{-- @if(Auth::user()->funds > $item->initialPrice)
-                                    Funds: <b class="text-success">{{number_format(Auth::user()->funds,2)}} PHP</b> 
-                                @else
-                                    Funds: <b class="text-danger">{{number_format(Auth::user()->funds,2)}} PHP</b> 
-                                    <a href="/fundings" class="userloggedbtn ms-1"> <i class="bi bi-plus-circle" style="font-size: 18px;"></i></a>
-                                @endif  --}}
-                    @if(Auth::check())
-                    <div class="">
-                        <h5 class="mb-2">Your Max Bid: <b>{{number_format($my_max_bid,2)}} PHP</b> </h5>
-                        
-                        @if(empty($pfp))
-                            <h5><b>No Bidders yet.</b></h5>
-                        @else
-                            <h5>Highest Bidder: <img src="/userPFP/{{$pfp->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-2" ><b>{{$max_bidder->uname}}</b></h5>
-                        @endif
-                    </div>
-                                @if(Auth::user()->user_status == 0)
-                                    <h6 class="">Enter your Bidding Amount</h6>
-                                    {!! Form::number('bid_amt', '', ['class'=>'form-control','disabled']) !!}
-                                    {{Form::submit('PLACE BID', ['class'=>'btn btn-dark mt-5 w-50 mb-2','style'=>'border-radius:0%; ','disabled']) }}
-                                @else
-                                    @if($bid_data === null || $bid_status = 0)
-                                        {!! Form::open(['action'=>'App\Http\Controllers\BiddingController@store','method'=>'POST',$item->id]) !!}
-                                            {{Form::hidden('id',$item->id)}}
-                                            {!! Form::number('bid_amt', '', ['class'=>'form-control me-5','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter your Bidding Amount','required']) !!}
-                                            {{--  --}}
-                
-                
-                                        <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-dark btn btn-dark mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    PLACE BID
-                                </button>
-                                
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Bid Agreement</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                If you won an auction, you must place an order for the item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
-                                                You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
-                                                <br>
-                                                <br>
-                                                <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
-                                            </div>
+                                            {{-- @if(Auth::user()->funds > $item->initialPrice)
+                                                Funds: <b class="text-success">{{number_format(Auth::user()->funds,2)}} PHP</b> 
+                                            @else
+                                                Funds: <b class="text-danger">{{number_format(Auth::user()->funds,2)}} PHP</b> 
+                                                <a href="/fundings" class="userloggedbtn ms-1"> <i class="bi bi-plus-circle" style="font-size: 18px;"></i></a>
+                                            @endif  --}}
+                                @if(Auth::check())
+                                <div class="">
+                                    <h5 class="mb-2">Your Max Bid: <b>{{number_format($my_max_bid,2)}} PHP</b> </h5>
+                                </div>
+                            
+                                            @if(Auth::user()->user_status == 0)
+                                                <h6 class="">Enter your Bidding Amount</h6>
+                                                {!! Form::number('bid_amt', '', ['class'=>'form-control','disabled']) !!}
+                                                {{Form::submit('PLACE BID', ['class'=>'btn btn-dark mt-5 w-50 mb-2','style'=>'border-radius:0%; ','disabled']) }}
+                                            @else
+                                                @if($bid_data === null || $bid_status = 0)
+                                                    @if(empty($pfp))
+                                                        <h5><b>No Bidders yet.</b></h5>
+                                                    @else
+                                                        <h5>Highest Bidder: <img src="/userPFP/{{$pfp->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-2" ><b>{{$max_bidder->uname}}</b></h5>
+                                                    @endif
+                                                    {!! Form::open(['action'=>'App\Http\Controllers\BiddingController@store','method'=>'POST',$item->id]) !!}
+                                                        {{Form::hidden('id',$item->id)}}
+                                                        {!! Form::number('bid_amt', '', ['class'=>'form-control me-5','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter your Bidding Amount','required']) !!}
+                                                        {{--  --}}
+                            
+                            
+                                                    <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-dark btn btn-dark mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                PLACE BID
+                                            </button>
                                             
-                                            
-                                            <div class="modal-footer justify-content-center  align-items-center">
-                                                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> --}}
-                                                {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
-                                                {{Form::submit('CONFIRM BID', ['class'=>' btn btn-dark  w-50 mb-2','style'=>'border-radius:0%;']) }}
-                                                {{Form::hidden('id',$item->id)}}
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Bid Agreement</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            If you won an auction, you must place an order for the item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
+                                                            You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
+                                                            <br>
+                                                            <br>
+                                                            <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
+                                                        </div>
+                                                        
+                                                        
+                                                        <div class="modal-footer justify-content-center  align-items-center">
+                                                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> --}}
+                                                            {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
+                                                            {{Form::submit('CONFIRM BID', ['class'=>' btn btn-dark  w-50 mb-2','style'=>'border-radius:0%;']) }}
+                                                            {{Form::hidden('id',$item->id)}}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            {!! Form::close() !!}
+                                                @else
+                                                
+                                                    <div class="mt-3">
+                                                        <h4>Bid Placed:<b> {{number_format($bid_data->bidamt,2)}} PHP</b></h4>
+                                                        <b><a href="/biddings" class="" style="font-size: 15px;">View your Biddings</a></b>
+                                                    </div>
+                                                @endif
+                                            @endif
                                         </div>
                                     </div>
-                                </div>
-                                {!! Form::close() !!}
-                                    @else
-                                        <div class="">
-                                            <h5><b>Bid Placed: {{number_format($bid_data->bidamt,2)}} PHP</b></h5>
-                                            <a href="/biddings" class="userloggedbtn" style="font-size: 15px;">View your Biddings</a>
-                                        </div>
-                                    @endif
-                                @endif
-                            </div>
-                        </div>
                     @else
                         <div class="mt-5">
                             <b >You need to Login first.</b> 
@@ -147,11 +148,8 @@ if(distance < 0){
                                 LOGIN TO BID
                             </button>
                         </div>
-                            
-                
                     @endif
                     </div>
-
                 </section>
 
         {!! Form::open(['action'=>'App\Http\Controllers\storePagesController@store_index','method'=>'GET']) !!}

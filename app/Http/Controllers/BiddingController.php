@@ -42,6 +42,7 @@ class BiddingController extends Controller
         ->where('bidtransactions.bagstatus',0)
         ->where('bidtransactions.retractstat',0)
         ->where('bidtransactions.winstatus','Lost')
+        ->where('bidtransactions.orderstatus',0)
         ->orderBy('bidtransactions.created_at','DESC')
         ->paginate(5);
 
@@ -50,14 +51,39 @@ class BiddingController extends Controller
         //                     ->where('winstatus','Won')
         //                     ->first();
         
-     
-
         return view('profile.biddings', compact('title','pending','won','lost'));
 
        
     }
 
-    
+    static function won_qty(){
+        $user_id = Auth::user()->id;
+        return Biddings::where('user_id',$user_id)
+                        ->where('winstatus','Won')
+                        ->where('orderstatus',0)
+                        ->where('bidstatus',1)
+                        ->where('bagstatus',0)
+                        ->count();
+    }
+
+    static function pend_qty(){
+        $user_id = Auth::user()->id;
+        return Biddings::where('user_id',$user_id)
+                        ->where('winstatus','Pending')
+                        ->where('bidstatus',1)
+                        ->count();
+    }
+
+    static function lost_qty(){
+        $user_id = Auth::user()->id;
+        return Biddings::where('user_id',$user_id)
+                        ->where('winstatus','Lost')
+                        ->where('bidstatus',1)
+                        ->where('retractstat',0)
+                        ->where('bagstatus',0)
+                        ->where('orderstatus',0)
+                        ->count();
+    }
 
     /**
      * Show the form for creating a new resource.

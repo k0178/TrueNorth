@@ -109,6 +109,9 @@ class InventoryController extends Controller
                         ->where('bidtransactions.prod_id','=',$inventory)
                         ->where('bidamt','=',$highest_bid)
                         ->first();
+                        $datacount = Biddings::where('prod_id','=',$inventory)
+                                ->where('retractstat',0)
+                                ->count();
         
         $orderstat = Biddings::select('*')
                             ->where('orderstatus',1)
@@ -126,6 +129,9 @@ class InventoryController extends Controller
                                 ->where('user_id','=', Auth::user()->id)
                                 ->where('retractstat',0)
                                 ->first();
+            
+            
+
             $bag_status = Biddings::select('bagstatus')
                                 ->where('prod_id','=',$inventory)
                                 ->where('user_id','=', Auth::user()->id)
@@ -158,7 +164,8 @@ class InventoryController extends Controller
                                                 'pfp',
                                                 'bag_status',
                                                 'bagwoutbid',
-                                                'orderstat'
+                                                'orderstat',
+                                                'datacount'
                                                 ));
     }
 

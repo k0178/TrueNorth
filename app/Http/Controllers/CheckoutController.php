@@ -66,10 +66,9 @@ class CheckoutController extends Controller
     public function show($id)
     {   
         $title = "Checkout";
-        $total = Bag::join('bidtransactions','bag.product_id','=','bidtransactions.prod_id')
-        ->where('bag.user_id', Auth::user()->id)
-        ->where('bidtransactions.bagstatus', 1)
-        ->sum('bidtransactions.bidamt');
+        $total = Biddings::where('user_id',Auth::user()->id)
+                        ->where('prod_id',$id)
+                        ->first();
 
         $item = Auction::where('id',$id)->first();
         return view('pages.checkoutsingle')

@@ -78,6 +78,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -101,9 +102,9 @@ body {
     animation: fadeInAnimation ease 0.8s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-
+    
 }
-  
+
 @keyframes fadeInAnimation {
   0% {
       opacity: 0;
@@ -652,6 +653,7 @@ progress {
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+  
 }
 
 @media (min-width: 576px) {
@@ -11218,6 +11220,7 @@ justify-content: center;
   }
   .portfolio .portfolio-item {
     margin-bottom: 30px;
+   
   }
   
   .portfolio #portfolio-flters {
@@ -11257,6 +11260,7 @@ justify-content: center;
     overflow: hidden;
     z-index: 1;
     background: rgba(85, 98, 112, 0.6);
+    border: #f0eeee 1px solid;
   }
   
   .portfolio .portfolio-wrap::before {
@@ -11322,9 +11326,9 @@ justify-content: center;
 
   }
   
-  .portfolio .portfolio-wrap .portfolio-links a:hover {
+  /* .portfolio .portfolio-wrap .portfolio-links a:hover {
     color: black !important;
-  }
+  } */
   
   .portfolio .portfolio-wrap:hover::before {
     opacity: 1;

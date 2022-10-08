@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     
     <title>{{$title}}</title> 
+    <link rel="icon" href="/img/favicon.ico">
 </head>
 <body>
     <div class="fixed-top">

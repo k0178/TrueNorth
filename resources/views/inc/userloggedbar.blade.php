@@ -9,7 +9,7 @@ $bag_qty = BagController::bag_qty();
 $data = User::where('username',$username)->first();
 ?>
 
-<div class="userloggedbar d-flex  align-items-center border-bottom justify-content-end bg-white py-2 px-4">
+<div class="userloggedbar d-flex  align-items-center  justify-content-end py-2 px-4" style="background: #f0eeee;">
     <div class="userloggedbar-content d-flex align-items-center">
         <a href="/messages/{{$username}}" class="userloggedbtn btn " style="font-size: medium;">
             <label style="font-size: 12px; " class="text-danger"></label>
