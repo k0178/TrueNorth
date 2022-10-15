@@ -38,6 +38,7 @@ class LoginController extends Controller
     
         if((Auth::user()-> user_type) == 0){
             return '/admin/index';
+            
         }
         
         else {

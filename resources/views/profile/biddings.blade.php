@@ -131,7 +131,7 @@ $lost_qty = BiddingController::lost_qty();
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
             @if(count($won) > 0)
             @foreach($won as $info)
-            <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
+            <div class="list-group list-group-flush scrollarea mt-3 mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
               <div class="d-flex align-items-center">
                 <div class="d-flex">
                   <img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
@@ -160,6 +160,7 @@ $lost_qty = BiddingController::lost_qty();
                   <ul  style="list-style: none;">
                       <li><h5>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h5></li>
                       <li class="mb-1"> Placed at: <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
+                      <li class="mb-1"> Must place order on or before: <b>{{\Carbon\Carbon::parse($info->orderDate)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>
                       {{-- <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li> --}}
                   </ul>
@@ -193,7 +194,7 @@ $lost_qty = BiddingController::lost_qty();
                             <i class="bi bi-x-circle me-1" style="color: white;"></i> Retract Bid
                           </button>
                         </div>
-                        
+                      
                         {!! Form::close() !!}
                     </div>
                 </div>
