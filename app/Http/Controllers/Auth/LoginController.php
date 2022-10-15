@@ -36,9 +36,18 @@ class LoginController extends Controller
     protected function redirectTo()
     {
     
-        if((Auth::user()-> user_type) == 0){
+        if((Auth::user()-> user_type) ==5){
             return '/admin/index';
             
+        }
+        elseif((Auth::user()-> user_type) == 2){
+            return '/admin/toPay';
+        }
+        elseif((Auth::user()-> user_type) == 3){
+            return '/admin/shippings';
+        }
+        elseif((Auth::user()-> user_type) == 4){
+            return '/admin/reports';
         }
         
         else {
