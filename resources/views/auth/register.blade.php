@@ -146,7 +146,7 @@
                         <div class="text-center">
                             
                                 <button type="submit" class="btn btn-dark w-25 mb-2" style="border-radius: 0%; background:#1C1C1E; color:white;">
-                                    {{ __('Register') }}
+                                    {{ __('REGISTER') }}
                                 </button> 
                                 <a href="/login">
                                     <p>Already have an account? <b>Log in</b> instead.</p>

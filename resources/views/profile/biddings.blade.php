@@ -10,11 +10,11 @@ $lost_qty = BiddingController::lost_qty();
 
 ?>
     @section('content')
-    <div class="container  my-5 w-75 border">
+    <div class="container  my-5  border">
       <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none" style="border-bottom:1px #dddddd solid;">
       <span class="fs-5 fw-bold text-center w-100">Biddings</span>
     </a>
-    <div class="container my-5 w-100 ">
+    <div class="container my-5 ">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active fw-bold text-dark" style="font-size:16px;" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><i class="mx-1 bi bi-hourglass-split"></i>Pending Bids
@@ -126,7 +126,7 @@ $lost_qty = BiddingController::lost_qty();
               <h3 class="m-5 text-center">Nothing to show.</h3>
 
             @endif
-            <div class="justify-content-center mt-3 w-100 d-flex ">{{$pending->links()}}</div>
+            <div class="justify-content-center mt-3  d-flex ">{{$pending->links()}}</div>
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
             @if(count($won) > 0)
@@ -149,41 +149,44 @@ $lost_qty = BiddingController::lost_qty();
                 <div class="pt-3">
                   
                     <ul style="list-style: none;">
-                      <li><h5><b>{{$info->prodName}}</b> </h5></li> 
+                      <li class="d-flex align-items-center"><h5><b>{{$info->prodName}}</b> </h5>
+                        {!! Form::open(['action'=>['App\Http\Controllers\BagController@addToBag',$info->product_id],
+                          'method'=>'GET'])!!}
+                          {{ Form::hidden('product_id',$info->prod_id) }}
+                            <button style="border-radius: 0%;"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Add to Bag">
+                        <i class="bi bi-bag-plus " style="font-size: 20px;"></i>
+                      </button>
+                      {!! Form::close() !!}
+                      
+                      </li> 
                       <li>Type: <b>{{$info->type}}</b></li>
                       <li>Category: <b>{{$info->category}}</b></li>
                       <li>Condition: <b>{{$info->cond}}</b></li>
                       <li>End Date: <b>{{Carbon\Carbon::parse($info->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
                     </ul>
                 </div>
-                <div class="">
+                <div class="w-50">
                   <ul  style="list-style: none;">
                       <li><h5>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h5></li>
                       <li class="mb-1"> Placed at: <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
-                      <li class="mb-1"> Must place order on or before: <b>{{\Carbon\Carbon::parse($info->orderDate)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
+                      <li class="mb-1 mt-3"> Must place order before: <br> <b>{{\Carbon\Carbon::parse($info->orderDate)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>
                       {{-- <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li> --}}
                   </ul>
                 </div>
-                <div class="ms-3 d-flex">
+              
                   @if(\Carbon\Carbon::parse($info->endDate)->subDays(1) <= (\Carbon\Carbon::today()) )
-                    <button type="button" class="btn btn-success me-3" style="border-radius: 0%; "
+                  
+                  <button type="button" class="btn btn-success ms-3 d-flex" style="border-radius: 0%; "
                       data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-custom-class="custom-tooltip"
-                      data-bs-title="You must place an order for this item within 14 days or else it will be deleted from your biddings
-                                    and the Administrator may block you from bidding on other auctions."
+                      data-bs-title="Checkout"
                       onclick="location.href='/checkout/{{$info->prod_id}}'">
                       <i class="bi bi-bag-check me-1" style="color:white;"></i>
+                      CHECKOUT
                       {{-- <a href="/checkout/{{$info->prod_id}}" class="userloggedbtn w-50" style="border-radius: 0%;"></a> --}}
                     </button>
-                    {!! Form::open(['action'=>['App\Http\Controllers\BagController@addToBag',$info->product_id],
-                    'method'=>'GET'])!!}
-                    {{ Form::hidden('product_id',$info->prod_id) }}
-                      <button  class="btn btn-light" style="border-radius: 0%;">
-                        <i class="bi bi-bag-plus"></i>
-                      </button>
-                      {!! Form::close() !!}
-                  </div>
                     @else
                     <div class=" text-center mx-3">
                       {!! Form::open(['action'=>['App\Http\Controllers\BiddingController@retractbid',$info->id],
@@ -202,7 +205,7 @@ $lost_qty = BiddingController::lost_qty();
                 <hr class="text-secondary">
               </div>
               
-              <button type="button" class="btn btn-outline-dark mt-5  mb-3" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <button type="button" class="btn btn-outline-dark my-3" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   View Bidding Results
               </button>
               
@@ -298,18 +301,15 @@ $lost_qty = BiddingController::lost_qty();
                         $winner = Biddings::join('users','users.username','bidtransactions.uname')
                                           ->where('bidtransactions.prod_id', '=', $info->prod_id)
                                           ->where('bidtransactions.winstatus', '=','Won')
-                                          ->get();
+                                          ->first();
                         $win_bid = Biddings::where('bidtransactions.prod_id', '=', $info->prod_id)
                                     ->where('bidtransactions.winstatus', '=','Won')
-                                    ->get();
+                                    ->first();
                       @endphp
                       
-                      @foreach ($winner as $win)
-                        <li><h5><i class="me-1 bi bi-trophy "></i><img src="/userPFP/{{$win->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle mx-1" ><b class="text-success">{{$win->uname}} </b> for <b>{{number_format($win->bidamt,2)}} PHP</b></h5></li>
-                        @foreach($win_bid as $windata)
-                          <li>Placed at: <b>{{\Carbon\Carbon::parse($windata->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
-                          @endforeach
-                      @endforeach
+                        <li><h5><i class="me-1 bi bi-trophy "></i><img src="/userPFP/{{$winner->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle mx-1" ><b class="text-success">{{$winner->username}} </b> for <b>{{number_format($winner->bidamt,2)}} PHP</b></h5></li>
+                        <li>Placed at: <b>{{\Carbon\Carbon::parse($win_bid->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
+                        
                       <br>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>
                       <li>Your Bid: <b>{{number_format($info->bidamt,2)}} PHP</b></li>

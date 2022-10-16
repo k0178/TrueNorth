@@ -16,7 +16,7 @@ class UserFundingsController extends Controller
     public function index()
     {
 
-        $title = "True North Garments | Fundings";
+        $title =  Auth::user()->username ." | Fundings";
         $username = Auth::user()->username;
         $data = Funds::where('uname','=',Auth::user()->username)->orderBy('created_at','DESC')->get();
         $funds = User::where('username',$username)->select('funds')->first();

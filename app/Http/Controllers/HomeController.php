@@ -23,7 +23,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        $title = "Home";
+        $title = "True North Auction | Home";
         $products= Auction::where('aucStatus','=',1)->take(6)->orderBy('endDate', 'DESC')->get();
         // $hot_auc = Biddings::join('auctions', 'bidtransactions.prod_id','=','auctions.id')
         //                     ->select('auctions.prodName')

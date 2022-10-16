@@ -82,9 +82,8 @@ if(distance < 0){
                                 </div>
                             
                                             @if(Auth::user()->user_status == 0)
-                                                <h6 class="">Enter your Bidding Amount</h6>
-                                                {!! Form::number('bid_amt', '', ['class'=>'form-control','disabled']) !!}
-                                                {{Form::submit('PLACE BID', ['class'=>'btn btn-dark mt-5 w-50 mb-2','style'=>'border-radius:0%; ','disabled']) }}
+                                               
+                                                
                                             @else
                                                 @if($bid_data === null || $bid_status = 0)
                                                     @if(empty($pfp))
@@ -94,7 +93,7 @@ if(distance < 0){
                                                     @endif
                                                     {!! Form::open(['action'=>'App\Http\Controllers\BiddingController@store','method'=>'POST',$item->id]) !!}
                                                         {{Form::hidden('id',$item->id)}}
-                                                        {!! Form::number('bid_amt', '', ['class'=>'form-control me-5','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter your Bidding Amount','required']) !!}
+                                                        {!! Form::number('bid_amt', '', ['class'=>'form-control me-5 mt-3','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter your Bidding Amount','required']) !!}
                                                         {{--  --}}
                             
                             

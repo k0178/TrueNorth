@@ -20,7 +20,7 @@ class BiddingController extends Controller
     
     public function index(Request $request)
     {
-        $title = "Biddings";
+        $title = Auth::user()->username ." | Biddings";
         $pending = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
         ->where('bidtransactions.user_id','=',Auth::user()->id)
         ->where('bidtransactions.bagstatus',0)

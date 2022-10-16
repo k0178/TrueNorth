@@ -50,11 +50,11 @@ class BagController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $title = "Bag";
+        // $title = "Bag";
 
-        $products = Auction::join('bag','auctions.id','=','bag.product_id')
-        ->where('bag.user_id','=',Auth::user()->id)
-        ->get();
+        // $products = Auction::join('bag','auctions.id','=','bag.product_id')
+        // ->where('bag.user_id','=',Auth::user()->id)
+        // ->get();
     
         // $bid_deet = Biddings::join('bag','bag.product_id','=','bidtransactions.prod_id')
         //         ->where('bag.user_id','=',Auth::user()->id)
@@ -86,10 +86,10 @@ class BagController extends Controller
         
         // $status = Bag::where('user_id', Auth::user()->id)->get();
 
-        return view('pages.bag')
-                ->with(compact('title',
-                            'products'
-                            ));
+        // return view('inc.userloggedbar')
+        //         ->with(compact('title',
+        //                     'products'
+        //                     ));
     
     }   
 
@@ -134,7 +134,7 @@ class BagController extends Controller
         
         $del->delete();
         
-        return redirect('/item/'.$id);
+        return redirect()->back();
     }
     function addToBag(Request $request){
 

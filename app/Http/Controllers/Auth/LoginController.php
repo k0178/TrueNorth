@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
 
     public function showLoginForm(){
-        $title = "Login";
+        $title = "True North Auction | Login";
         return view('auth.login',compact('title'));
     }
     
@@ -41,7 +41,7 @@ class LoginController extends Controller
             
         }
         elseif((Auth::user()-> user_type) == 2){
-            return '/admin/toPay';
+            return '/admin/usermanagement';
         }
         elseif((Auth::user()-> user_type) == 3){
             return '/admin/shippings';
@@ -63,7 +63,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-       
+    
     }
 
 }

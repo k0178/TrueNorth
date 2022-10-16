@@ -18,7 +18,7 @@ class BidHistoryController extends Controller
      */
     public function index()
     {
-        $title = "Biddings";
+        $title =  Auth::user()->username ." | Bid History";
         $data = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
         ->where('bidtransactions.user_id','=',Auth::user()->id)
         ->orderBy('bidtransactions.created_at','DESC')

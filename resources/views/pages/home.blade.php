@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="container">
-  <div class="show text-center pt-4"><h2><b>TRUE NORTH GARMENTS</b></h2>
+  <div class="show text-center pt-4"><h4><b>WELCOME TO THE</b></h4>
+    <img src="/img/tnglogo.png" alt="" width='300px' height="100px">
     <p><a href ="/store" style="font-size: small;">VIEW STORE</a></p>
 </div>
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">

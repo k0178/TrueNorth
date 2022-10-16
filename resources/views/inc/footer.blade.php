@@ -76,10 +76,10 @@
   <footer class="py-5">
     <div class="row">
       <div class="col-6 col-md-2 mb-3">
-        <h5><b>Customer Services</b> </h5>
+        <h5><b >Customer Services</b> </h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/contactus" class="nav-link p-0 text-muted">Contact</a></li>
-          <li class="nav-item mb-2"><a href="/faqs" class="nav-link p-0 text-muted">FAQs</a></li>
+          <li class="nav-item mt-2"><a href="/contactus" class="nav-link p-0 text-muted">Contact</a></li>
+          <li class="nav-item my-2"><a href="/faqs" class="nav-link p-0 text-muted">FAQs</a></li>
           <li class="nav-item mb-2"><a href="/shipsandpayments" class="nav-link p-0 text-muted">Shipping & Payments</a></li>
         </ul>
       </div>
@@ -87,8 +87,8 @@
       <div class="col-6 col-md-2 mb-3">
         <h5><b>Legal</b></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/privacypolicy" class="nav-link p-0 text-muted">Privacy Policy</a></li>
-          <li class="nav-item mb-2"><a href="/cookiepolicy" class="nav-link p-0 text-muted">Cookie Policy</a></li>
+          <li class="nav-item mt-2"><a href="/privacypolicy" class="nav-link p-0 text-muted">Privacy Policy</a></li>
+          <li class="nav-item my-2"><a href="/cookiepolicy" class="nav-link p-0 text-muted">Cookie Policy</a></li>
           <li class="nav-item mb-2"><a href="/termsandcondition" class="nav-link p-0 text-muted">Terms & Condition</a></li>
         </ul>
       </div>
@@ -96,8 +96,8 @@
       <div class="col-6 col-md-2 mb-3">
         <h5><b>About Us</b></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/developers" class="nav-link p-0 text-muted">Developers</a></li>
-          <li class="nav-item mb-2"><a href="/company" class="nav-link p-0 text-muted">Company</a></li>
+          <li class="nav-item mt-2"><a href="/developers" class="nav-link p-0 text-muted">Developers</a></li>
+          <li class="nav-item my-2"><a href="/company" class="nav-link p-0 text-muted">Company</a></li>
         </ul>
       </div>
 

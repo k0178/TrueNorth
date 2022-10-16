@@ -17,11 +17,22 @@ class fundController extends Controller
             'reqAmt'=>'required'
         ]);
 
+        $fndget = User::select('funds')
+        ->where('username', Auth::user()->username)
+        ->get();
+        //add existing value with the requested value
+        $newsum =$fndget['0']->funds + $request->reqAmt;
+        //update new value
+        $fundup = User::select('funds')
+        ->where('username', Auth::user()->username)
+        ->update(['funds'=>$newsum]);
+
         $data = new Funds;
         $data->uname=$request->accname;
+        $data->status='Approved';
         $data->refnum=$request->refnum;
         $data->type='Fund';
-        $data->amount=$request->input('reqAmt');
+        $data->amount=$request->reqAmt;
         $data->save();
 
         return back();

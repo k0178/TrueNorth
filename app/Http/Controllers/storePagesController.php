@@ -16,14 +16,14 @@ class storePagesController extends Controller
 
     
     public function store_index(Request $request){
-        $title = "Store";
+        $title = "True North Auction | Store";
     
             $products= Auction::where('aucStatus','=',1)->orderBy('endDate','DESC')->get();
         
         return view('pages.store',compact('title','products'));
     }
     public function search(){
-        $title = "Store";
+        $title = "True North Auction | Store";
         $search = $_GET['search'];
         $products = Auction::where('prodName','LIKE', "%$search%")
         ->where('aucStatus','=',1)

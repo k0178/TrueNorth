@@ -35,7 +35,7 @@ class RegisterController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
 
     public function showRegistrationForm(){
-        $title = "Create your Account";
+        $title = "True North Auction | Create your Account";
         return view('auth.register',compact('title'));
     }
     
