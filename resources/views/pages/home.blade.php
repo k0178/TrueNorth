@@ -2,27 +2,51 @@
 @section('title', 'Home | True North Garments')
 @section('content')
 
-<div class="container">
-  <div class="show text-center pt-4"><h4><b>WELCOME TO THE</b></h4>
-    <img src="/img/tnglogo.png" alt="" width='300px' height="100px">
-    <p><a href ="/store" style="font-size: small;">VIEW STORE</a></p>
-</div>
+
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active " aria-current="true" aria-label="Slide 1"></button>
+      <button type="" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="5000" >
         <img src="\img\sample.jpg" class="d-block w-100" alt="...">
+        <span style=" position: absolute; top: 200px; left: 200px;">
+          @if(Auth::check())
+            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 60px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
+            <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
+              VIEW OUR AUCTIONS
+            </button>
+          @else
+          <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 60px !important;">Welcome to <br><label for="" style="color: #E7BB41;">True North Auction.</label> </h1> <br>
+            <button class="form-btn text-dark fw-bold ms-2" onclick="location.href='/store'" style="font-size: 16px;   ">
+              VIEW OUR AUCTIONS
+            </button>
+          @endif
+        </span>
         <div class="carousel-caption d-none d-md-block">
           <h5>First slide label</h5>
           <p>Some representative placeholder content for the first slide.</p>
         </div>
       </div>
+
       <div class="carousel-item" data-bs-interval="5000" >
         <img src="\img\sample2.jpg" class="d-block w-100" alt="...">
+        <span style=" position: absolute; top: 200px; left: 200px;">
+          @if(Auth::check())
+            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
+            <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
+              VIEW OUR AUCTIONS
+            </button>
+          @else
+          <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to <label for="" style="color: #E7BB41;">True North Auction.</label> </h1> <br>
+            <button class="form-btn text-dark fw-bold ms-2" onclick="location.href='/store'" style="font-size: 16px;  ">
+              VIEW OUR AUCTIONS
+            </button>
+          @endif
+        </span>
         <div class="carousel-caption d-none d-md-block">
           <h5>Second slide label</h5>
           <p>Some representative placeholder content for the second slide.</p>
@@ -30,6 +54,19 @@
       </div>
       <div class="carousel-item" data-bs-interval="500" >
         <img src="\img\sample3.jpg" class="d-block w-100" alt="...">
+        <span style=" position: absolute; top: 200px; left: 200px;">
+          @if(Auth::check())
+            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
+            <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
+              VIEW OUR AUCTIONS
+            </button>
+          @else
+          <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to <label for="" style="color: #E7BB41;">True North Auction.</label> </h1> <br>
+            <button class="form-btn text-dark fw-bold ms-2" onclick="location.href='/store'" style="font-size: 16px;">
+              VIEW OUR AUCTIONS
+            </button>
+          @endif
+        </span>
         <div class="carousel-caption d-none d-md-block">
           <h5>Third slide label</h5>
           <p>Some representative placeholder content for the third slide.</p>
@@ -66,14 +103,16 @@
       </a>
     </div> --}}
 </div>
+<div class="container mt-5">
 <div class="whats-new container pt-4">
   <div class="row justify-content-center align-items-center m-auto pb-4 pt-5 px-3">
-    <div class ="col" style="text-align:left;">
+    <div class = "col" style=" text-align:left;">
+      <h3><b>What's New!</b>  </h3>
+    </div>
+    <div class ="col" style="text-align:right;">
       <a href="/store">SEE MORE</a>
     </div>`
-    <div class = "col" style=" text-align:right;">
-      <h3>What's New! </h3>
-    </div>
+    
   </div>
     <div
         id="carouselMultiItemExample"
@@ -89,27 +128,25 @@
   <div class="container  ">
     <div class="row portfolio-container">
   @foreach($products as $prod)
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" >
-                      
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app" style="text-align: left !important;">
                       <div class="portfolio-wrap">
                         <img src="/itemImages/{{$prod->itemImg}}" class="img-fluid " alt="" style="width: 490px;
                         height: 400px; ">
-                        
                         <div class="portfolio-info ">
-                          
                           <h4>{{$prod->prodName}}</h4>
                           <p>Auction until: {{ Carbon\Carbon::parse($prod->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</p>
-                          <small style="color:white;">{{$prod->prodDeets}}</small>
+                          {{-- <small style="color:white;">{{$prod->prodDeets}}</small> --}}
                           <div class="portfolio-links pt-5">
                             <a href="/item/{{$prod->id}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{$prod->prodName}}">VIEW AUCTION</a>
                           </div>
                         </div>
                       </div>
-                      <h4 class="mt-3"><b>{{$prod->prodName}}</b></h4>
-                      <small class="text-secondary">NEW</small>
+                      <div class="px-3 py-3 ">
+                        <span class="badge" style="background-color:#E7BB41;">{{$prod->cond}}</span>
+                          <h3 class="text-dark fw-bold ">{{$prod->prodName}}</h3>
+                        <label style="font-size: 12px;">BID STARTS AT: <label for="" class="fw-bold">{{number_format($prod->initialPrice,2)}} PHP</label> </label> 
+                      </div>
                     </div>
-                    
             {{-- </div> --}}
               @endforeach
                   </div>

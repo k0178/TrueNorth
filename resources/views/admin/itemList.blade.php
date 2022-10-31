@@ -1,11 +1,10 @@
 @extends('layout.admin')
 @section('content') 
-<a href="/admin/list" style="margin-top: 150px; " class="border-top d-flex w-100 flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+<a href="/admin/list" class=" d-flex w-100 flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold text-center w-100">Item List</span>
 </a>
 
-<div class="d-flex mb-5 ">
-      <div class="bg-white w-100">
+      
           <div class="list-group list-group-flush border-bottom scrollarea " style="border-right:1px #f0eeee solid;">
             @if(count($data)>0)
             @foreach ($data as $info)
@@ -13,7 +12,7 @@
               <div class="d-flex align-items-center">
               
                 <div class="me-3">
-                  <img src="/itemImages/{{$info->itemImg}}" width="150px" height="150px" 
+                  <img src="/itemImages/{{$info->itemImg}}" width="120px" height="120px" 
                     style="object-fit: cover; border:1px #121212 solid;" 
                     class="rounded-circle" >
                 </div>
@@ -23,7 +22,6 @@
                         <li><b>ID:</b> {{$info->id}}</li>
                         <li><b>Name:</b> {{$info->prodName}}</li>
                         <li><b>Details:</b> <textarea class="form-control" style="background: none; resize:none;" name="" id="" cols="10" rows="5" disabled>{{$info->prodDeets}}</textarea> </li>
-
                     </ul>
                   </small>
                   <small>
@@ -37,7 +35,6 @@
                     </ul>
                   </small>
                 </div>
-
                 <div>
                   <a href="list/{{$info->id}}/edit" class="userloggedbtn ms-5 px-5" style="font-size:15px;">Edit</a>
                 </div>
@@ -67,29 +64,18 @@
                 </div>
                 @endif
               </div>
-              
             </div>
             @endforeach
             @else
             <p class="m-auto"> No Records Found! </p>
           @endif
-          </div>
-      </div>
-</div>
-
-  
-
-
 {{--     <div class="searchbox  pt-5">
         {!! Form::open(['action'=>'App\Http\Controllers\SearchController@search',
         'method'=>'GET']) !!} 
-       
-       {{Form::text('search','',['class'=>'form-control','style'=>'border:none; border-radius:0%;  border-bottom:1px #000000 solid;','placeholder'=>'Search'])}}
-       {{Form::submit('Search',['class'=>'btn w-50 textalign-center','style'=>'border-radius:0%; color:#ffffff; background:#121212'])}} 
-        {!! Form::close() !!} 
-     </div> --}}
-
-
+        {{Form::text('search','',['class'=>'form-control','style'=>'border:none; border-radius:0%;  border-bottom:1px #000000 solid;','placeholder'=>'Search'])}}
+        {{Form::submit('Search',['class'=>'btn w-50 textalign-center','style'=>'border-radius:0%; color:#ffffff; background:#121212'])}} 
+          {!! Form::close() !!} 
+      </div> --}}
     @endsection
 {{-- @extends('layout.admin')
 @section('content')

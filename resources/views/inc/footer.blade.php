@@ -72,13 +72,13 @@
  --}}
 
  <div class="m-5">
-  <hr>
   <footer class="py-5">
-    <div class="row">
-      <div class="col-6 col-md-2 mb-3">
+    <hr>
+    <div class="row py-3 px-3">
+      <div class="col-1 col-md-2 mb-3">
         <h5><b >Customer Services</b> </h5>
         <ul class="nav flex-column">
-          <li class="nav-item mt-2"><a href="/contactus" class="nav-link p-0 text-muted">Contact</a></li>
+          <a href="/contactus" class="">Contact</li></a>
           <li class="nav-item my-2"><a href="/faqs" class="nav-link p-0 text-muted">FAQs</a></li>
           <li class="nav-item mb-2"><a href="/shipsandpayments" class="nav-link p-0 text-muted">Shipping & Payments</a></li>
         </ul>

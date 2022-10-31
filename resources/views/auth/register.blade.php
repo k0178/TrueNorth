@@ -4,7 +4,7 @@
 <div class="container  my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="box-shadow: 0 0 8px 1px #ccc;">
+            <div class="card">
                 <div class="card-header">{{ __('CREATE YOUR ACCOUNT') }}</div>
 
                 <div class="card-body">
@@ -143,19 +143,20 @@
                             </div>
                         </div>
 
-                        <div class="text-center">
+                        <div class="text-center mb-5">
                             
-                                <button type="submit" class="btn btn-dark w-25 mb-2" style="border-radius: 0%; background:#1C1C1E; color:white;">
+                                <button class="form-btn w-50 mb-3">
                                     {{ __('REGISTER') }}
-                                </button> 
-                                <a href="/login">
-                                    <p>Already have an account? <b>Log in</b> instead.</p>
-                                </a>
+                                </button> <br>
+                                <p class="userloggedbtn mb-2">By registering, you agree to pay an amount of <b>1000.00 PHP</b>  as a membership fee at True North Garments Auction System.</p>
+                               
+                                <a href="/termsandcondition" style="font-size: 11px;"> <b>VIEW OUR Terms & Condition</b> </a>
                         </div>
 
                         <div class="text-center px-5 mx-5">
-                            <p class="userloggedbtn">By registering, you agree to pay an amount of <b>1000.00 PHP</b>  as a membership fee at True North Garments Auction System.</p>
-                            <p class="userloggedbtn mt-5"> <a href="/termsandcondition"><b>Terms & Condition</b> </a>apply.</p>  
+                            <a href="/login" style="font-size: 11px;">
+                                Already have an account? <b>Log in</b> instead.
+                            </a>
                         </div>
                     </form>
                 </div>

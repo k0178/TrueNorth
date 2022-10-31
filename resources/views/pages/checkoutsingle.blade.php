@@ -124,7 +124,7 @@ $total_amt = $total->bidamt + $del_fee ;
                     </div>
                 </div>
             <div class="d-flex  justify-content-center">
-                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/item/{{$item->id}}' " style="border-radius: 0%;">
+                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/biddings' " style="border-radius: 0%;">
                     CANCEL
                 </button>
             </div>

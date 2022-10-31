@@ -161,7 +161,7 @@ $ref_num = Auth::user()->id.date('ymdHis');
                             <label for="" class="mt-3">Your Funds after placing this order will be: <br> <b> {{number_format(Auth::user()->funds - $total_amt,2) }} PHP</b></label>
                 </div>
             <div class="d-flex  justify-content-center">
-                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/bag/{{Auth::user()->username}}' " style="border-radius: 0%;">
+                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/biddings' " style="border-radius: 0%;">
                     CANCEL
                 </button>
             </div>

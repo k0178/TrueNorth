@@ -9,11 +9,13 @@ $pend_qty = BiddingController::pend_qty();
 $lost_qty = BiddingController::lost_qty();
 
 ?>
+
     @section('content')
+
     <div class="container  my-5  border">
-      <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none" style="border-bottom:1px #dddddd solid;">
-      <span class="fs-5 fw-bold text-center w-100">Biddings</span>
-    </a>
+      <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none" style="border-bottom:1px #dddddd solid;">
+        <span class="fs-5 fw-bold text-center w-100">Biddings</span>
+      </div>
     <div class="container my-5 ">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -129,6 +131,7 @@ $lost_qty = BiddingController::lost_qty();
             <div class="justify-content-center mt-3  d-flex ">{{$pending->links()}}</div>
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+         
             @if(count($won) > 0)
             @foreach($won as $info)
             <div class="list-group list-group-flush scrollarea mt-3 mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
@@ -136,16 +139,12 @@ $lost_qty = BiddingController::lost_qty();
                 <div class="d-flex">
                   <img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
                     style="object-fit: cover; 
-                            border:3px #59A14F solid; 
+                            border:3px #56A06E solid; 
                             
                             margin-top :20px;
                             margin-bottom :20px;" 
                     class="rounded-circle ">
-
-
-                  
                 </div>
-                
                 <div class="pt-3">
                   
                     <ul style="list-style: none;">
@@ -153,7 +152,7 @@ $lost_qty = BiddingController::lost_qty();
                         {!! Form::open(['action'=>['App\Http\Controllers\BagController@addToBag',$info->product_id],
                           'method'=>'GET'])!!}
                           {{ Form::hidden('product_id',$info->prod_id) }}
-                            <button style="border-radius: 0%;"
+                            <button class="btn" style="border-radius: 0%;"
                             data-bs-toggle="tooltip" data-bs-placement="top"
                             data-bs-title="Add to Bag">
                         <i class="bi bi-bag-plus " style="font-size: 20px;"></i>
@@ -179,7 +178,7 @@ $lost_qty = BiddingController::lost_qty();
               
                   @if(\Carbon\Carbon::parse($info->endDate)->subDays(1) <= (\Carbon\Carbon::today()) )
                   
-                  <button type="button" class="btn btn-success ms-3 d-flex" style="border-radius: 0%; "
+                  <button type="button" class="form-btn text-white ms-3 d-flex" style="border-radius: 0%; background:#56A06E;"
                       data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Checkout"
                       onclick="location.href='/checkout/{{$info->prod_id}}'">
@@ -205,12 +204,12 @@ $lost_qty = BiddingController::lost_qty();
                 <hr class="text-secondary">
               </div>
               
-              <button type="button" class="btn btn-outline-dark my-3" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <button type="button" class="btn btn-outline-dark my-3" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#bidresults">
                   View Bidding Results
               </button>
               
               <!-- Modal -->
-              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal fade" id="bidresults" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
@@ -281,7 +280,7 @@ $lost_qty = BiddingController::lost_qty();
                 <div class="d-flex">
                   <img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
                     style="object-fit: cover; 
-                            border:3px #E15759 solid; 
+                            border:3px #C76D6D solid; 
                             margin-top :20px;
                             margin-bottom :20px;" 
                     class="rounded-circle ">
@@ -307,8 +306,8 @@ $lost_qty = BiddingController::lost_qty();
                                     ->first();
                       @endphp
                       
-                        <li><h5><i class="me-1 bi bi-trophy "></i><img src="/userPFP/{{$winner->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle mx-1" ><b class="text-success">{{$winner->username}} </b> for <b>{{number_format($winner->bidamt,2)}} PHP</b></h5></li>
-                        <li>Placed at: <b>{{\Carbon\Carbon::parse($win_bid->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
+                        {{-- <li><h5><i class="me-1 bi bi-trophy "></i><img src="/userPFP/{{$winner->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle mx-1" ><b class="text-success">{{$winner->username}} </b> for <b>{{number_format($winner->bidamt,2)}} PHP</b></h5></li>
+                        <li>Placed at: <b>{{\Carbon\Carbon::parse($win_bid->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li> --}}
                         
                       <br>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>

@@ -87,37 +87,36 @@
 
 
 
-  <nav class="navbar navbar-expand-lg bg-white border-bottom ">
-    <div class="container-fluid">
-      <a class="navbar-brand ms-3" href="/home"> <img src="/img/tnglogo.png" width="100px" height="30px" alt=""> </a>
-    
-      
+  <nav class="navbar navbar-expand-lg  ">
+    <div class="container-fluid text-white">
+      <img src="/img/tnglogo.png" alt="" width="90px" height="30px"><button class="btn ms-1 fw-bold " type="button" style="font-size:26px; margin-right: 90px;"  onclick="location.href='/home'"> TRUE NORTH AUCTION </button>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item dropdown me-5">
+            <div class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               PRE-LOVED
-            </a>
+            </div>
             <ul class="dropdown-menu">
               <a><b>Men</b></a> 
-              <li><a class="dropdown-item" href="/store/PreLoved/men/tops">Tees</a></li>
-              <li><a class="dropdown-item" href="/store/PreLoved/men/bottoms">Pants</a></li>
-              <li><a class="dropdown-item" href="/store/PreLoved/men/shorts">Shorts</a></li>
+              <li><a class="drop-item" href="/store/PreLoved/men/tops">Tees</a></li>
+              <li><a class="drop-item" href="/store/PreLoved/men/bottoms">Pants</a></li>
+              <li><a class="drop-item" href="/store/PreLoved/men/shorts">Shorts</a></li>
               <hr>
               <a><b>Women</b></a> 
-              <li><a class="dropdown-item" href="/store/PreLoved/women/tops">Tees</a></li>
-              <li><a class="dropdown-item" href="/store/PreLoved/women/bottoms">Pants</a></li>
-              <li> <a class="dropdown-item" href="/store/PreLoved/women/shorts">Shorts</a></li>
+              <li><a class="drop-item" href="/store/PreLoved/women/tops">Tees</a></li>
+              <li><a class="drop-item" href="/store/PreLoved/women/bottoms">Pants</a></li>
+              <li> <a class="drop-item" href="/store/PreLoved/women/shorts">Shorts</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          
+          <li class="nav-item dropdown me-5">
+            <div class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               BRAND NEW
-            </a>
+            </div>
             <ul class="dropdown-menu">
               <a><b>Men</b></a> 
               <li><a class="dropdown-item" href="/store/BrandNew/men/tops">Tees</a></li>
@@ -131,9 +130,9 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               BULK
-            </a>
+            </div>
             <ul class="dropdown-menu">
               <a><b>Men</b></a> 
               <li><a class="dropdown-item" href="/store/Bulk/men/tops">Tees</a></li>
@@ -147,7 +146,7 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex " role="search" form type="get" action="{{url ('/search')}}">
+        <form class="" role="search" form type="get" action="{{url ('/search')}}">
           {{-- <input type="search" name="search" style="background: none;  " class="ps-1 search form-control" placeholder="Search for Auctions"> --}}
           <input class="form-control me-3"  name="search" type="search" placeholder="Search for Auctions " aria-label="Search">
           {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}

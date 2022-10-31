@@ -1,9 +1,13 @@
 @extends('layout.app')
+<title>True North Auction | {{$item->prodName}}</title>
     @section('content')
 
 @php
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Biddings;
+use App\Models\User;
+use App\Models\Auction;
 $date = date($item->endDate);
 $time = date(' 23:59:59');
 $date_today = $date.''.$time;
@@ -22,18 +26,18 @@ var x = setInterval(function(){
     var minutes = Math.floor((distance % (1000 * 60 * 60))/(1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60))/1000);
 
-document.getElementById("end_date").innerHTML = "<h5 class='mt-3 px-4 py-2' style ='border: 2px #000000 solid; '>Remaining Time: <br> <b style='font-size: 22px;'>" + days + "d " + hours + "h " + minutes + "m " + seconds + "s </b></h5>";
+document.getElementById("end_date").innerHTML = "<h5 class='text-center mt-3 px-4 py-2' style ='border: 2px #000000 solid; '>Remaining Time: <br> <b style='font-size: 22px; color: #E7BB41;'>" + days + "d " + hours + "h " + minutes + "m " + seconds + "s </b></h5>";
 
 if(distance < 0){
     clearInterval(x);
-    document.getElementById("end_date").innerHTML = "Remaining Time: Bidding ENDED";
+    document.getElementById("end_date").innerHTML = "Auction Status: <b class=text-danger> Bidding ENDED</b>";
 }
 },1000);
 </script>
 
 
-    <div class="bidding my-5">
-        <div class="bidding-container p-5 justify-content-center ">
+    <div class=" my-5">
+        <div class="bidding-container p-5  justify-content-center ">
             <div class="row">
                 <div class="col">
                     <div class="title">
@@ -47,21 +51,58 @@ if(distance < 0){
                         <div class="col-lg-5 col-md-6 portfolio-item filter-app me-3">
                             <div class="portfolio-wrap">
                                 <img src="/itemImages/{{$item->itemImg}}" class="img-fluid" alt="" style="width:500px;
-                                height: 450px; ">
+                                height: 550px; ">
                                 <div class="portfolio-info ">
                                     <h4>{{$item->prodName}}</h4>
                                     <p>Ends on: {{ \Carbon\Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">                        
-                        
-                            <h4 class="mb-3">Starting Bid: <b>{{number_format($item->initialPrice,2)}} PHP</b></h4>
-                            <h5>Category: <b>{{$item->category}}</b></h5>
-                            <h5>Condition: <b>{{$item->cond}}</b> </h5>
-                            <small class=""><p  style="width:500px; max-width:100%;">{{$item->prodDeets}}</p></small>
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">  
+                            <div class="d-flex align-items-center">
+                                    <h2 class="me-2"><b>{{$item->prodName}}</b></h2>
+                                    <span class="badge" style="background-color:#E7BB41;">{{$item->cond}}</span>
+                            </div>
+                            Starting Bid: <h4 class="mb-3"> <b>{{number_format($item->initialPrice,2)}} PHP</b></h4>
+                            <hr>
+                            Category: <h5 class="mb-3"> 
+                                <b>
+                                    @if($item->category == 'M')
+                                        Men
+                                    @elseif($item->category == 'W')
+                                        Women
+                                    @else
+                                        
+                                    @endif
+                                </b>
+                            </h5>
+                            Type: <h5 class="mb-3">
+                                    <b>
+                                        @if($item->type == 'T')
+                                            T-Shirt
+                                        @elseif($item->type == 'P')
+                                            Pants
+                                        @elseif($item->type == 'S')
+                                            Shorts
+                                        @else
+                                            
+                                        @endif
+                                    </b>
+                                </h5>
+                            <p>
+                                <button class="form-btn w-100 mb-3" style="background: #D3D0CB;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    SHOW DETAILS
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    {{$item->prodDeets}}
+                                </div>
+                            </div>
+                            <hr>
+                            {{-- <small class=""><p  style="width:500px; max-width:100%;">{{$item->prodDeets}}</p></small> --}}
                             @if(empty($orderstat))
-                                <h5>Auction Ends on:<b> {{ Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></h5>
+                                Auction Ends on: <h5><b> {{ Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></h5>
                                 <p id="end_date"></p>
                             @elseif(!empty($orderstat) && $orderstat = 1)
                                 <h4><b class="text-danger">ITEM SOLD</b></h4>
@@ -80,11 +121,32 @@ if(distance < 0){
                                 <div class="">
                                     <h5 class="mb-2">Your Max Bid: <b>{{number_format($my_max_bid,2)}} PHP</b> </h5>
                                 </div>
-                            
                                             @if(Auth::user()->user_status == 0)
-                                               
                                                 
                                             @else
+                                                <div class="my-3 ">
+                                                    @if(Carbon::parse($item->endDate) < Carbon::now())
+
+                                                    @else
+                                                        <div class=" mb-3">
+                                                            Current Bidder/s:<h4>  <b>{{$datacount}}</b></h4>
+                                                            As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}
+                                                        </div>
+                                                    @endif
+                                                    <div class=" ">
+                                                            @php
+                                                                $total_bid = Biddings::where('prod_id',$item->id)
+                                                                                    ->where('retractstat',0)
+                                                                                    ->sum('bidamt');
+                                                            @endphp
+                                                            @if($total_bid == 0)
+                                                                
+                                                            @else
+                                                            <label for="">Total Current Biddings:</label><h4><b class="text-success">{{number_format($total_bid, 2)}} PHP</b></h4> 
+                                                            @endif
+                                                            
+                                                    </div>
+                                                </div>
                                                 @if($bid_data === null || $bid_status = 0)
                                                     @if(empty($pfp))
                                                         <h5><b>No Bidders yet.</b></h5>
@@ -93,12 +155,10 @@ if(distance < 0){
                                                     @endif
                                                     {!! Form::open(['action'=>'App\Http\Controllers\BiddingController@store','method'=>'POST',$item->id]) !!}
                                                         {{Form::hidden('id',$item->id)}}
-                                                        {!! Form::number('bid_amt', '', ['class'=>'form-control me-5 mt-3','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter your Bidding Amount','required']) !!}
-                                                        {{--  --}}
-                            
-                            
+                                                        {!! Form::number('bid_amt', '', ['class'=>'form-control me-5 mt-3','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter '.number_format($item->initialPrice + 0.01,2) .' PHP or more.','required']) !!}
+                                                        
                                                     <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-dark btn btn-dark mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            <button type="button" class="form-btn mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 PLACE BID
                                             </button>
                                             
@@ -128,33 +188,106 @@ if(distance < 0){
                                                     </div>
                                                 </div>
                                             </div>
+                                            <button type="button" class="form-btn w-100 mt-2 " style="background: #D3D0CB; border-radius:0%;" data-bs-toggle="modal" data-bs-target="#incTbl">
+                                                            SHOW BID INCREMENT TABLE
+                                                        </button>
+                                                        <div class="modal fade" id="incTbl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Bid Increment Table</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Bid Price</th>
+                                                                                    <th scope="col">Bid Increment</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>0.00 PHP - 500.00 PHP</td>
+                                                                                    <td class="text-success">100.00 PHP</td>
+                                                                                </tr> 
+                                                                                <tr>
+                                                                                    <td>500.01 PHP - 1500.00 PHP</td>
+                                                                                    <td class="text-success">150.00 PHP</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>1500.01 PHP - 3000.00 PHP</td>
+                                                                                    <td class="text-success">300.00 PHP</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>3000.01 PHP - 4500.00 PHP</td>
+                                                                                    <td class="text-success">300.00 PHP</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>4500.01 PHP - 5000.00 PHP</td>
+                                                                                    <td class="text-success">300.00 PHP</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>5000.01 PHP - 10000.00 PHP</td>
+                                                                                    <td class="text-success">500.00 PHP</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>10000.01 PHP +</td>
+                                                                                    <td class="text-success">1000.00 PHP</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-center  align-items-center">
+                                                                        <button type="button" class="btn btn-dark w-50" style="border-radius: 0%;" data-bs-dismiss="modal">GOT IT</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                             {!! Form::close() !!}
                                                 @else
-                                                
-                                                    <div class="mt-3">
-                                                        <h4>Bid Placed:<b> {{number_format($bid_data->bidamt,2)}} PHP</b></h4>
-                                                        <b><a href="/biddings" class="" style="font-size: 15px;">View your Biddings</a></b>
+                                                <h4 class="">Your Current Bid:<b class="text-success"> {{number_format($bid_data->bidamt,2)}} PHP</b></h4>
+                                                    <div class="mt-3 ">
+                                                        {{$item->endDate}}
+                                                        @if($item->endDate < Carbon::now()->format('Y-m-d'))
+
+                                                        @else
+                                                            <div class=" mb-3">
+                                                                Current Bidder/s:<h4>  <b>{{$datacount}}</b></h4>
+                                                                As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}
+                                                            </div>
+                                                        @endif
+                                                        <div class=" ">
+                                                                @php
+                                                                    $total_bid = Biddings::where('prod_id',$item->id)
+                                                                                        ->where('retractstat',0)
+                                                                                        ->sum('bidamt');
+                                                                @endphp
+                                                                <label for="">Total Current Biddings:</label><h4><b class="text-success">{{number_format($total_bid, 2)}} PHP</b></h4> 
+                                                        </div>
                                                     </div>
                                                 @endif
                                             @endif
                                         </div>
                                     </div>
+                                    {{-- <div align="center" class="mt-3">
+                                        <div class="">
+                                            <button class="form-btn mb-3" onclick="location.href='/biddings'" style="background: #D3D0CB; border-radius: 0%;"><i class="bi bi-cash-coin me-2 text-dark"></i> VIEW YOUR BIDDINGS</button>
+                                            <br>
+                                            <button class="form-btn" onclick="location.href='/store'" style="border-radius: 0%; background: #D3D0CB;"> BACK TO STORE</button>
+                                        </div>
+                                    </div> --}}
                     @else
-                        <div class="mt-5">
-                            <b >You need to Login first.</b> 
-                            <br>
-                            <button class="btn btn-dark mt-3 w-100" onclick="location.href='/login' " style="border-radius: 0%;">
+                        <div class="mt-3">
+                            Current Bidder/s:<h4>  <b>{{$datacount}}</b></h4>
+                            <h6 class="mb-3">As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}</h6>
+                            <button class="form-btn mt-3 w-100" onclick="location.href='/login' " style="border-radius: 0%;">
                                 LOGIN TO BID
                             </button>
                         </div>
                     @endif
                     </div>
                 </section>
-
-        {!! Form::open(['action'=>'App\Http\Controllers\storePagesController@store_index','method'=>'GET']) !!}
-            {{Form::submit('VIEW OTHER AUCTIONS', ['class'=>'userloggedbtn mt-5  ','style'=>'border-radius:0%; font-size:14px; font-weight:bold; border: 1px #000000 solid; padding: 0.3rem 0.5rem;'])}}<br>
-        {!! Form::close() !!}
-
     </div>
 </div>
 @endsection

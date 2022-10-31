@@ -10,6 +10,7 @@
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>{{$title}}</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/273827b7bf.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/img/favicon.ico">
   </head>
   <body class="">
@@ -76,8 +77,10 @@
   @yield('content')
   
 </div>
+
 @include('inc.footer')
 <script type="text/javascript">
+
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
   const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

@@ -27,17 +27,22 @@
     </div>
  --}}
 
-<div class="userloggedbar  d-flex  align-items-center justify-content-end " style="background: #f0eeee;">
+<div class="userloggedbar  d-flex  align-items-center justify-content-end " style="background: #E7E5DF;">
  @guest
         <div class="userbar d-flex  justify-content-end  py-2">
             <div class="userbar-content">
                     @if (Route::has('login'))
                         <div class="">
-                            <a class="me-2 px-2" href="/login" style="font-size:12px;"><i class="bi bi-arrow-right-short pe-1"></i></i>LOGIN</a>
+                            <a class="me-4 fw-bold " style="font-size: 12px;" href="/login" >
+                                <i class="fa-solid fa-arrow-right-to-bracket me-1"></i>
+                                LOGIN
+                            </a>
                     @endif
-
                     @if (Route::has('register'))
-                    <a class="pe-4" href="/register" style="font-size:12px;"><i class="bi bi-plus pe-1"></i>REGISTER</a> 
+                            <a class="me-4 fw-bold" style="font-size: 12px;" href="/register"> 
+                                <i class="fa-regular fa-user me-1"></i>
+                                REGISTER
+                            </a> 
                     @endif 
                 </div>       
             </div>

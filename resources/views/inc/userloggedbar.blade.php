@@ -55,23 +55,21 @@ $data = User::where('username',$username)->first();
 
  --}}
 
-<nav class="navbar " style="background: #f0eeee;" aria-label="Light offcanvas navbar">
+<nav class="navbar " style="background: #D3D0CB;" aria-label="Light offcanvas navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
         <div class="d-flex align-items-center">
             <div class="position-relative mx-3">
-                <a href="/bag/{{$username}}" class="me-2" style="color: black; font-size:16px;">
-                </a>      
-                    <span class="position-absolute pt-1 top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
                         {{$bag_qty}}
                     </span>
-                    <button class="" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
+                    <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                         
-                        <i class="bi bi-bag" style="font-size: 16px;"></i>
+                        <i class="bi bi-bag " style="font-size: 16px; font-weight:bold;"></i>
                     </button> 
             </div> 
-            <button class="" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
+            <button class="btn" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
                 {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                 
                 <img src="/userPFP/{{Auth::user()->profileImage}}" width="35px" height="35px" style="object-fit: cover;" class="rounded-circle me-1" >

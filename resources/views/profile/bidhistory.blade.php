@@ -14,11 +14,11 @@
             @foreach($data as $info)
                 <tr class="">
                     <th scope="row">
-                        <a href="/item/{{$info->prod_id}}"><img src="/itemImages/{{$info->itemImg}} " width="125px" height="125px" 
+                        <img src="/itemImages/{{$info->itemImg}} " width="125px" height="125px" 
                             style="object-fit: cover; 
                                     border:1px #000000 solid; 
                                     margin:20px;" 
-                            class="rounded-circle"></a>
+                            class="rounded-circle">
                     </th>
                     <td class="" style="padding-top:40px; padding-bottom:30px;">
                         <ul class="" style="list-style: none;">
