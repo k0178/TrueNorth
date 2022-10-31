@@ -17,6 +17,7 @@ use App\Http\Controllers;
 
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');
+Route::get('/refund','App\Http\Controllers\PagesController@refund');
 Route::resource('/item','App\Http\Controllers\InventoryController');
 Route::get('/logout','App\Http\Controllers\LogoutController@logout');
 Route::get('/historypage','App\Http\Controllers\PagesController@historypage');
@@ -33,6 +34,7 @@ Route::resource('/membershippay','App\Http\Controllers\MemberPaymentController')
 Route::post('/memberpay','App\Http\Controllers\fundController@memberPay')->middleware('auth');
 //admin module
 Route::get('/admin/index','App\Http\Controllers\PagesController@adminindex')->middleware('auth');
+Route::get('/admin/refundreq','App\Http\Controllers\PagesController@refundreq')->middleware('auth');
 Route::resource('/admin/usermanagement','App\Http\Controllers\UserManagementController')->middleware('auth');
 Route::get('/add','App\Http\Controllers\PagesController@add')->middleware('auth');
 Route::get('/fundings','App\Http\Controllers\PagesController@fundings')->middleware('auth');

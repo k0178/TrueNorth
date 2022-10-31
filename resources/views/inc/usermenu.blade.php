@@ -19,5 +19,8 @@
         <div class="pt-4 pb-3 ps-4 pe-4">
             <a href="/history">PURCHASE HISTORY</a>
         </div>
+        <div class="pt-4 pb-3 ps-4 pe-4">
+            <a href="/history">REQUEST A REFUND</a>
+        </div>
     </div>
 </div>

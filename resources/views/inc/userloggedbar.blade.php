@@ -301,6 +301,9 @@ $data = User::where('username',$username)->first();
                     <li class="nav-item">
                         <a class="nav-link" href="/orders"><i class="bi bi-basket3 me-2"></i>MY ORDERS</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/refund"><i class="bi bi-piggy-bank me-2"></i>REQUEST A REFUND</a>
+                    </li>
                     <hr>
                     <li class="nav-item">
                         {{-- <a class="btn btn-dark w-100" href="/logout"><i class="bi bi-box-arrow-left me-2"></i>LOGOUT</a> --}}
