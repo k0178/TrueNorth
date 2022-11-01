@@ -17,7 +17,7 @@ use App\Http\Controllers;
 
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');
-Route::get('/refund','App\Http\Controllers\PagesController@refund');
+Route::resource('/refund','App\Http\Controllers\RefundController');
 Route::resource('/item','App\Http\Controllers\InventoryController');
 Route::get('/logout','App\Http\Controllers\LogoutController@logout');
 Route::get('/historypage','App\Http\Controllers\PagesController@historypage');
@@ -34,7 +34,7 @@ Route::resource('/membershippay','App\Http\Controllers\MemberPaymentController')
 Route::post('/memberpay','App\Http\Controllers\fundController@memberPay')->middleware('auth');
 //admin module
 Route::get('/admin/index','App\Http\Controllers\PagesController@adminindex')->middleware('auth');
-Route::get('/admin/refundreq','App\Http\Controllers\PagesController@refundreq')->middleware('auth');
+Route::get('/admin/refundreq','App\Http\Controllers\RefundController@adminindex')->middleware('auth');
 Route::resource('/admin/usermanagement','App\Http\Controllers\UserManagementController')->middleware('auth');
 Route::get('/add','App\Http\Controllers\PagesController@add')->middleware('auth');
 Route::get('/fundings','App\Http\Controllers\PagesController@fundings')->middleware('auth');
@@ -50,6 +50,11 @@ Route::resource('/admin/blockedusers','App\Http\Controllers\BlockedUsersControll
 Route::get('/admin/reports','App\Http\Controllers\reportsController@index')->middleware('auth');
 Route::post('/deny','App\Http\Controllers\ToPayController@deny')->middleware('auth');
 Route::post('/approve','App\Http\Controllers\ToPayController@update')->middleware('auth');
+
+Route::post('/admin/refunddeny','App\Http\Controllers\RefundController@deny')->middleware('auth');
+
+
+
 // Route::get('/search','App\Http\Controllers\itemListController@search');
 Route::post('/itemimgup','App\Http\Controllers\imgController@itemImage')->middleware('auth');
 Route::resource('/postItem','App\Http\Controllers\AuctionController')->middleware('auth');

@@ -18,22 +18,51 @@
         </tr>
         </thead>
         <tbody>
-
+        @foreach ($data as $rf)
             <tr>
-            <th>1</th>
-            <td>johndoe</td>
-            <td>PHP 500</td>
-            <td>09204197332</td>
-            <td>Marked as Refunded</td>
-            <td>Deny</td>
-            <td>
-                {{Form::textArea('refundmsg','',
-                ['class'=>'form-control',
-                'style'=>'height:50px;',
-                'placeholder'=>'Input message here.'
-                ])}}
-            </td>
+            <th>{{$rf->id}}</th>
+            <td>{{$rf->uname}}</td>
+            <td>{{$rf->amount}}</td>
+            <td>{{$rf->gcashnum}}</td>
+
+            @if ($rf->status!="pending")
+
+            <td>----------</td>
+            <td>----------</td>
+                
+            @else
+
+            {!! Form::open(['action'=>['App\Http\Controllers\RefundController@update',$rf->id],
+            'method'=>'PUT'])!!}
+
+            
+
+            <td>{{Form::radio('apr','Refunded',[
+                ])}} <small class="text-info">Mark as Refunded</small></td>
+                <td> {{Form::radio('apr','Denied',[
+                ])}} <small class="text-danger">Deny</small></td>
+                 <td>
+                    {{Form::textArea('refundmsg','We have Refunded PHP '.$rf->amount.'.00 to your Gcash Account:'.$rf->gcashnum.'. Ref No:',
+                    ['class'=>'form-control',
+                    'style'=>'height:50px;'
+                    ])}}
+    
+                </td>
+                <td>
+                {{ Form::hidden('uname',$rf->uname) }}
+                {{ Form::hidden('amt',$rf->amount) }}
+                {{ Form::hidden('uid',$rf->uid) }}
+
+                {{ Form::submit('SUBMIT',['class' => 'btn '])}}
+                </td>
+                {!! Form::close() !!}
+            @endif
+
+           
+          
             </tr>
+        @endforeach
+            
         </tbody>
     </table>       
     </div>

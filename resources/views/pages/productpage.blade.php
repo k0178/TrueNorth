@@ -158,9 +158,16 @@ if(distance < 0){
                                                         {!! Form::number('bid_amt', '', ['class'=>'form-control me-5 mt-3','step'=>'0.01','style'=>'border-radius:0%;','placeholder'=>'Enter '.number_format($item->initialPrice + 0.01,2) .' PHP or more.','required']) !!}
                                                         
                                                     <!-- Button trigger modal -->
-                                            <button type="button" class="form-btn mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                PLACE BID
-                                            </button>
+                                                    @if (Auth::User()->user_status==3)
+                                                    <button type="button" class="form-btn mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled>
+                                                        YOUR ACCOUNT IS FROZEN
+                                                    </button>
+                                                    @else
+                                                    <button type="button" class="form-btn mt-3 w-100  mb-2" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        PLACE BID
+                                                    </button>
+                                                    @endif
+                                            
                                             
                                             <!-- Modal -->
                                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

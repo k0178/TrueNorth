@@ -1,5 +1,8 @@
 @extends('layout.app')
 @section('content')
+@php
+    
+@endphp
 <div class="m-5 py-5 justify-content-center" style="background: #f0eeee;">
     <div class="d-flex ps-5 align-items-center ">
         <h3 class="w-100"><b>REFUND REQUEST</b> </h3>
@@ -21,11 +24,20 @@
           </p>
 
           <div class="mt-3 mb-3">
+            {!! Form::open(['action'=>'App\Http\Controllers\RefundController@store',
+            'method'=>'POST', 'enctype'=>'multipart/form-data']) !!}
+
             {{Form::number('gcashnum','',
             ['class'=>'form-control w-50',
             'placeholder'=>'Enter your Gcash Number'])}}
-            {{-- put if statement here --}}
+            @if (Auth::user()->user_status==3)
+            {{Form::submit('Your Account is Frozen',['class'=>'btn btn-dark mt-3 disabled','style'=>'border-radius:0%;'])}}
+            @else
             {{Form::submit('REQUEST REFUND',['class'=>'btn btn-dark mt-3','style'=>'border-radius:0%;'])}}
+            @endif
+       
+
+            {!! Form::close() !!}
           </div>
           
           <small class="font-italic secondary">

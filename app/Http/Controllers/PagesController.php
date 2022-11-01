@@ -134,11 +134,6 @@ class PagesController extends Controller
         return view('admin.refundreq', compact('title'));
     }
 
-    public function refund(){
-        $title = "Refunds";
-        return view('pages.refund', compact('title'));
-    }
-
 }
 
 
