@@ -307,7 +307,7 @@ $data = User::where('username',$username)->first();
                     <hr>
                     <li class="nav-item">
                         {{-- <a class="btn btn-dark w-100" href="/logout"><i class="bi bi-box-arrow-left me-2"></i>LOGOUT</a> --}}
-                    <button type="button" class="btn btn-dark w-100" style="border-radius: 0%;" onclick="location.href='/logout'"><i class="bi bi-box-arrow-left me-2 text-white"></i>LOGOUT</button>
+                    <button type="button" class="form-btn w-100" onclick="location.href='/logout'"><i class="bi bi-box-arrow-left me-2 text-dark"></i>LOGOUT</button>
                     </li>
                     
                 </ul>

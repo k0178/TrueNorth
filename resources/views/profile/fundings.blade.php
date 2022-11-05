@@ -1,10 +1,10 @@
 @extends('layout.app')
 @section('content')
 <div class="bg-white my-5 mx-5 " style="border: 1px #dddddd solid;">
-    <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none "
+    <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none "
     style=" border-bottom:1px #dddddd solid;">
       <span class="fs-5 fw-bold text-center w-100">My Funds</span>
-    </a>
+    </div>
 <?php
     $refnum=Auth::user()->id.date('ymdHis');
 ?>
@@ -16,7 +16,7 @@
     'method'=>'POST']) !!} 
     <div class="text-center mb-3">
       @if(Auth::user()->user_status == 0)
-        {{Form::text('reqAmt','',['class'=>'form-control ','placeholder'=>'Enter Amount','style'=>'border-radius:0%; background:none; border:none; border-bottom:1px #000000 solid;','disabled' ])}}  
+        {{Form::text('reqAmt','',['class'=>'form-control ','placeholder'=>'Enter Amount','disabled' ])}}  
         
         {{Form::submit('ADD FUNDS',['class'=>' btn mt-3 mb-5 w-50 btn-dark', 'style'=>'border-radius:0%; ','disabled'])}}
         {{Form::hidden('refnum',$refnum)}}
@@ -28,12 +28,11 @@
           <b>Fund Request is only available to paid members.</b>
           <br>
           <b><a href="/membershippay">Click here to pay membership.</a></b>
-       
           @elseif(Auth::user()->memberpmt == 'Pending')
             <b>Membership Payment approval is pending.</b>
           @else
-              {{Form::number('reqAmt','',['class'=>'form-control','step'=>'0.01', 'placeholder'=>'Enter Amount','style'=>'border-radius:0%; background:none; border:none; border-bottom:1px #000000 solid;'])}}  
-              {{Form::submit('ADD FUNDS',['class'=>' btn mt-3 mb-5 w-50 btn-dark', 'style'=>'border-radius:0%;'])}}
+              {{Form::number('reqAmt','',['class'=>'form-control','step'=>'0.01', 'placeholder'=>'Enter Amount','required'])}}  
+              {{Form::submit('ADD FUNDS',['class'=>'form-btn mt-3 mb-3 w-100 '])}}
               {{Form::hidden('refnum',$refnum)}}
               {{Form::hidden('accname',Auth::user()->username)}}
               {!! Form::close() !!}  
@@ -42,8 +41,8 @@
       @endif
     </div>
   
-    <div class="mt-3 text-center"> 
-      <h3>Your current funds: <b>{{number_format(Auth::user()->funds,2)}} PHP</b></h3>
+    <div class="mt-1 text-center"> 
+      Your current funds:<h3> <b>{{number_format(Auth::user()->funds,2)}} PHP</b></h3>
       Your Reference number is <b>{{$refnum}}</b>   
       <p class="mt-5"><small >Want to add funds? Pay thru: </small></p>  
       <a href=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 200 200" version="1.1">
@@ -68,9 +67,9 @@
 
   <div class="w-100 mx-3">
       <table class="table">
-        <a class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+        <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
           <span class="fs-6 fw-semibold text-center w-100"><b>Fund Transaction History</b> </span>
-        </a>
+        </div>
         <thead>
           <tr>
             <th scope="col">Amount</th>

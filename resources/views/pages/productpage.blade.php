@@ -195,7 +195,7 @@ if(distance < 0){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="form-btn w-100 mt-2 " style="background: #D3D0CB; border-radius:0%;" data-bs-toggle="modal" data-bs-target="#incTbl">
+                                            <button type="button" class="info-btn w-100 mt-2 " data-bs-toggle="modal" data-bs-target="#incTbl">
                                                             SHOW BID INCREMENT TABLE
                                                         </button>
                                                         <div class="modal fade" id="incTbl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

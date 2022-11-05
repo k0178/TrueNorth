@@ -173,7 +173,7 @@
             <div class="row">
               <div class="row justify-content-center align-items-center m-auto pb-4 pt-5 px-3">
                 <div class ="col" style="text-align:left;">
-                  <h3>Hot Auctions!</h3>
+                  <h3><b>Hot Auctions!</b></h3>
                 </div>
                 <div class = "col" style=" text-align:right;">
                   <a href="/store">SEE MORE</a>

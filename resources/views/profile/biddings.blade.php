@@ -204,7 +204,7 @@ $lost_qty = BiddingController::lost_qty();
                 <hr class="text-secondary">
               </div>
               
-              <button type="button" class="btn btn-outline-dark my-3" style="border-radius:0%;" data-bs-toggle="modal" data-bs-target="#bidresults">
+              <button type="button" class="info-btn my-3" data-bs-toggle="modal" data-bs-target="#bidresults">
                   View Bidding Results
               </button>
               
@@ -218,9 +218,9 @@ $lost_qty = BiddingController::lost_qty();
                           </div>
                           <div class="modal-body text-center">
                             <table class="table">
-                              <a class="d-flex  flex-shrink-0  link-dark text-decoration-none border-bottom">
+                              <div class="d-flex  flex-shrink-0  link-dark text-decoration-none border-bottom">
                                 <span class="fs-6 fw-semibold text-center w-100"><b>List of Bidders</b> </span>
-                              </a>
+                              </div>
                               <thead>
                                 <tr>
                                   <th scope="col">Username</th>
@@ -255,7 +255,7 @@ $lost_qty = BiddingController::lost_qty();
                           
                           
                           <div class="modal-footer justify-content-center  align-items-center">
-                              <button type="button" class="btn btn-dark  w-25 mb-2" style="border-radius:0%;" data-bs-dismiss="modal">Got It</button>
+                              <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
                               {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
                               {{-- {{Form::submit('CONFIRM BID', ['class'=>' btn btn-dark  w-50 mb-2','style'=>'border-radius:0%;']) }}
                               {{Form::hidden('id',$item->id)}} --}}
