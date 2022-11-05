@@ -27,9 +27,12 @@
 
             @if ($rf->status!="pending")
 
-            <td>----------</td>
-            <td>----------</td>
-                
+                @if ($rf->status=="Refunded")
+                    <td class="text-info">{{$rf->status}}</td>
+                @endif      
+                @if ($rf->status=="Denied")
+                <td class="text-danger">{{$rf->status}}</td>
+                @endif          
             @else
 
             {!! Form::open(['action'=>['App\Http\Controllers\RefundController@update',$rf->id],
@@ -52,6 +55,7 @@
                 {{ Form::hidden('uname',$rf->uname) }}
                 {{ Form::hidden('amt',$rf->amount) }}
                 {{ Form::hidden('uid',$rf->uid) }}
+                {{ Form::hidden('email',$rf->email) }}
 
                 {{ Form::submit('SUBMIT',['class' => 'btn '])}}
                 </td>
