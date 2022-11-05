@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('amount');
             $table->string('gcashnum');
             $table->string('status')->default('pending');
+            $table->string('email');
             $table->timestamps();
         });
     }

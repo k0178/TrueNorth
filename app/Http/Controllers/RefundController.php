@@ -52,6 +52,7 @@ class RefundController extends Controller
         $in->uid=Auth::User()->id;
         $in->amount=Auth::User()->funds;
         $in->gcashnum=$request->input('gcashnum');
+        $in->email=Auth::User()->email;
         $in->save();
 
         $up = User::find(Auth::User()->id);
@@ -102,13 +103,15 @@ class RefundController extends Controller
         $fnd->funds = $fnd->funds-$request->input('amt');
         $fnd->save();
 
-        $msg = new Messages;
-        $msg->user_id = $request->uid;
-        $msg->message = $request->input('refundmsg');
-        $msg->save();
+        $msg = $request->input('refundmsg');
+        $mail = $request->email;
 
-         Session::flash('success', "ok ");
-        return redirect('/admin/refundreq');
+
+
+        Session::flash('success', "Refund Processed");
+        Session::put('msg',$msg);
+        Session::put('mail',$mail);
+        return redirect('/mailex');
 
     }
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -119,6 +120,11 @@ Route::get('/cookiepolicy','App\Http\Controllers\PagesController@cookiepolicy');
 Route::get('/termsandcondition','App\Http\Controllers\PagesController@termsandcondition');
 Route::get('/developers','App\Http\Controllers\PagesController@developers');
 Route::get('/company','App\Http\Controllers\PagesController@company');
+
+//mail
+Route::get('/mailex','App\Http\Controllers\MailController@sendMail');
+
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
