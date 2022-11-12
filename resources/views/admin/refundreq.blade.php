@@ -36,7 +36,7 @@
             @else
 
             {!! Form::open(['action'=>['App\Http\Controllers\RefundController@update',$rf->id],
-            'method'=>'PUT'])!!}
+            'method'=>'PUT','enctype'=>'multipart/form-data'])!!}
 
             
 
@@ -50,6 +50,10 @@
                     'style'=>'height:50px;'
                     ])}}
     
+                </td>
+                <td>
+                    @method('put')
+                        {{Form::file('img',['class'=>'form-control w-75'])}}
                 </td>
                 <td>
                 {{ Form::hidden('uname',$rf->uname) }}

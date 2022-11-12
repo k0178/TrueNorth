@@ -12,15 +12,19 @@ class refund extends Mailable
     use Queueable, SerializesModels;
 
     public $msg;
+    public $name;
+    public $attch;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($msg)
+    public function __construct($msg, $name, $attch)
     {
         $this->msg=$msg;
+        $this->name=$name;
+        $this->attch=$attch;
     }
 
     /**
