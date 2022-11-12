@@ -6,12 +6,20 @@ use App\Http\Controllers\BagController;
 use App\Models\Bag;
 use App\Models\Biddings;
 use App\Models\Auction;
+use App\Models\Messages;
 use Illuminate\Support\Facades\Auth;
 
 $username = Auth::user()->username;
 $bag_qty = BagController::bag_qty();
 
 $data = User::where('username',$username)->first();
+$messages = Messages::select('*')
+                            ->where('user_id',Auth::user()->id)
+                            ->orderBy('created_at','DESC')
+                            ->get();
+$users = User::select('*')
+        ->where('id', Auth::user()->id)
+        ->first();
 ?>
 
 {{--<div class="userloggedbar d-flex  align-items-center  justify-content-end py-2 px-4" style="background: #f0eeee;">
@@ -55,25 +63,84 @@ $data = User::where('username',$username)->first();
 
  --}}
 
-<nav class="navbar " style="background: #D3D0CB;" aria-label="Light offcanvas navbar">
+<nav class="navbar pt-2 " style="background: #393E41;" aria-label="Light offcanvas navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
         <div class="d-flex align-items-center">
-            <div class="position-relative mx-3">
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
+            <div class="position-relative ms-3">
+                    {{-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
                         {{$bag_qty}}
-                    </span>
+                    </span> --}}
+                    <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#msg" aria-controls="msg">
+                        {{-- <span class="bi bi-three-dots-vertical"></span> --}}
+                        <i class="bi bi-chat-dots-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
+                        <span class="badge bg-none " style="color: #E7BB41;"></span>
+                    </button> 
+                    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="msg" aria-labelledby="offcanvasNavbarLightLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="msg">
+                                <i class="bi bi-chat-dots" style="font-size: 18px;"></i>
+                                <b> Messages |
+                                <img src="/userPFP/{{Auth::user()->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle ms-1" >
+                                <label for="" style="font-size: 18px;">{{Auth::user()->username}}</label>
+                            </h5></b>  
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            
+                        </div>
+                        <div class="offcanvas-body">
+                            YOUR MESSAGES
+
+                            {{-- <div class="border mx-5 mb-5  " style="margin-top: 150px;">
+
+                            <div class="bg-white mb-5" style="margin:0%; width: 400px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">
+                            <div class="list-grouplist-group-flush border-bottom scrollarea " style="overflow:auto;">
+                                
+                                @if(count($users)>0)
+                                @foreach ($users as $user)
+
+                                    <a href="/admin/messages/{{$user->id}}" class="px-3 list-group-item list-group-item-action  py-3" aria-current="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-3">
+                                                <img src="/userPFP/{{$user->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-1" >
+                                            </div>
+                                            <label for="" class="fw-bold me-2" style="font-size: 16px;">{{$user->username}}</label>
+                                            <label for="" class="">{{$user->fname. ' '. $user->lname}}</label>
+                                            @php
+                                                    $latest_msg = Messages::select('*')
+                                                                        ->where('user_id',$user->id)
+                                                                        ->orderBy('created_at','DESC')
+                                                                        ->first();
+                                            @endphp
+                                        </div>
+                                        <div class="d-flex mt-2 align-items-center">
+                                            <label for="" class="me-2" style="font-size: 16px;">{{$latest_msg->message}} </label>
+                                            <label for="" class="text-secondary">- {{$latest_msg->created_at}} </label>
+                                        </div>
+                                        
+                                        
+                                    </a>
+                                    @endforeach
+                                    @else
+                                        <p class="m-auto"> No Messages </p>
+                                    @endif
+                                </div>
+                                </div>
+                            </div>--}}
+                        </div> 
+                    </div>
                     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
+                        <i class="bi bi-bag-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
                         
-                        <i class="bi bi-bag " style="font-size: 16px; font-weight:bold;"></i>
+                        <span class="badge bg-none " style="color: #E7BB41;">{{$bag_qty}}</span>
+                        
                     </button> 
             </div> 
             <button class="btn" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
                 {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                 
-                <img src="/userPFP/{{Auth::user()->profileImage}}" width="35px" height="35px" style="object-fit: cover;" class="rounded-circle me-1" >
-                <label for="" class="fw-bold" style="font-size: 14px;">{{strtoupper(Auth::user()->username)}}</label>
+                <img src="/userPFP/{{Auth::user()->profileImage}}" width="40px" height="40px" style="object-fit: cover; border: 3px #E7BB41 solid;" class="rounded-circle me-1 "  >
+                {{-- <label for="" class="fw-bold text-white" style="font-size: 14px;">{{strtoupper(Auth::user()->username)}}</label> --}}
             </button> 
             
             {{-- <a href="" class="mx-3" style="color: black; font-size:16px;"><i class="bi bi-bag"></i></a>       --}}
@@ -262,12 +329,9 @@ $data = User::where('username',$username)->first();
                                 <a href="/biddings"> View Biddings</a>
                             </div>
                             @endif
-                        
-                        
+                        </div>
                     </div>
-                    
-            </div>
-        </div>
+                </div>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
             <div class="offcanvas-header">

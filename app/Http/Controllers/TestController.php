@@ -6,7 +6,7 @@ use App\Models\Funds;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class UserFundingsController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,12 @@ class UserFundingsController extends Controller
      */
     public function index()
     {
-
         $title =  Auth::user()->username ." | Fundings";
         $username = Auth::user()->username;
         $data = Funds::where('uname','=',Auth::user()->username)->orderBy('created_at','DESC')->get();
         $funds = User::where('username',$username)->select('funds')->first();
         
-        return view('profile.fundings', compact('title'))->with('funds',$funds)->with('data',$data);
+        return view('profile.test', compact('title'))->with('funds',$funds)->with('data',$data);
     }
 
     /**
@@ -53,7 +52,7 @@ class UserFundingsController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -89,16 +88,28 @@ class UserFundingsController extends Controller
     {
         //
     }
-
-    public function search(Request $request){
     
+    public function search(Request $request){
+        // $fund = Funds::where('refnum','Like','%'.$request->search.'%')
+        //         ->orWhere('type','Like','%'.$request->search.'%')
+        //         ->where('uname',Auth::user()->username)
+        //         ->first();
+        
+        //     foreach ($fund as $funds) {
+        //     $output.= 
+        //     '<tr>
+        //         <td>'.$funds->refnum.'</td>
+        //     </tr>';
+        //     }
+            
+        //     return response($output);
+
         if($request->ajax()){
 
             $output = '';
             $query = $request->get('query');
             if($query != ''){
                 $data = Funds::where('refnum','like','%'.$query.'%')
-                            ->orwhere('created_at','like','%'.$query.'%')
                             ->where('uname', Auth::user()->username)
                             ->get();
             }
@@ -111,49 +122,20 @@ class UserFundingsController extends Controller
             $total_row = $data->count();
             if($total_row > 0){
                 foreach ($data as $row) {
-                    if($row->status == "Approved"){
-                        $output .= '
-                                    <tr>
-                                        <th scope="row">'.number_format($row->amount,2).' PHP</th>
-                                        <td>'. $row->type.'</td>
-                                        <td class=text-success>'. $row->status.'</td>
-                                        <td></td>
-                                        <td>'. $row->refnum.'</td>
-                                        <td>'. $row->created_at.'</td>
-                                    </tr>
-                                    ';
-                    }
-                    elseif($row->status == "Pending"){
-                        $output .= '
-                        <tr>
-                            <th scope="row">'.number_format($row->amount,2).' PHP</th>
-                            <td>'. $row->type.'</td>
-                            <td class=text-warning>'. $row->status.'</td>
-                            <td></td>
-                            <td>'. $row->refnum.'</td>
-                            <td>'. $row->created_at.'</td>
-                        </tr>
-                        ';
-                    }
-                    elseif($row->status == "Declined"){
-                        $output .= '
-                        <tr>
-                            <th scope="row">'.number_format($row->amount,2).' PHP</th>
-                            <td>'. $row->type.'</td>
-                            <td class=text-danger>'. $row->status.'</td>
-                            <td></td>
-                            <td>'. $row->refnum.'</td>
-                            <td>'. $row->created_at.'</td>
-                        </tr>
-                        ';
-                    }
+                    $output .= '
+                    <tr>
+                        <td>'. $row->id.'</td>
+                        <td>'. $row->refnum.'</td>
+                        <td>'. $row->uname.'</td>
+                    </tr>
+                    
+                    ';
                 }
-                
             }
             else{
                 $output = '
                     <tr>
-                        <td colspan=6 class=text-center> NO DATA FOUND</td>
+                        <td> No DATA FOUND</td>
                     </tr>
                 '; 
             }
@@ -163,7 +145,5 @@ class UserFundingsController extends Controller
             );
             echo json_encode($data);
         }
-    
     }
-    
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('message');
+            $table->integer('msg_to');
+            $table->integer('msg_from');
             $table->timestamps();
         });
     }

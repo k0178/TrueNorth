@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\MailController;
+
+use App\Http\Controllers\UserFundingsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,7 @@ use App\Http\MailController;
 */
 
 
+Route::get("frmsearch",[UserFundingsController::class,'search'])->name('frmsearch');
 
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');

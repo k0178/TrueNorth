@@ -47,6 +47,7 @@ $lost_qty = BiddingController::lost_qty();
             @foreach($pending as $info)
             <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
               <div class="d-flex align-items-center">
+                
                 <div class="d-flex">
                   <a href="/item/{{$info->prod_id}}"><img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
                     style="object-fit: cover; 
@@ -131,7 +132,7 @@ $lost_qty = BiddingController::lost_qty();
             <div class="justify-content-center mt-3  d-flex ">{{$pending->links()}}</div>
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-         
+            <input type="search" class="form-control my-3"  name="search" id="form-search" placeholder="Search for Item Name">
             @if(count($won) > 0)
             @foreach($won as $info)
             <div class="list-group list-group-flush scrollarea mt-3 mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
@@ -273,7 +274,13 @@ $lost_qty = BiddingController::lost_qty();
           </div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
             @if(count($lost) > 0)
-            
+            <div class="mt-3 w-50">
+              <form class="" role="search" form type="get" action="{{url ('/search')}}">
+                {{-- <input type="search" name="search" style="background: none;  " class="ps-1 search form-control" placeholder="Search for Auctions"> --}}
+                <input class="form-control me-3 "  name="search" type="search" placeholder="Search" aria-label="Search">
+                {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
+              </form>
+            </div>
             @foreach($lost as $info)
             <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
               <div class="d-flex align-items-center">

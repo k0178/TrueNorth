@@ -3,14 +3,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel= "stylesheet" href= "\css\app.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>{{$title}}</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/273827b7bf.js" crossorigin="anonymous"></script>
+    
     <link rel="icon" href="/img/favicon.ico">
   </head>
   <body class="">
@@ -62,7 +67,7 @@
   @endif
 
   @if(Session::has('success'))
-      <div class="d-flex w-100 mt-5 justify-content-center" style="background: none; margin:0%;">
+      {{-- <div class="d-flex w-100 mt-5 justify-content-center" style="background: none; margin:0%;">
           <div class="alert alert-success alert-dismissible w-50  align-items-center d-flex" style="border-radius: 0%;">
               <div class="w-100 text-center text-success">
                   {{Session::get('success')}}
@@ -71,7 +76,14 @@
                   <button class="close btn userloggedbtn"  data-dismiss="alert"><b class="text-success" style="font-size: 20px;">&times;</b></button>
               </div>
           </div>
-      </div>
+      </div> --}}
+      <div class="justify-content-center w-100 d-flex mt-5">
+        <div class="alert alert-success alert-dismissible fade text-center show w-50" role="alert">
+            <i class="bi bi-exclamation-circle-fill text-success"></i>
+            <strong class="text-success">Perfect.</strong> {{Session::get('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
   @endif
   
   @yield('content')
@@ -80,6 +92,8 @@
 
 @include('inc.footer')
 <script type="text/javascript">
+
+
 
   const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
   const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

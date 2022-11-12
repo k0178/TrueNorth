@@ -67,15 +67,15 @@
 </div>
 
   <div class="w-100 mx-3">
-      <table class="table">
-        <div class="d-flex justify-content-center flex-shrink-0 p-3 link-dark text-decoration-none align-items-center border-bottom">
-          {{-- <span class="fs-6 fw-semibold text-center"><b>Fund Transaction History</b> </span> --}}
-            <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Reference Number or Date (yyyy-mm-dd)">
-          <div class="d-flex align-items-center">
-          Showing
-          <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-          </div>
-          
+    <div class="mt-3 w-50">
+        
+        <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search">
+      
+      
+    </div>
+      {{-- <table class="table">
+        <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+          <span class="fs-6 fw-semibold text-center w-100"><b>Fund Transaction History</b> </span>
         </div>
         <thead>
           <tr>
@@ -88,13 +88,64 @@
           </tr>
         </thead>
         <tbody>
-          
+          @foreach ($data as $info)
+            <tr>
+              <th scope="row">{{number_format($info->amount,2)}} PHP</th>
+              <td>{{$info->type}}</td>
+              @if($info->status == "Pending")
+                <td class="text-warning">{{$info->status}}</td>
+                @elseif($info->status =="Approved")
+                <td class="text-success">{{$info->status}}</td>
+                @elseif($info->status =="Denied")
+                <td class="text-danger">{{$info->status}}</td>
+              @endif
+              
+              <td></td>
+              <td>{{$info->refnum}}</td>
+              <td>{{$info->updated_at}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+        <tbody></tbody>
+      </table> --}}
+      <table class="table">
+        <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+          <span class="fs-6 fw-semibold text-center w-100"><b>Fund Transaction History</b> </span>
+          <span id="total_records"></span>
+        </div>
+        <thead>
+          <tr>
+            <th scope="col">Amount</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+            <th scope="col">Payment Method</th>
+            <th scope="col">Reference #</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{-- @foreach ($data as $info)
+            <tr>
+              <th scope="row">{{number_format($info->amount,2)}} PHP</th>
+              <td>{{$info->type}}</td>
+              @if($info->status == "Pending")
+                <td class="text-warning">{{$info->status}}</td>
+                @elseif($info->status =="Approved")
+                <td class="text-success">{{$info->status}}</td>
+                @elseif($info->status =="Denied")
+                <td class="text-danger">{{$info->status}}</td>
+              @endif
+              
+              <td></td>
+              <td>{{$info->refnum}}</td>
+              <td>{{$info->updated_at}}</td>
+            </tr>
+          @endforeach --}}
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
 <script>
 $(document).ready(function(){
         fetch_fund_data();
@@ -111,6 +162,8 @@ $(document).ready(function(){
                     $('tbody').html(data.table_data);
                     $('#total_records').text(data.total_data);
                 }
+
+
             })
         }
 
@@ -118,6 +171,8 @@ $(document).ready(function(){
             var query  = $(this).val();
             fetch_fund_data(query);
         })
+
+
     })
   </script>
 @endsection
