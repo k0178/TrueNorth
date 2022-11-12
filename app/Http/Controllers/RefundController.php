@@ -99,6 +99,7 @@ class RefundController extends Controller
         $stat->save();
 
         $fnd = User::find($request->uid);
+        
         $fnd->user_status=1;
         $fnd->funds = $fnd->funds-$request->input('amt');
         $fnd->save();
@@ -106,12 +107,17 @@ class RefundController extends Controller
         $msg = $request->input('refundmsg');
         $mail = $request->email;
 
+        $filename= $fnd->username."email.".$request->file('img')->getClientOriginalExtension();
+        $request->file('img')->storeAs('mailAttch',$filename,'public_uploads');
 
 
         Session::flash('success', "Refund Processed");
+        session::put('attch',$filename);
         Session::put('msg',$msg);
+        Session::put('name',$fnd->username);
         Session::put('mail',$mail);
         return redirect('/mailex');
+      
 
     }
 

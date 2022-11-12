@@ -13,8 +13,10 @@ class MailController extends Controller
     public function sendMail(){
 
         $msg=Session::get('msg');
+        $name=Session::get('name');
         $mail=Session::get('mail');
-        Mail::to($mail)->send(new refund($msg));
+        $attch=Session::get('attch');
+        Mail::to($mail)->send(new refund($msg, $name, $attch));
         
         Session::flash('success', "Refund Processed");
         return back();
