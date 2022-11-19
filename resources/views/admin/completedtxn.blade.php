@@ -8,9 +8,9 @@ use App\Models\OrderItems;
 @endphp
 
 <div class="bg-white mx-3 " style="margin-top: 150px; border-top:1px #dddddd solid; ">
-  <a href="" style="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none " style="border-bottom:1px #dddddd solid;">
+  <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none " style="border-bottom:1px #dddddd solid;">
     <span class="fs-5 fw-bold text-center w-100">To Ship</span>
-  </a>
+  </div>
     <table class="table">
       <thead>
         <tr>
@@ -20,7 +20,6 @@ use App\Models\OrderItems;
           <th scope="col">Delivery Address </th>
           <th scope="col">Total</th>
           <th scope="col">Reference Number</th>
-       
           <th scope="col">Tracking Number</th>
         </tr>
       </thead>
@@ -44,8 +43,6 @@ use App\Models\OrderItems;
             <td>{{$info->del_address}}</td>
             <td>{{number_format($info->total,2)}}</td>
             <td>{{$info->refnum}}</td>
-      
-           
             <td>{{$info->tracknum}}</td>
             <td>
               <a href="" class="btn userloggedbtn text-success ">View Feedback/s</a>

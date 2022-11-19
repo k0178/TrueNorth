@@ -20,13 +20,7 @@ class UserManagementController extends Controller
         return view('admin.usermanagement', compact('title'))->with('data',$data);
     }
 
-    public function search(){
-        $title = "Admin | User Management";
-        $search = $_GET['search'];
-        $data = User::where('username' ,'=', $search)->get();
-
-        return view('admin.usermanagement',compact('title','data'));
-    }
+  
 
 
     /**
@@ -100,5 +94,54 @@ class UserManagementController extends Controller
         //
     }
 
-   
+    public function search(Request $request){
+    
+        if($request->ajax()){
+
+            $output = ' ';
+            $query = $request->get('query');
+            if($query != ''){
+                $data =  User::where('fname','like','%'.$query.'%')
+                            ->orwhere('lname','like','%'.$query.'%')
+                            ->orwhere('username','like','%'.$query.'%')
+                            ->get();
+            }
+            else{
+                $data = User::where('user_type','=',1)
+                            ->where('user_status','=',1)
+                            ->get();
+                                    
+            }
+            
+
+            $total_row = $data->count();
+            if($total_row > 0){
+                foreach ($data as $row) {
+                    $output .= '
+                    <tr>
+                        <th scope=row>'.$row->id.'</th>
+                        <td>'.$row->username.'</td>
+                        <td>'.$row->fname.' '.$row->lname.'</td>
+                        <td>'.$row->address.'</td>
+                        <td>'.number_format($row->funds,2).' PHP</td>
+                        <td>'.\Carbon\Carbon::parse($row->created_at)->isoFormat('MMM D, YYYY').'</td>
+                        <td><button class ="btn fw-bold text-danger " > BLOCK </button>  </td>
+                    </tr>';
+                }
+            }
+            else{
+                $output = '
+                    <tr>
+                        <td colspan=6 class=text-center> NO DATA FOUND</td>
+                    </tr>
+                '; 
+            }
+            $data = array(
+                'table_data'=> $output,
+                'total_data'=> $total_row
+            );
+            echo json_encode($data);
+        }
+    
+    }
 }

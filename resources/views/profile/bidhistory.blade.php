@@ -2,15 +2,23 @@
 @extends('layout.app')
 @section('content')
 
-<div class="mx-3 mt-5">
+<div class="mx-3 mt-5 justify-content-center ">
 <table class="table">
     <thead>
-      <tr>
-        <th scope="col" colspan="3" class="text-center" style="font-size: 22px;">Bid History</th>
-      </tr>
+        <div align="right" class="my-5 d-flex align-items-center">
+            <i class="bi bi-search me-3"></i>
+            <input type="search" class="form-control me-3 w-50"  name="search" id="form-search" placeholder="Search for Item Name, Reference Number or Date (yyyy-mm-dd)">
+            <div class="d-flex align-items-center">
+                Showing
+                <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+                </div>
+        </div>
+        <tr>
+            <th scope="col" colspan="3" class=" border-top text-center" style="font-size: 22px;">Bid History</th>
+        </tr>
     </thead>
-    <tbody>
-        @if(count($data) > 0)
+    <tbody id="bidhistory">
+        {{-- @if(count($data) > 0)
             @foreach($data as $info)
                 <tr class="">
                     <th scope="row">
@@ -52,7 +60,6 @@
                                 <li><h5>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h5></li>
                                 <li class="mb-1"> <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y h:i:s A')}} </b></li>
                                 <li>Reference #: <b>{{$info->refnum}}</b> </li>
-                                {{-- <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li> --}}
                             </small>
                         </ul>
                     </td>
@@ -63,12 +70,35 @@
                 <h5><b>You have no bids yet.</b> </h5>
                 <a href="/store" class=" btn userloggedbtn " style="font-size: 14px;">View other Auctions</a>
             </div> 
-        @endif
+        @endif --}}
    
     </tbody>
   </table>
 
 </div>
-
+<script>
+    $(document).ready(function(){
+            fetch_bidhistory_data();
+    
+            function fetch_bidhistory_data(query = ''){
+                
+                $.ajax({
+                    url:"{{ route('bhsearch')}}",
+                    method:'GET',
+                    data:{query:query},
+                    dataType:'json',
+                    success:function(data){
+                        $('#bidhistory').html(data.table_data);
+                        $('#total_records').text(data.total_data);
+                    }
+                })
+            }
+    
+            $(document).on('keyup','#form-search',function(){
+                var query  = $(this).val();
+                fetch_bidhistory_data(query);
+            })
+        })
+      </script>
 @endsection
 

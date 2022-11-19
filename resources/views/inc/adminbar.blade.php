@@ -36,15 +36,15 @@
             </div>
         </div> --}}
 
-<nav class="navbar " style="background: #f0eeee;" aria-label="Light offcanvas navbar">
+<nav class="navbar " style="background: #393E41;" aria-label="Light offcanvas navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
         <div class="d-flex align-items-center">
-            <button class="" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
+            <button class="btn" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
                 {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                 
                 <img src="/userPFP/{{Auth::user()->profileImage}}" width="35px" height="35px" style="object-fit: cover;" class="rounded-circle me-1" >
-                <label for="" class="fw-bold" style="font-size: 14px;">{{strtoupper(Auth::user()->username)}}</label>
+                <label for="" class="fw-bold text-white" style="font-size: 14px;">{{strtoupper(Auth::user()->username)}}</label>
             </button> 
             
             {{-- <a href="" class="mx-3" style="color: black; font-size:16px;"><i class="bi bi-bag"></i></a>       --}}
@@ -61,14 +61,14 @@
             </div>
         <div class="offcanvas-body">
             <hr>
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <ul class="navbar-nav text-center mx-5 justify-content-center flex-grow-1 pe-3">
                 @if(Auth::user()->user_type == 5)
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/index">
                             <i class="bi bi-plus-square me-2"></i>ADD ITEM
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a class="nav-link" href="/admin/list"><i class="bi bi-card-list me-2"></i>ITEM LIST
                         </a>
                     </li>
@@ -112,13 +112,9 @@
                 @else
 
                 @endif
-                <hr>
-                <li class="nav-item">
-                    {{-- <a class="btn btn-dark w-100" href="/logout"><i class="bi bi-box-arrow-left me-2"></i>LOGOUT</a> --}}
-                <button type="button" class="btn btn-dark w-100" style="border-radius: 0%;" onclick="location.href='/logout'"><i class="bi bi-box-arrow-left me-2 text-white"></i>LOGOUT</button>
-                </li>
-                
             </ul>
+            <hr>
+            <button type="button" class="form-btn  w-100" onclick="location.href='/logout'"><i class="bi bi-box-arrow-left me-2"></i>LOGOUT</button>
         </div>
         </div>
     </div>

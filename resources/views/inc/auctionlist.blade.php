@@ -1,9 +1,17 @@
 @php
     use App\Models\Biddings;  
 @endphp
-<a href="/admin/auctionlist" style="margin-top: 150px;" class=" border d-flex flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+<div style="" class=" d-flex flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
     <span class="fs-5 fw-bold text-center w-100">Auction List</span>
-</a>
+</div>
+<div align="right" class="my-3 mx-3 d-flex align-items-center">
+  <i class="bi bi-search me-3"></i>
+  <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Item Name or Item ID ">
+  <div class="d-flex align-items-center">
+      Showing
+      <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+      </div>
+</div>
 <div class="bg-white mb-5" style="margin:0%; width: 500px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">
   <div class="list-group list-group-flush border-bottom scrollarea " style="overflow:auto;">
     
@@ -41,7 +49,7 @@
       </a>
     @endforeach
       @else
-        <p class="m-auto"> No Records Found! </p>
+        <p class=" text-center"> No Records Found! </p>
     @endif
   </div>
 </div>

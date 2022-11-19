@@ -18,81 +18,85 @@
             <div class="add-auc-content pb-5 d-flex justify-content-center mb-5">
                 <div class="col-5">
                     <div class="row ms-2 pb-2">
-                        <a>Product Name</a>
-                        {{Form::text('prodName',$data->prodName,['class'=>'form-control','placeholder'=>'Product Name','style'=>'border-radius:0%; background:none; border:none; border-bottom:1px #000000 solid;'])}}
+                        <label>Product Name</label>
+                        {{Form::text('prodName',$data->prodName,['class'=>'form-control fw-bold','placeholder'=>'Product Name','readonly'])}}
                     </div>
                     <div class="row ms-2 mt-3">
-                        <a>Product Details</a>
+                        <label>Product Details</label>
                         {{Form::textArea('prodDeets',$data->prodDeets,
-                        ['class'=>'form-control',
+                        ['class'=>'form-control fw-bold',
                         'placeholder'=>'Product Details',
-                        'style'=>'border:none; background:none; border-radius:0%; border:1px #000000 solid;'])}}
+                        'readonly'])}}
                     </div>
                 </div>
                 <div class="col-5 ms-5 pe-5">
                     <div class="row ms-2 mb-2">
-                        <a>Category</a>
+                        <label>Category</label>
                         {{Form::select('category',[
                             'M' => 'Men', 
                             'W' => 'Women',
                             'A' => 'Accessories',
                             'O' => 'Others'], 
-                            $data->category, ['class'=> 'btn mt-1 ms-3','placeholder' => 'Choose Category','style'=>'border-radius:0%; border-bottom:1px #000000 solid;']
+                            $data->category, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3']
                         )}}
                     </div>
                     <div class="row ms-2 mb-2">
-                        <a>Type</a>
+                        <label>Type</label>
                         {{Form::select('type',[
                             'T' => 'Tees', 
                             'P' => 'Pants',
                             'S' => 'Shorts',
                             'Sh' => 'Shoes'], 
-                            $data->type, ['class'=> 'btn mt-1 mb-2 ms-3','placeholder' => 'Choose Category','style'=>'border-radius:0%; border-bottom:1px #000000 solid;']
+                            $data->type, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3']
                         )}}
                     </div>
                     <div class="row ms-2 mb-2">
-                        <a>Condition</a>
+                        <label>Condition</label>
                         {{Form::select('cond',[
                             'Pre-Loved' => 'Pre-Loved', 
                             'Brand New' => 'Brand New',
                             'Bulk' => 'Bulk'], 
-                            $data->cond, ['class'=> 'btn mt-1 ms-3','placeholder' => 'Choose Category','style'=>'border-radius:0%; border-bottom:1px #000000 solid;']
+                            $data->cond, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 ms-3']
                         )}}
                     </div>
-                    <div class="row ms-2 w-100" style="">
-                        <a>Initial Price</a>
-                        {{Form::text('initialPrice',$data->initialPrice,
-                        ['class'=>'reg form-control mt-1 mb-3 ms-3',
-                        'placeholder'=>'Initial Price',
-                        'style'=>'border:none; padding:0; background:none; border-radius:0%; border-bottom:1px #000000 solid;'])}}
+                    <div class="row ms-2 mt-3 w-100" style="">
+                        <label>Initial Price</label>
+                        {{Form::text('initialPrice', $data->initialPrice,
+                        ['class'=>'form-control fw-bold mt-1 mb-3 ms-3',
+                        'placeholder'=>'Initial Price','readonly'
+                        ])}}
                     </div>
                     <div class="row ms-2">
-                        <a>Buyout Price</a>
-                        {{Form::text('buyPrice',$data->buyPrice,
-                        ['class'=>'reg form-control mt-1 pt-1 ms-3 my-3',
-                        'placeholder'=>'Buy Out Price',
-                        'style'=>'border:none; background:none; border-radius:0%; border-bottom:1px #000000 solid;'])}}
+                        <label>Buyout Price</label>
+                        {{Form::text('buyPrice', $data->buyPrice,
+                        ['class'=>'form-control fw-bold mt-1 pt-1 ms-3 my-3',
+                        'placeholder'=>'Buy Out Price','readonly'
+                        ])}}
                     </div>
                     <div class="row ms-2" style="">
-                        <a>Quantity</a>
+                        <label>Quantity</label>
                         {{Form::number('qty',$data->qty,
-                        ['class'=>'reg form-control mt-1 mb-3 ms-3',
-                        'placeholder'=>'Quantity',
-                        'style'=>'border:none; background:none; border-radius:0%; border-bottom:1px #000000 solid;'])}}
+                        ['class'=>'form-control fw-bold mt-1 mb-3 ms-3',
+                        'placeholder'=>'Quantity','readonly'
+                        ])}}
                     </div>
                 </div>
                 </fieldset> 
-             
                     <div class="d-flex text-center justify-content-center align-items-center w-100">
                         <label class="me-2">End Date:</label>
                         {{ Form::date('endDate', \Carbon\Carbon::now(), ['class' => 'w-25 form-control ']) }}
                     </div>
-                    <div class="d-flex justify-content-center mt-5 ">
-                        {{Form::submit('Post Item',['class'=>'btn btn-dark w-25 mb-5','style'=>'border-radius:0%;'])}}
-                    </div>
+                    <div align="center" class="mt-5 mx-5">
+                            {{Form::submit('Post Item',['class'=>'form-btn mb-3 w-25 ' ])}}
                             
-                {!! Form::close() !!}
-    </div>
+                            {!! Form::close() !!}
+                            <br>
+                    </div>
+                    <div align="center">
+                        <button class="info-btn mb-5" onclick="location.href='/admin/list'">Cancel</button>
+                    </div>
+                    
+                </div>
 
     @endsection
 

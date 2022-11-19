@@ -177,7 +177,7 @@ if(distance < 0){
                                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Bid Agreement</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body text-center">
                                                             If you won an auction, you must place an order for the item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
                                                             You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
                                                             <br>
@@ -189,7 +189,7 @@ if(distance < 0){
                                                         <div class="modal-footer justify-content-center  align-items-center">
                                                             {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> --}}
                                                             {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
-                                                            {{Form::submit('CONFIRM BID', ['class'=>' btn btn-dark  w-50 mb-2','style'=>'border-radius:0%;']) }}
+                                                            {{Form::submit('CONFIRM BID', ['class'=>'form-btn mb-2']) }}
                                                             {{Form::hidden('id',$item->id)}}
                                                         </div>
                                                     </div>
@@ -246,14 +246,14 @@ if(distance < 0){
                                                                         </table>
                                                                     </div>
                                                                     <div class="modal-footer justify-content-center  align-items-center">
-                                                                        <button type="button" class="btn btn-dark w-50" style="border-radius: 0%;" data-bs-dismiss="modal">GOT IT</button>
+                                                                        <button type="button" class="info-btn" data-bs-dismiss="modal">GOT IT</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                             {!! Form::close() !!}
                                                 @else
-                                                <h4 class="">Your Current Bid:<b class="text-success"> {{number_format($bid_data->bidamt,2)}} PHP</b></h4>
+                                                {{-- <h4 class="">Your Current Bid:<b class="text-success"> {{number_format($bid_data->bidamt,2)}} PHP</b></h4>
                                                     <div class="mt-3 ">
                                                         {{$item->endDate}}
                                                         @if($item->endDate < Carbon::now()->format('Y-m-d'))
@@ -271,6 +271,13 @@ if(distance < 0){
                                                                                         ->sum('bidamt');
                                                                 @endphp
                                                                 <label for="">Total Current Biddings:</label><h4><b class="text-success">{{number_format($total_bid, 2)}} PHP</b></h4> 
+                                                        </div>
+                                                    </div> --}}
+                                                    <div align="center" class="mt-3">
+                                                        <div class="">
+                                                            <button class="form-btn mb-3" onclick="location.href='/biddings'" style="background: #D3D0CB; border-radius: 0%;"><i class="bi bi-cash-coin me-2 text-dark"></i> VIEW YOUR BIDDINGS</button>
+                                                            <br>
+                                                            <button class="form-btn" onclick="location.href='/store'" style="border-radius: 0%; background: #D3D0CB;"> BACK TO STORE</button>
                                                         </div>
                                                     </div>
                                                 @endif

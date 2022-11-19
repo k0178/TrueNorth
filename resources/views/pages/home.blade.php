@@ -141,9 +141,8 @@
                           </div>
                         </div>
                       </div>
-                      <div class="px-3 py-3 ">
-                        <span class="badge" style="background-color:#E7BB41;">{{$prod->cond}}</span>
-                          <h3 class="text-dark fw-bold ">{{$prod->prodName}}</h3>
+                      <div class="px-2 py-3 ">
+                        <h5 class="text-dark fw-bold my-2">{{$prod->prodName}}<span class="badge " style="background: #E7BB41; font-size:12px;">{{$prod->cond}}</span></h6>
                         <label style="font-size: 12px;">BID STARTS AT: <label for="" class="fw-bold">{{number_format($prod->initialPrice,2)}} PHP</label> </label> 
                       </div>
                     </div>

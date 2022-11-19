@@ -2,15 +2,18 @@
 @section('content')
 
 
-<div class="bg-white  mx-5 " style="margin-top: 150px; border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-left:1px #f0eeee solid;">
+<div class="bg-white  mx-5 mt-5 " style=" border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-left:1px #f0eeee solid;">
     <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
       <span class="fs-5 fw-semibold text-center w-100">Manage Users</span>
-        {{-- <form type="get" action="{{url ('/admin/usermanagement/search')}}" class="d-flex  justify-content-center align-items-center" style="float: left; position:relative;">
-          <input type="search" name="search" class="search form-control mr-sm-1" step="width:200px;" placeholder="Search for Users">
-          <button type = "submit" class="btn"><i class="bi bi-search"></i></button>
-        </form>  --}}
   </div>
-  
+  <div align="right" class="my-3 mx-3 d-flex align-items-center">
+    <i class="bi bi-search me-3"></i>
+    <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Name or Username ">
+    <div class="d-flex align-items-center">
+        Showing
+        <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+        </div>
+  </div>
     <div>
       <table class="table">
         <thead>
@@ -21,10 +24,11 @@
             <th scope="col">Address</th>
             <th scope="col">Funds</th>
             <th scope="col">Account Created at</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($data as $user)
+          {{-- @foreach ($data as $user)
             <tr>
               <th scope="row">{{$user->id}}</th>
               <td>{{$user->username}}</td>
@@ -40,9 +44,34 @@
                 {!! Form::close() !!}
             </td>
             </tr>
-          @endforeach
+          @endforeach --}}
         </tbody>
       </table>       
     </div>
   </div>
+
+  <script>
+    $(document).ready(function(){
+            fetch_userlist_data();
+    
+            function fetch_userlist_data(query = ''){
+                
+                $.ajax({
+                    url:"{{ route('usersearch')}}",
+                    method:'GET',
+                    data:{query:query},
+                    dataType:'json',
+                    success:function(data){
+                        $('tbody').html(data.table_data);
+                        $('#total_records').text(data.total_data);
+                    }
+                })
+            }
+    
+            $(document).on('keyup','#form-search',function(){
+                var query  = $(this).val();
+                fetch_userlist_data(query);
+            })
+        })
+      </script>
 @endsection

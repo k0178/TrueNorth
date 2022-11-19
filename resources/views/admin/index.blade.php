@@ -82,11 +82,8 @@
                                 {{Form::number('qty','',
                                 ['class'=>'form-control mt-1 mb-3 ms-3',
                                 'placeholder'=>'Quantity'])}}
-                                {{Form::submit('ADD ITEM',['class'=>'btn btn-dark ms-3 mt-3','style'=>'border-radius:0%;'])}}
+                                {{Form::submit('ADD ITEM',['class'=>'form-btn ms-3 mt-3'])}}
                             </div>
-                            
-                                   
-                            
                         </div>
                         {!! Form::close() !!}
                     </div>

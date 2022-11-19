@@ -35,8 +35,10 @@
         </div>
     </div> 
     <div class="d-flex w-100 justify-content-center align-items-center mb-3">
-        <a href="/profile/{{$data->username}}/edit" class= "edit-prof btn w-25 textalign-center" style="color:#ffffff !important; background-color:#121212; border-radius: 0%;">Edit Profile</a> 
+        <button type="button" class= "info-btn w-25 " onclick="location.href='/profile/{{$data->username}}/edit'">Edit Profile</button> 
     </div> 
+
+    {{-- /profile/{{$data->username}}/edit --}}
         {!! Form::close() !!}
         <fieldset disabled>
             <div class="container  my-5 ">

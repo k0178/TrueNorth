@@ -100,7 +100,7 @@ $ref_num = Auth::user()->id.date('ymdHis');
                         <ul class="" style="list-style: none;   margin-bottom:auto;">
                         <small>
                             @if($price === null)
-                            <li><h6><b>{{number_format($item->buyPrice,2)}} </b></h6></li>
+                            <li><h6><b>{{number_format($item->buyPrice,2)}} PHP </b></h6></li>
                             @php
                                 $total_buy += $item->buyPrice;
                             @endphp
@@ -108,7 +108,7 @@ $ref_num = Auth::user()->id.date('ymdHis');
                             @php
                                 $total_bids += $price->bidamt;
                             @endphp
-                            <li><h6><b>{{number_format($price->bidamt,2)}} </b></h6></li>
+                            <li><h6><b>{{number_format($price->bidamt,2)}} PHP </b></h6></li>
                             @endif
                         </small>
                         </ul>
@@ -122,46 +122,45 @@ $ref_num = Auth::user()->id.date('ymdHis');
                 </div>
                 <hr>
                 <div align="right" class="w-100 px-3">
-                    <label><h5>Sub-Total: <b>{{number_format($sub_total,2)}}</b></h5> </label><br>
+                    <label><h5>Sub-Total: <b>{{number_format($sub_total,2)}} PHP</b></h5> </label><br>
                     {{-- @php
                         
                         $penalty = number_format(0,2);
                         $total_amt = $total + $total_sgl + $del_fee + $penalty;
                     @endphp --}}
-                    <label>Shipping Fee: <b>{{$del_fee}}</b></label><br>
+                    <label>Shipping Fee: <b>{{$del_fee}} PHP</b></label><br>
                     <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
                     <hr>
-                    <label class= "px-3 pt-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
+                    <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
                 </div>
                 
                 </div>
             </div>
             <div class=" mt-5 text-center mb-3 ">
                 @if(Auth::user()->funds < $total_amt)  
-                        {{Form::submit('PLACE ORDER', ['class'=>' btn btn-dark  mb-1  ','style'=>'border-radius:0%;','disabled']) }}
+                        {{Form::submit('PLACE ORDER', ['class'=>' form-btn  mb-1  ','disabled']) }}
                     <br>
-                    <small class="userloggedbtn ">Insufficient Funds</small>
+                        <label for="" class="mt-3">Funds: <b><h4 class="text-danger">{{number_format(Auth::user()->funds,2)}} PHP</h4>  </b></label>
+                        
                     <br>
-                        <label for="" class="my-3">Funds: <b class="text-danger"> {{number_format(Auth::user()->funds,2)}} </b></label>
-                    <br>
-                    
+                    <a href="/fundings" class="fw-bold"> Add Funds</a>
                     <div class="d-flex  justify-content-center">
                         {!! Form::open(['action'=>'App\Http\Controllers\storePagesController@store_index','method'=>'GET']) !!}
-                            {{Form::submit('CANCEL', ['class'=>' btn btn-dark  mb-3  ','style'=>'border-radius:0%;']) }} 
+                            {{Form::submit('CANCEL', ['class'=>'info-btn  my-3  ']) }} 
                         {!! Form::close() !!}
                     </div>
                 @elseif(Auth::user()->funds > $total_amt || Auth::user()->funds = $total_amt )
                     {!! Form::open(['action'=>'App\Http\Controllers\CheckoutController@placeOrder','method'=>'POST']) !!}
                         {{Form::hidden('refnum',$ref_num)}}
                         {{Form::hidden('total_amt',$total_amt)}}
-                        {{Form::submit('PLACE ORDER', ['class'=>' btn btn-dark  mb-1  ','style'=>'border-radius:0%;']) }}
+                        {{Form::submit('PLACE ORDER', ['class'=>'form-btn  mb-1 ']) }}
                     {!! Form::close() !!}
                         
                             <small class="userloggedbtn">By Placing Order, you agree to pay the <b>Total amount</b>  using your <b>Funds</b> </small>
-                            <label for="" class="mt-3">Your Funds after placing this order will be: <br> <b> {{number_format(Auth::user()->funds - $total_amt,2) }} PHP</b></label>
+                            <label for="" class="mt-3">Your Funds after placing this order will be: <br> <h4><b class="text-success"> {{number_format(Auth::user()->funds - $total_amt,2) }} PHP</b></h4></label>
                 </div>
             <div class="d-flex  justify-content-center">
-                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/biddings' " style="border-radius: 0%;">
+                <button class="info-btn mt-3 mb-5" onclick="location.href='/biddings' " style="border-radius: 0%;">
                     CANCEL
                 </button>
             </div>

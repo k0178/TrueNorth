@@ -130,7 +130,7 @@ hr {
 }
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
-  margin-top: 0;
+  margin-top: 0rem;
   margin-bottom: 0rem;
   font-weight: 500;
   line-height: 1.2;
@@ -203,6 +203,8 @@ address {
 ol,
 ul {
   padding-left: 2rem;
+  list-style: none;
+
 }
 
 ol,
@@ -210,6 +212,7 @@ ul,
 dl {
   margin-top: 0;
   margin-bottom: 1rem;
+  list-style: none;
 }
 
 ol ol,
@@ -217,6 +220,7 @@ ul ul,
 ol ul,
 ul ol {
   margin-bottom: 0;
+  list-style: none;
 }
 
 dt {
@@ -2901,7 +2905,7 @@ textarea.form-control-lg {
   --bs-btn-padding-y: 0.1rem;
   --bs-btn-font-family: ;
   --bs-btn-font-size: 0.9rem;
-  --bs-btn-font-weight: 400;
+  --bs-btn-font-weight: bold;
   --bs-btn-line-height: 1.6;
   --bs-btn-color: #212529;
   --bs-btn-bg: transparent;
@@ -4731,7 +4735,7 @@ textarea.form-control-lg {
 
 .badge {
   --bs-badge-padding-x: 0.60em;
-  --bs-badge-padding-y: 0.60em;
+  --bs-badge-padding-y: 0.50em;
   --bs-badge-font-size: 0.75em;
   --bs-badge-font-weight: 700;
   --bs-badge-color: #000;
@@ -4746,8 +4750,8 @@ textarea.form-control-lg {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: var(--bs-badge-border-radius);
- margin-top: 10px;
- margin-bottom: 5px;
+  margin-left: 5px;
+
 }
 .badge:empty {
   display: none;

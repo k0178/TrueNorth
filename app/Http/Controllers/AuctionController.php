@@ -81,9 +81,18 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction, $id)
     {
-        $data = Inventory::find($id);
-        $title = 'Post Auction';
-        return view('admin.itemPost', compact('title'))->with('data',$data);
+        $stocks = Inventory::where('id',$id)->first();
+        if ($stocks->qty == 0) {
+
+            Session::flash('error', "No Stocks.");
+            return redirect()->back();
+        }
+        else {
+            $data = Inventory::find($id);
+            $title = 'Post Auction';
+            return view('admin.itemPost', compact('title'))->with('data',$data);
+        }
+      
     }
 
     /**

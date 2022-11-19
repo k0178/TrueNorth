@@ -24,10 +24,11 @@
             <small>Upload Profile Picture</small> 
             <div class="text-center pb-4 d-flex align-items-center justify-content-center">
                     {{Form::file('pfpImg',['class'=>'form-control w-25 me-3','id'=>'pfpImg'])}}
-                <div class="save-prof">
-                    {{Form::submit('SAVE',['class'=>'userloggedbtn px-3 py-1'])}} 
+               
+                    {{-- {{Form::submit('SAVE',['class'=>'userloggedbtn px-3 py-1'])}}  --}}
+                    <button type="submit" class="form-btn">SAVE PICTURE</button>
                     {!! Form::close() !!}
-                </div>
+               
             </div>
         </div>
 
@@ -103,10 +104,11 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    
+{{--                                     
                                     {{ Form::submit('SAVE PROFILE',['class'=>'btn btn-dark my-3 w-50 ',
                                     'style' => 'border-radius:0%;'
-                                    ]) }}
+                                    ]) }} --}}
+                                    <button type="submit" class="form-btn mb-3 w-50">SAVE PROFILE</button>
                                     {!! Form::close() !!}
                                 </div>
                         </div>

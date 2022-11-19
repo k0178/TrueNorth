@@ -91,41 +91,47 @@ $users = User::select('*')
                             YOUR MESSAGES
 
                             {{-- <div class="border mx-5 mb-5  " style="margin-top: 150px;">
-
-                            <div class="bg-white mb-5" style="margin:0%; width: 400px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">
-                            <div class="list-grouplist-group-flush border-bottom scrollarea " style="overflow:auto;">
-                                
-                                @if(count($users)>0)
-                                @foreach ($users as $user)
-
-                                    <a href="/admin/messages/{{$user->id}}" class="px-3 list-group-item list-group-item-action  py-3" aria-current="true">
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-3">
-                                                <img src="/userPFP/{{$user->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-1" >
-                                            </div>
-                                            <label for="" class="fw-bold me-2" style="font-size: 16px;">{{$user->username}}</label>
-                                            <label for="" class="">{{$user->fname. ' '. $user->lname}}</label>
-                                            @php
-                                                    $latest_msg = Messages::select('*')
-                                                                        ->where('user_id',$user->id)
-                                                                        ->orderBy('created_at','DESC')
-                                                                        ->first();
-                                            @endphp
-                                        </div>
-                                        <div class="d-flex mt-2 align-items-center">
-                                            <label for="" class="me-2" style="font-size: 16px;">{{$latest_msg->message}} </label>
-                                            <label for="" class="text-secondary">- {{$latest_msg->created_at}} </label>
-                                        </div>
+                                <div class="bg-white mb-5" style="margin:0%; width: 400px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">
+                                    <div class="list-grouplist-group-flush border-bottom scrollarea " style="overflow:auto;">
                                         
-                                        
-                                    </a>
-                                    @endforeach
-                                    @else
-                                        <p class="m-auto"> No Messages </p>
-                                    @endif
-                                </div>
-                                </div>
-                            </div>--}}
+                                        @if(count($messages)>0)
+                                        @foreach ($messages as $user)
+
+                                            <a href="/admin/messages/{{$user->id}}" class="px-3 list-group-item list-group-item-action  py-3" aria-current="true">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="me-3">
+                                                        <img src="/userPFP/{{$user->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-1" >
+                                                    </div>
+                                                    <label for="" class="fw-bold me-2" style="font-size: 16px;">{{$user->username}}</label>
+                                                    <label for="" class="">{{$user->fname. ' '. $user->lname}}</label>
+                                                    @php
+                                                            $latest_msg = Messages::select('*')
+                                                                                ->where('user_id',$user->id)
+                                                                                ->orderBy('created_at','DESC')
+                                                                                ->first();
+                                                    @endphp
+                                                </div>
+                                                <div class="d-flex mt-2 align-items-center">
+                                                    <label for="" class="me-2" style="font-size: 16px;">{{$latest_msg->message}} </label>
+                                                    <label for="" class="text-secondary">- {{$latest_msg->created_at}} </label>
+                                                </div>
+                                                
+                                                
+                                            </a>
+                                            @endforeach
+                                            @else
+                                                <p class="m-auto"> No Messages </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                            </div>
+                            <div>
+                                {!! Form::open(['action'=>['App\Http\Controllers\MessagesController@store'],
+                                'method'=>'POST']) !!} 
+                                {!! Form::text('message', '', ['class' => 'form-control', 'style' => 'background:none; ; border-radius:0%; border:none;','placeholder' => 'Enter your message here.', 'required '] )!!}
+                                    
+                                {!! Form::close() !!}
+                            </div> --}}
                         </div> 
                     </div>
                     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
@@ -149,7 +155,7 @@ $users = User::select('*')
         @if($bag_qty == 0)
             <div class="offcanvas offcanvas-end w-25" tabindex="-1" id="bag" aria-labelledby="offcanvasNavbarLightLabel">
         @else
-            <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="bag" aria-labelledby="offcanvasNavbarLightLabel">
+            <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="bag" aria-labelledby="offcanvasNavbarLightLabel">
         @endif
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="bag">
@@ -163,7 +169,7 @@ $users = User::select('*')
             </div>
             <div class="offcanvas-body">
                 <hr>
-                    <div class="d-flex border-bottom justify-content-center ">
+                    <div class="d-flex border-bottom">
                         
                             @php
                                 $products = Auction::join('bag','auctions.id','=','bag.product_id')
@@ -172,55 +178,35 @@ $users = User::select('*')
     
                             @endphp
                             @if(count($products)>0)
-                            <div class="">
+                            <div class="w-100">
                             @foreach ($products as $item)
-                            
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex  align-items-center border-bottom">
                                     <div class="">
-                                        <a href="/item/{{$item->product_id}}">
-                                            <img src="/itemImages/{{$item->itemImg}}" width="100px" height="100px" 
-                                            style="object-fit: cover; border:1px #121212 solid;" 
-                                            class="rounded-circle" >
-                                    </a>
+                                        <img src="/itemImages/{{$item->itemImg}}" width="100px" height="100px" 
+                                        style="object-fit: cover; border:1px #121212 solid;" 
+                                        class="rounded-circle" >
                                     </div>
-                            {{-- @php
-                                $price = Biddings::select('bidtransactions.bidamt')
-                                            ->join('bag','bag.product_id','=','bidtransactions.prod_id')
-                                            ->where('bidtransactions.bagstatus',1)
-                                            ->where('bidtransactions.prod_id','=',$item->product_id)
-                                            ->where('bidtransactions.user_id', Auth::user()->id)
-                                            ->first();
-                                // $total = Bag::join('bidtransactions','bag.product_id','=','bidtransactions.prod_id')
-                                // ->where('bag.user_id', Auth::user()->id)
-                                // ->where('bidtransactions.bagstatus', 1)
-                                // ->sum('bidtransactions.bidamt');
-                    
-                                // $total_sgl =  Bag::join('auctions','bag.product_id','=','auctions.id')
-                                // ->where('bag.user_id', Auth::user()->id)
-                                // ->sum('auctions.buyPrice');
-                    
-                            @endphp --}}
                                 <input type="hidden" name="product_id" value={{$item->product_id}}>
-                                <div class="d-flex ">
+                                <div class="d-flex align-items-center p-3 ">
                                     <div class="d-flex  align-items-center">
-                                    <ul class="pe-3" style="list-style: none;   margin-bottom:auto;">
-                                        <li><h6><b>{{$item->prodName}} </b></h6></li>
-                                        @php
-                                        $price = Biddings::select('bidtransactions.bidamt')
-                                                    ->join('bag','bag.product_id','=','bidtransactions.prod_id')
-                                                    ->where('bidtransactions.bagstatus',1)
-                                                    ->where('bidtransactions.prod_id','=',$item->product_id)
-                                                    ->where('bidtransactions.user_id', Auth::user()->id)
-                                                    ->first();
-                                        @endphp
-                                        @if($price === null)
-                                        <li><h6>Buy Price: <b>{{number_format($item->buyPrice,2)}} </b></h6></li>
-                                        @else
-                                        <li><h6>Bid Placed: <b>{{number_format($price->bidamt,2)}} </b></h6></li>
-                                        @endif
-                                        <li>Condition: <b>{{$item->cond}}</b></li>
-                                        </small>
-                                    </ul>
+                                        <ul class="pe-3" style="list-style: none;   ">
+                                            <li><h6 class="mb-2"><b>{{$item->prodName}} </b></h6></li>
+                                            @php
+                                            $price = Biddings::select('bidtransactions.bidamt')
+                                                        ->join('bag','bag.product_id','=','bidtransactions.prod_id')
+                                                        ->where('bidtransactions.bagstatus',1)
+                                                        ->where('bidtransactions.prod_id','=',$item->product_id)
+                                                        ->where('bidtransactions.user_id', Auth::user()->id)
+                                                        ->first();
+                                            @endphp
+                                            @if($price === null)
+                                                <li><h6>Buy Price: <b>{{number_format($item->buyPrice,2)}} PHP </b></h6></li>
+                                            @else
+                                                <li><h6>Bid Placed: <b>{{number_format($price->bidamt,2)}} PHP </b></h6></li>
+                                            @endif
+                                            <li><h6 class="mt-2">Condition:</h6> <b>{{$item->cond}}</b></li>
+                                            </small>
+                                        </ul>
                                     </div>
                                     <div class="w-50 justify-content-center align-items-center d-flex">
                                     {!! Form::open(['action'=>['App\Http\Controllers\BagController@destroy',$item->product_id],
@@ -233,100 +219,92 @@ $users = User::select('*')
                                 </div>
                                 <br>
                                 </div>
-                                <hr class="me-3">
+                                
                             @endforeach
                         </div>
-                            <div class="w-50" style="border-left: 1px #dddddd solid;">
+                            <div class="w-100" style="border-left: 1px #dddddd solid;">
                                 <div class="">
-                                <h5 class="pt-3 text-center">BAG TOTAL</h5>
-                                <div class="ms-3 me-3">
-                                    <hr>
-                                    <div class="d-flex " >
-                                    <div class="" >
-                                        @foreach($products as $item)
-                                        <ul class="" style=" list-style: none; margin-bottom:auto;">
-                                            <li><h6>{{$item->prodName}}</b></h6></li>
-                                        </ul>
-                                        @endforeach
-                                    </div>
-                                    <div align="right" class="">
-                                        @php
-                                        // $total_bids = Bag::join('bidtransactions','bag.product_id','=','bidtransactions.prod_id')
-                                        // ->where('bidtransactions.user_id', Auth::user()->id)
-                                        // ->where('bidtransactions.bagstatus', 1)
-                                        // ->where('bidtransactions.winstatus', 'Won')
-                                        // ->where('bidtransactions.prod_id','=',$item->product_id)
-                                        // ->sum('bidtransactions.bidamt');
-                            
-                                        // $total_bids = Biddings::where('user_id', Auth::user()->id)
-                                        //                       ->where('bagstatus',1)
-                                                            
-                                        //                       ->sum('bidamt');
-                            
-                                        $total_bids = 0;
-                                        $total_buy =  0;
-                                        $del_fee =  number_format(45, 2);
-                                        @endphp
-                                        @foreach($products as $item)
-                                        @php
-                                        $price = Biddings::select('bidtransactions.bidamt')
-                                                    ->join('bag','bag.product_id','=','bidtransactions.prod_id')
-                                                    ->where('bidtransactions.bagstatus',1)
-                                                    ->where('bidtransactions.prod_id','=',$item->product_id)
-                                                    ->where('bidtransactions.user_id', Auth::user()->id)
-                                                    ->first();
-                                        @endphp
-                                        <ul class="" style="list-style: none;   margin-bottom:auto;">
-                                            <small>
-                                            @if($price === null)
-                                            <li><h6><b>{{number_format($item->buyPrice,2)}} </b></h6></li>
+                                    <h5 class="pt-3 text-center"><b>BAG TOTAL</b> </h5>
+                                    <div class="ms-3 me-3">
+                                        <hr>
+                                        <div class="d-flex " >
+                                            <div class="" >
+                                                @foreach($products as $item)
+                                                <ul class="" style=" list-style: none; margin-bottom:auto;">
+                                                    <li><h6>{{$item->prodName}}</b></h6></li>
+                                                </ul>
+                                                @endforeach
+                                            </div>
+                                            <div align="right" class="">
+                                                @php
+                                                    $total_bids = 0;
+                                                    $total_buy =  0;
+                                                    $del_fee =  number_format(45, 2);
+                                                @endphp
+                                                @foreach($products as $item)
+                                                @php
+                                                    $price = Biddings::select('bidtransactions.bidamt')
+                                                            ->join('bag','bag.product_id','=','bidtransactions.prod_id')
+                                                            ->where('bidtransactions.bagstatus',1)
+                                                            ->where('bidtransactions.prod_id','=',$item->product_id)
+                                                            ->where('bidtransactions.user_id', Auth::user()->id)
+                                                            ->first();
+                                                @endphp
+                                                <ul class="" style="list-style: none;   margin-bottom:auto;">
+                                                    <small>
+                                                        @if($price === null)
+                                                        <li><h6><b>{{number_format($item->buyPrice,2)}} </b></h6></li>
+                                                        @php
+                                                            $total_buy += $item->buyPrice;
+                                                        @endphp
+                                                        @else
+                                                        @php
+                                                            $total_bids += $price->bidamt;
+                                                        @endphp
+                                                        <li><h6><b>{{number_format($price->bidamt,2)}} </b></h6></li>
+                                                        @endif
+                                                    </small>
+                                                </ul>
+                                                @endforeach
+                                                @php
+                                                    $sub_total = $total_bids + $total_buy;
+                                                    $total_amt = $sub_total + $del_fee ;
+                                                @endphp
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div align="right" class="">
                                             @php
-                                                $total_buy += $item->buyPrice;
                                             @endphp
+                                            <label><h5>Sub-Total: <b>{{number_format($sub_total,2)}}</b></h5> </label><br>
+                                            <label>Shipping Fee: <b>{{$del_fee}}</b></label><br>
+                                            <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
+                                            <hr>
+                                            <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
+                                            @if(count($products)>0)
+                                
+                                            {!! Form::open(['action'=>'App\Http\Controllers\CheckoutController@index','method'=>'GET']) !!}
+                                                {{-- {{Form::submit('CHECKOUT', ['class'=>' btn btn-dark  mb-3  ','style'=>'border-radius:0%;']) }} --}}
+                                                    <div class=" my-3">
+                                                        <button type="submit" class="form-btn w-100 ">Checkout</button>
+                                                    </div>
+                                                    
+                                                {!! Form::close() !!}
+                                            
                                             @else
-                                            @php
-                                                $total_bids += $price->bidamt;
-                                            @endphp
-                                            <li><h6><b>{{number_format($price->bidamt,2)}} </b></h6></li>
-                                            @endif
-                                            </small>
-                                        </ul>
-                                        @endforeach
-                                        @php
-                                            $sub_total = $total_bids + $total_buy;
-                                            $total_amt = $sub_total + $del_fee ;
-                                        @endphp
-                                    </div>
-                                    </div>
-                                    <hr>
-                                    <div align="right" class="">
-                                    @php
-                                    @endphp
-                                    <label><h5>Sub-Total: <b>{{number_format($sub_total,2)}}</b></h5> </label><br>
-                                    <label>Shipping Fee: <b>{{$del_fee}}</b></label><br>
-                                    <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
-                                    <hr>
-                                    <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
-                                    </div>
                                     
+                                        @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                            @if(count($products)>0)
-                                <div class="d-flex mt-5 justify-content-center">
-                                {!! Form::open(['action'=>'App\Http\Controllers\CheckoutController@index','method'=>'GET']) !!}
-                                    {{Form::submit('CHECKOUT', ['class'=>' btn btn-dark  mb-3  ','style'=>'border-radius:0%;']) }}
-                                {!! Form::close() !!}
-                                </div>
-                                @else
-                        
-                            @endif
+                                
                             
                             </div>
                             
                             @else
-                            <div class=" w-100 mb-3  justify-content-center align-items-center">
-                                <h5><b>Your Bag is empty.</b> </h5>
-                                <a href="/biddings"> View Biddings</a>
+                            <div class=" w-100 mb-3 ">
+                                <h4 class="mb-2"><b>Your Bag is empty.</b> </h4>
+                                <small><a href="/biddings"> View Biddings</a></small> <small class="mx-3">|</small> <small><a href="/store"> Continue Bidding</a></small>
                             </div>
                             @endif
                         </div>
@@ -346,7 +324,7 @@ $users = User::select('*')
 
             <div class="offcanvas-body">
                 <hr>
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <ul class="navbar-nav text-center mx-5 justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">
                             <i class="bi bi-person me-2"></i>PROFILE
@@ -368,13 +346,9 @@ $users = User::select('*')
                     <li class="nav-item">
                         <a class="nav-link" href="/refund"><i class="bi bi-piggy-bank me-2"></i>REQUEST A REFUND</a>
                     </li>
-                    <hr>
-                    <li class="nav-item">
-                        {{-- <a class="btn btn-dark w-100" href="/logout"><i class="bi bi-box-arrow-left me-2"></i>LOGOUT</a> --}}
+                </ul>  
+                <hr>
                     <button type="button" class="form-btn w-100" onclick="location.href='/logout'"><i class="bi bi-box-arrow-left me-2 text-dark"></i>LOGOUT</button>
-                    </li>
-                    
-                </ul>
             </div>
         </div>
     </div>

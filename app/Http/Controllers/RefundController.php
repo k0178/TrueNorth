@@ -117,7 +117,6 @@ class RefundController extends Controller
         Session::put('name',$fnd->username);
         Session::put('mail',$mail);
         return redirect('/mailex');
-      
 
     }
 

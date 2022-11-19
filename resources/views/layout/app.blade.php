@@ -116,7 +116,7 @@ toast.show()
 })
 }
     
-      const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
 const alert = (message, type) => {
 const wrapper = document.createElement('div')

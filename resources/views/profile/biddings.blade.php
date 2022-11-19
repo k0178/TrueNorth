@@ -43,6 +43,19 @@ $lost_qty = BiddingController::lost_qty();
         </nav>
         <div class="tab-content " id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <div align="right" class="my-3 mx-3 d-flex align-items-center">
+              <i class="bi bi-search me-3"></i>
+              <input type="search" class="form-control me-3"  name="search" id="pend-search" placeholder="Search for Item Name">
+              <div class="d-flex align-items-center">
+                  Showing
+                  <p id="pend_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+              </div>
+            </div>
+
+            <div class="" id="pend_tbl">
+              
+            </div>
+            {{-- 
             @if(count($pending) > 0)
             @foreach($pending as $info)
             <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
@@ -90,7 +103,7 @@ $lost_qty = BiddingController::lost_qty();
                         <b class="text-danger">RETRACT</b> 
                       </button>
                     
-                    <!-- Modal -->
+                  
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -107,8 +120,6 @@ $lost_qty = BiddingController::lost_qty();
                                 <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
                             </div>
                           <div class="modal-footer justify-content-center  align-items-center">
-                              {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button> --}}
-                              {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
                               {!! Form::open(['action'=>['App\Http\Controllers\BiddingController@retractbid',$info->id],
                               'method'=>'POST'])!!}
                                 {{Form::submit('Confirm Retract', ['class'=>' btn btn-danger  mb-2','style'=>'border-radius:0%;']) }}
@@ -118,22 +129,33 @@ $lost_qty = BiddingController::lost_qty();
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
                 @endif
               </div>
-            </div>
             @endforeach
             
             @else
               <h3 class="m-5 text-center">Nothing to show.</h3>
 
             @endif
-            <div class="justify-content-center mt-3  d-flex ">{{$pending->links()}}</div>
+          </div><div class="justify-content-center mt-3  d-flex ">{{$pending->links()}}</div> --}}
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-            <input type="search" class="form-control my-3"  name="search" id="form-search" placeholder="Search for Item Name">
-            @if(count($won) > 0)
+            <div align="right" class="my-3 mx-3 d-flex align-items-center">
+              <i class="bi bi-search me-3"></i>
+              <input type="search" class="form-control me-3"  name="search" id="won-search" placeholder="Search for Item Name">
+              <div class="d-flex align-items-center">
+                  Showing
+                  <p id="won_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+                  </div>
+            </div>
+          
+            <div class="" id="won_tbl">
+              
+            </div>
+            {{-- @if(count($won) > 0)
             @foreach($won as $info)
             <div class="list-group list-group-flush scrollarea mt-3 mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
               <div class="d-flex align-items-center">
@@ -173,7 +195,6 @@ $lost_qty = BiddingController::lost_qty();
                       <li class="mb-1"> Placed at: <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
                       <li class="mb-1 mt-3"> Must place order before: <br> <b>{{\Carbon\Carbon::parse($info->orderDate)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>
-                      {{-- <li>Starting Price: <b>{{number_format($info->initialPrice,2)}} PHP</b></li> --}}
                   </ul>
                 </div>
               
@@ -185,7 +206,6 @@ $lost_qty = BiddingController::lost_qty();
                       onclick="location.href='/checkout/{{$info->prod_id}}'">
                       <i class="bi bi-bag-check me-1" style="color:white;"></i>
                       CHECKOUT
-                      {{-- <a href="/checkout/{{$info->prod_id}}" class="userloggedbtn w-50" style="border-radius: 0%;"></a> --}}
                     </button>
                     @else
                     <div class=" text-center mx-3">
@@ -209,7 +229,7 @@ $lost_qty = BiddingController::lost_qty();
                   View Bidding Results
               </button>
               
-              <!-- Modal -->
+              
               <div class="modal fade" id="bidresults" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
@@ -257,9 +277,6 @@ $lost_qty = BiddingController::lost_qty();
                           
                           <div class="modal-footer justify-content-center  align-items-center">
                               <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
-                              {{-- {{Form::submit('CANCEL', ['class'=>' btn btn-secondary mt-3 w-25 mb-2','style'=>'border-radius:0%;','data-bs-dismiss'=>'modal']) }} --}}
-                              {{-- {{Form::submit('CONFIRM BID', ['class'=>' btn btn-dark  w-50 mb-2','style'=>'border-radius:0%;']) }}
-                              {{Form::hidden('id',$item->id)}} --}}
                           </div>
                       </div>
                   </div>
@@ -270,17 +287,22 @@ $lost_qty = BiddingController::lost_qty();
             @else
               <h3 class="m-5 text-center">Nothing to show.</h3>
             @endif
-            <div class="justify-content-center mt-3 w-100 d-flex ">{{$won->links()}}</div>
+            <div class="justify-content-center mt-3 w-100 d-flex ">{{$won->links()}}</div> --}}
           </div>
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-            @if(count($lost) > 0)
-            <div class="mt-3 w-50">
-              <form class="" role="search" form type="get" action="{{url ('/search')}}">
-                {{-- <input type="search" name="search" style="background: none;  " class="ps-1 search form-control" placeholder="Search for Auctions"> --}}
-                <input class="form-control me-3 "  name="search" type="search" placeholder="Search" aria-label="Search">
-                {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
-              </form>
+            <div align="right" class="my-3 mx-3 d-flex align-items-center">
+              <i class="bi bi-search me-3"></i>
+              <input type="search" class="form-control me-3"  name="search" id="lost-search" placeholder="Search for Item Name">
+              <div class="d-flex align-items-center">
+                  Showing
+                  <p id="lost_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
+                  </div>
             </div>
+            <div class="" id="lost_tbl">
+              
+            </div>   
+
+            {{-- @if(count($lost) > 0)
             @foreach($lost as $info)
             <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
               <div class="d-flex align-items-center">
@@ -312,9 +334,6 @@ $lost_qty = BiddingController::lost_qty();
                                     ->where('bidtransactions.winstatus', '=','Won')
                                     ->first();
                       @endphp
-                      
-                        {{-- <li><h5><i class="me-1 bi bi-trophy "></i><img src="/userPFP/{{$winner->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle mx-1" ><b class="text-success">{{$winner->username}} </b> for <b>{{number_format($winner->bidamt,2)}} PHP</b></h5></li>
-                        <li>Placed at: <b>{{\Carbon\Carbon::parse($win_bid->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li> --}}
                         
                       <br>
                       <li>Reference #: <b>{{$info->refnum}}</b> </li>
@@ -329,9 +348,83 @@ $lost_qty = BiddingController::lost_qty();
             @else
               <h3 class="m-5 text-center">Nothing to show.</h3>
             @endif
-            <div class="justify-content-center mt-3 w-100 d-flex ">{{$lost->links()}}</div>
+            <div class="justify-content-center mt-3 w-100 d-flex ">{{$lost->links()}}</div> --}}
           </div>
         </div>
     </div>
+
+    <script>
+      
+      $(document).ready(function(){
+
+        
+              fetch_wonbids_data();
+              fetch_lostbids_data();
+              fetch_pendbids_data();
+
+              function fetch_wonbids_data(query = ''){
+                  
+                  $.ajax({
+                      url:"{{ route('wonsearch')}}",
+                      method:'GET',
+                      data:{query:query},
+                      dataType:'json',
+                      success:function(data){
+                          $('#won_tbl').html(data.table_data);
+                          $('#won_total_records').text(data.total_data);
+                      }
+                  })
+              }
+
+              function fetch_lostbids_data(query = ''){
+                  
+                  $.ajax({
+                      url:"{{ route('lostsearch')}}",
+                      method:'GET',
+                      data:{query:query},
+                      dataType:'json',
+                      success:function(data){
+                          $('#lost_tbl').html(data.table_data);
+                          $('#lost_total_records').text(data.total_data);
+                      }
+                  })
+              }
+
+              
+              function fetch_pendbids_data(query = ''){
+                  
+                  $.ajax({
+                      url:"{{ route('pendsearch')}}",
+                      method:'GET',
+                      data:{query:query},
+                      dataType:'json',
+                      success:function(data){
+                          $('#pend_tbl').html(data.table_data);
+                          $('#pend_total_records').text(data.total_data);
+                      }
+                  })
+              }
+
+           
+      
+              $(document).on('keyup','#won-search',function(){
+                  var query  = $(this).val();
+                  fetch_wonbids_data(query);
+              })
+
+              $(document).on('keyup','#lost-search',function(){
+                  var query  = $(this).val();
+                  fetch_lostbids_data(query);
+              })
+
+              $(document).on('keyup','#pend-search',function(){
+                  var query  = $(this).val();
+                  fetch_pendbids_data(query);
+              })
+
+              
+          })
+        </script>
+
 @endsection
   

@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\MailController;
-
+use App\Http\Controllers\BidHistoryController;
 use App\Http\Controllers\UserFundingsController;
+use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\UserOrdersController;
+use App\Http\Controllers\itemListController;
+use App\Http\Controllers\BiddingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +22,13 @@ use App\Http\Controllers\UserFundingsController;
 
 
 Route::get("frmsearch",[UserFundingsController::class,'search'])->name('frmsearch');
+Route::get("bhsearch",[BidHistoryController::class,'search'])->name('bhsearch');
+Route::get("mosearch",[UserOrdersController::class,'search'])->name('mosearch');
+Route::get("usersearch",[UserManagementController::class,'search'])->name('usersearch');
+Route::get("itemsearch",[itemListController::class,'search'])->name('itemsearch');
+Route::get("wonsearch",[BiddingController::class,'wonsearch'])->name('wonsearch');
+Route::get("lostsearch",[BiddingController::class,'lostsearch'])->name('lostsearch');
+Route::get("pendsearch",[BiddingController::class,'pendsearch'])->name('pendsearch');
 
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');
@@ -27,13 +38,14 @@ Route::get('/logout','App\Http\Controllers\LogoutController@logout');
 Route::get('/historypage','App\Http\Controllers\PagesController@historypage');
 Route::get('/confirmEmail','App\Http\Controllers\EmailController@index');
 Route::get('/addtobag','App\Http\Controllers\BagController@addToBag');
+Route::get('/deleteitem','App\Http\Controllers\itemListController@addToBag');
 Route::get('/search','App\Http\Controllers\storePagesController@search');
 Route::resource('/checkout','App\Http\Controllers\CheckoutController')->middleware('auth');
 Route::get('/checkoutsingle','App\Http\Controllers\CheckoutController@placeOrderBuyPrice')->middleware('auth');
 Route::resource('/newmessage','App\Http\Controllers\MessagesController')->middleware('auth');
 Route::post('/placeorder','App\Http\Controllers\CheckoutController@placeOrder')->middleware('auth');
 Route::post('/placesingleorder','App\Http\Controllers\CheckoutController@placeSingleOrder')->middleware('auth');
-Route::post('/retractbid','App\Http\Controllers\BiddingController@retractbid')->middleware('auth');
+Route::get('/retractbid','App\Http\Controllers\BiddingController@retractbid')->middleware('auth');
 Route::resource('/membershippay','App\Http\Controllers\MemberPaymentController')->middleware('auth');
 Route::post('/memberpay','App\Http\Controllers\fundController@memberPay')->middleware('auth');
 //admin module
@@ -62,6 +74,9 @@ Route::post('/admin/refunddeny','App\Http\Controllers\RefundController@deny')->m
 // Route::get('/search','App\Http\Controllers\itemListController@search');
 Route::post('/itemimgup','App\Http\Controllers\imgController@itemImage')->middleware('auth');
 Route::resource('/postItem','App\Http\Controllers\AuctionController')->middleware('auth');
+
+
+
 Route::resource('/adminprofile','App\Http\Controllers\AdminProfileController')->middleware('auth');
 Route::resource('/admin/feedback','App\Http\Controllers\FeedbackController')->middleware('auth');
 Route::get('/admin/usermanagement/search','App\Http\Controllers\UserManagementController@search')->middleware('auth');

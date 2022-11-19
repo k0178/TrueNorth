@@ -67,16 +67,16 @@
 </div>
 
   <div class="w-100 mx-3">
-      <table class="table">
-        <div class="d-flex justify-content-center flex-shrink-0 p-3 link-dark text-decoration-none align-items-center border-bottom">
-          {{-- <span class="fs-6 fw-semibold text-center"><b>Fund Transaction History</b> </span> --}}
-            <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Reference Number or Date (yyyy-mm-dd)">
-          <div class="d-flex align-items-center">
+    <div align="right" class="my-3 d-flex align-items-center">
+      <i class="bi bi-search me-3"></i>
+      <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Reference Number or Date (yyyy-mm-dd)">
+      <div class="d-flex align-items-center">
           Showing
           <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
           </div>
-          
-        </div>
+  </div>
+<hr>
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">Amount</th>

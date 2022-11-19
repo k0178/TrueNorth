@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\Funds;
 use App\Models\User;
+use Session;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -45,11 +46,14 @@ class fundController extends Controller
         $data->refnum=$request->refnum;
         $data->type='Membership';
         $data->amount=1000;
+        $data->status='Approved';
         $data->save();
 
         User::where('id', Auth::user()->id)
-            ->update(['memberpmt'=>'Pending']);
+            ->update(['memberpmt'=>'Approved']);
 
-        return back();
+        Session::flash('success', "Membership Paid Successfully! Welcome!");
+        return redirect('/home');
+        
     }
 }
