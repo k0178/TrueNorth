@@ -38,7 +38,7 @@ Route::get('/logout','App\Http\Controllers\LogoutController@logout');
 Route::get('/historypage','App\Http\Controllers\PagesController@historypage');
 Route::get('/confirmEmail','App\Http\Controllers\EmailController@index');
 Route::get('/addtobag','App\Http\Controllers\BagController@addToBag');
-Route::get('/deleteitem','App\Http\Controllers\itemListController@addToBag');
+Route::get('/deleteitem','App\Http\Controllers\itemListController@destroy');
 Route::get('/search','App\Http\Controllers\storePagesController@search');
 Route::resource('/checkout','App\Http\Controllers\CheckoutController')->middleware('auth');
 Route::get('/checkoutsingle','App\Http\Controllers\CheckoutController@placeOrderBuyPrice')->middleware('auth');

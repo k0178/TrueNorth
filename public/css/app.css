@@ -94,7 +94,9 @@
   }
 }
 
-
+.nav-item:hover{
+  color: #E7BB41!important;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -11101,10 +11103,10 @@ a {
 }
 
 a:hover {
-  color: #000!important;
+  color: #E7BB41!important;
 }
 
-a::before {
+/* a::before {
   content: "";
   position: absolute;
   display: block;
@@ -11122,7 +11124,7 @@ a::before {
 
 a:hover::before {
   transform: scaleX(1);
-}
+} */
 
 /* * a{
  

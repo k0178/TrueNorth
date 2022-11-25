@@ -40,10 +40,12 @@ class MessagesController extends Controller
         $message = new Messages;
         $message->user_id = Auth::user()->id;
         $message->message = $request->input('message');
+        $message->msg_to = 39;
+        $message->msg_from = Auth::user()->id;
         $message->save();
 
         Session::flash('success', "Message Sent.");
-        return redirect('/messages/'. Auth::user()->username);
+        return back();
     }
 
     /**

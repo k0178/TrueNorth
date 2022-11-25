@@ -130,7 +130,7 @@ $ref_num = Auth::user()->id.date('ymdHis');
                     @endphp --}}
                     <label>Shipping Fee: <b>{{$del_fee}} PHP</b></label><br>
                     <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
-                    <hr>
+                    
                     <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
                 </div>
                 

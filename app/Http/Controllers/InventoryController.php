@@ -49,6 +49,7 @@ class InventoryController extends Controller
             'prodDeets'=>'required',
             'category'=>'required',
             'type'=>'required',
+            'cond'=>'required',
             'initialPrice'=>'required',
             'buyPrice'=>'required',
             'qty'=>'required',
@@ -69,17 +70,23 @@ class InventoryController extends Controller
         else{
             $data->type=$request->type;
         }
-        
+        if($request->cond == "bulk"){
+            $data->cond=$request->cond;
+            $data->weight = $request->weight;
+        }
+        else{
+            $data->cond=$request->cond;
+        }
+
         $data->initialPrice=$request->input('initialPrice');
         $data->buyPrice=$request->input('buyPrice');
         $data->qty=$request->input('qty');
-        $data->cond=$request->input('cond');
+
         $data->save();
 
         Session::flash('success', "Item successfuly Added.");
         return redirect('/admin/list');
-
-        
+        // dd($request->weight);
     }
 
     /**

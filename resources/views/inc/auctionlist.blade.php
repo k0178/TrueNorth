@@ -22,7 +22,7 @@
         ->where('prod_id', $info->id)
         ->max('bidamt');
     @endphp
-      <a href="/admin/auction/{{$info->id}}" class="list-group-item list-group-item-action  py-3" aria-current="true">
+      <button type="button" class="btn list-group-item list-group-item-action  py-3" onclick="location.href='/admin/auction/{{$info->id}}'" aria-current="true">
         <div class="d-flex align-items-center">
           <div class="me-3">
             <img src="/itemImages/{{$info->itemImg}}" width="100px" height="100px" 
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-      </a>
+      </button>
     @endforeach
       @else
         <p class=" text-center"> No Records Found! </p>

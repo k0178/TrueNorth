@@ -13,9 +13,18 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+    protected $commands = [
+        Commands\AuctionExpire::class,
+        Commands\WinStatus::class,
+        Commands\OrderDate::class,
+        Commands\OrderDeclined::class,
+    ];
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('auctions:auctionExp')->daily();
+        $schedule->command('bid:winStatus')->cron('* * * * *');
+        $schedule->command('order:SetOrderDate')->dailyAt('00:02');
+        $schedule->command('order:OrderDeclined')->dailyAt('00:03');
     }
 
     /**

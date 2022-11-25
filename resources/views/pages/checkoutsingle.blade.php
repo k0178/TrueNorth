@@ -12,9 +12,9 @@ $del_fee = 45;
 $total_amt = $total->bidamt + $del_fee ;
 @endphp
 <div class="bg-white my-5 mx-5 " style=" border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-bottom:1px #f0eeee solid;border-left:1px #f0eeee solid;">
-    <a class=" d-flex flex-shrink-0 p-3 link-dark text-decoration-none  ">
+    <div class=" d-flex flex-shrink-0 p-3 link-dark text-decoration-none  ">
         <span class="fs-5 fw-bold " style="margin:auto;">Checkout</span>
-    </a>
+    </div>
     <div class="d-flex">
         <div class="bg-white mb-5 w-75" style=" border-top:1px #f0eeee solid;">
             <div class="list-group list-group-flush border-bottom scrollarea ps-3 py-3">
@@ -83,18 +83,14 @@ $total_amt = $total->bidamt + $del_fee ;
                 </div>
                 <hr>
                 <div align="right" class="w-100 px-3">
-                    <label><h5>Sub-Total: <b>{{number_format($total->bidamt,2)}}</b></h5> </label><br>
+                    <label><h5>Sub-Total: <b>{{number_format($total->bidamt,2)}} PHP</b></h5> </label><br>
                     @php
-                       
                     @endphp
-                    <label>Shipping Fee: <b>{{$del_fee}}</b></label><br>
+                    <label>Shipping Fee: <b>{{number_format($del_fee,2)}} PHP</b></label><br>
                     <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
                     {{-- {!! Form::text('total_amt', $total_amt, ['id'=>'total_amt']) !!}
                     {!! Form::text('prod_id', $item->id, ['id'=>'prod_id']) !!} --}}
-                   
-       
-                    <hr>
-                    <label class= "px-3 pt-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
+                    <label class= "px-3 py-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
                 </div>
                 
                 </div>
@@ -102,13 +98,13 @@ $total_amt = $total->bidamt + $del_fee ;
             <div class=" mt-5 text-center mb-3 ">
                 @if(Auth::user()->funds < $total_amt)  
                     {!! Form::open(['action'=>'App\Http\Controllers\CheckoutController@index','method'=>'GET']) !!}
-                        {{Form::submit('PLACE ORDER', ['class'=>' btn btn-dark  mb-1  ','style'=>'border-radius:0%;','disabled']) }}
+                        {{Form::submit('PLACE ORDER', ['class'=>'form-btn  mb-1  ','disabled']) }}
                         {!! Form::close() !!}
                     <small class="userloggedbtn ">By Placing Order, you agree to pay the Total amount using your Funds.</small>
                     <br>
                         <label for="">Funds: <b class="text-danger"> {{number_format(Auth::user()->funds,2)}} PHP</b></label>
                     <div class="d-flex  justify-content-center">
-                        {{Form::submit('CANCEL', ['class'=>' btn btn-dark  mb-3  ','style'=>'border-radius:0%;']) }} 
+                        {{Form::submit('CANCEL', ['class'=>' info-btn  mb-3  ']) }} 
                     </div>
                 @elseif(Auth::user()->funds > $total_amt || Auth::user()->funds = $total_amt )
                     {!! Form::open(['action'=>'App\Http\Controllers\CheckoutController@placeSingleOrder','method'=>'POST']) !!}
@@ -116,15 +112,15 @@ $total_amt = $total->bidamt + $del_fee ;
                     {{Form::hidden('total_amt',$total_amt)}}
                     {{Form::hidden('prod_id',$item->id)}}
                     <div class="">
-                        {{Form::submit('PLACE ORDER', ['class'=>' btn btn-dark  mb-1 w-25 ','style'=>'border-radius:0%;']) }}
+                        {{Form::submit('PLACE ORDER', ['class'=>' form-btn mb-1 w-25 ']) }}
                         {!! Form::close() !!}
                         <br>
                         <small class="userloggedbtn">By Placing Order, you agree to pay the <b>Total amount</b>  using your <b>Funds</b> .</small>
-                        <label for="" class="mt-3">Your Funds after placing this order will be: <br> <b> {{number_format(Auth::user()->funds - $total_amt,2) }} PHP</b></label>
+                        <label for="" class="mt-3">Your Funds after placing this order will be: <br> <b class="text-success"> {{number_format(Auth::user()->funds - $total_amt,2) }} PHP</b></label>
                     </div>
                 </div>
             <div class="d-flex  justify-content-center">
-                <button class="btn btn-dark mt-3 mb-5 w-25" onclick="location.href='/biddings' " style="border-radius: 0%;">
+                <button class="info-btn mt-3 mb-5 w-25" onclick="location.href='/biddings' " style="border-radius: 0%;">
                     CANCEL
                 </button>
             </div>

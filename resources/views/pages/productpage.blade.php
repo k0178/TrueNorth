@@ -38,26 +38,53 @@ if(distance < 0){
 
     <div class=" my-5">
         <div class="bidding-container p-5  justify-content-center ">
-            <div class="row">
-                <div class="col">
-                    <div class="title">
-                        <h3><b>BIDDING</b></h3>
-                    </div>
-                </div>
-            </div>
             <section id="portfolio" class="portfolio">
                 <div class="container mt-5">
                     <div class="row portfolio-container align-items-center justify-content-center">
-                        <div class="col-lg-5 col-md-6 portfolio-item filter-app me-3">
-                            <div class="portfolio-wrap">
-                                <img src="/itemImages/{{$item->itemImg}}" class="img-fluid" alt="" style="width:500px;
-                                height: 550px; ">
-                                <div class="portfolio-info ">
-                                    <h4>{{$item->prodName}}</h4>
-                                    <p>Ends on: {{ \Carbon\Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</p>
+                        <div class="col-lg-5 col-md-6 portfolio-item filter-app me-3 text-center">
+                            <div id="prodimg" style="height:550px; width:430px; overflow:hidden;"  class="border">
+                                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+                                <div class="carousel-inner">
+                                        <div class="carousel-item active" data-bs-interval="5000" >
+                                            <img id="prod" class="border" src="/itemImages/{{$item->itemImg}}" style="transform-origin:center; object-fit:cover; height:100%; width:100%;">
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="5000" >
+                                        <img src="\img\sample2.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="5000" >
+                                        <img src="\img\sample3.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                
+                            <script>
+                                    const container = document.getElementById("prodimg");
+                                    const img = document.getElementById("prod");
+
+                                    container.addEventListener("mousemove",(e)=>{
+                                        const x = e.clientX - e.target.offsetLeft;
+                                        const y = e.clientY - e.target.offsetTop;
+                                        
+                                        img.style.transformOrigin = `${x}px ${y}px`;
+                                        img.style.transform = "scale(2)";
+                                    })
+
+                                    container.addEventListener("mouseleave",()=>{
+                                        img.style.transformOrigin = "center";
+                                        img.style.transform = "scale(1)";
+
+                                    })
+                                </script>
+                                        
                                 </div>
                             </div>
+                            <div class="">
+                                <button data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active  " aria-current="true" aria-label="Slide 1"></button>
+                                <button  data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2" ></button>
+                                <button  data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3" ></button>
+                            </div>
+                            <label for="" class="mt-2" style="font-size: 11px;"><i class="bi bi-info-circle-fill"></i> Hover to zoom the item.</label>
                         </div>
+                        
                         <div class="col-lg-4 col-md-6 portfolio-item filter-app">  
                             <div class="d-flex align-items-center">
                                     <h2 class="me-2"><b>{{$item->prodName}}</b></h2>
@@ -72,7 +99,7 @@ if(distance < 0){
                                     @elseif($item->category == 'W')
                                         Women
                                     @else
-                                        
+                                        Assorted
                                     @endif
                                 </b>
                             </h5>

@@ -115,7 +115,7 @@ class itemListController extends Controller
     {
         $drop=Inventory::where('id',$request->product_id);
         $drop->delete();
-        return redirect('/admin/list')->with('error','Item Deleted');
+        return redirect('/admin/list')->with('success','Item Deleted');
     }
 
     public function search(Request $request){

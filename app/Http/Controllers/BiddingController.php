@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Models\Auction;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use DB;
 class BiddingController extends Controller
 {
     /**
@@ -21,39 +23,80 @@ class BiddingController extends Controller
     public function index(Request $request)
     {
         $title = Auth::user()->username ." | Biddings";
-        $pending = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
-        ->where('bidtransactions.user_id','=',Auth::user()->id)
-        ->where('bidtransactions.bagstatus',0)
-        ->where('bidtransactions.retractstat',0)
-        ->where('bidtransactions.winstatus','Pending')
-        ->orderBy('bidtransactions.created_at','DESC')
-        ->paginate(5);
+        // $pending = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        // ->where('bidtransactions.user_id','=',Auth::user()->id)
+        // ->where('bidtransactions.bagstatus',0)
+        // ->where('bidtransactions.retractstat',0)
+        // ->where('bidtransactions.winstatus','Pending')
+        // ->orderBy('bidtransactions.created_at','DESC')
+        // ->paginate(5);
 
-        $won = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
-        ->where('bidtransactions.user_id','=',Auth::user()->id)
-        ->where('bidtransactions.bagstatus',0)
-        ->where('bidtransactions.retractstat',0)
-        ->where('bidtransactions.winstatus','Won')
-        ->orderBy('bidtransactions.created_at','DESC')
-        ->paginate(5);
+        // $won = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        // ->where('bidtransactions.user_id','=',Auth::user()->id)
+        // ->where('bidtransactions.bagstatus',0)
+        // ->where('bidtransactions.retractstat',0)
+        // ->where('bidtransactions.winstatus','Won')
+        // ->orderBy('bidtransactions.created_at','DESC')
+        // ->paginate(5);
 
-        $lost = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
-        ->where('bidtransactions.user_id','=',Auth::user()->id)
-        ->where('bidtransactions.bagstatus',0)
-        ->where('bidtransactions.retractstat',0)
-        ->where('bidtransactions.winstatus','Lost')
-        ->where('bidtransactions.orderstatus',0)
-        ->orderBy('bidtransactions.created_at','DESC')
-        ->paginate(5);
+        // $lost = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
+        // ->where('bidtransactions.user_id','=',Auth::user()->id)
+        // ->where('bidtransactions.bagstatus',0)
+        // ->where('bidtransactions.retractstat',0)
+        // ->where('bidtransactions.winstatus','Lost')
+        // ->where('bidtransactions.orderstatus',0)
+        // ->orderBy('bidtransactions.created_at','DESC')
+        // ->paginate(5);
 
         // $winner = Biddings::select('*')
         //                     ->where('prod_id',$request->input('id'))
         //                     ->where('winstatus','Won')
         //                     ->first();
         
-        return view('profile.biddings', compact('title','pending','won','lost'));
+        // return view('profile.biddings', compact('title','pending','won','lost'));
+        // $currentdate = Carbon::now()->format('Y-m-d');
+        // $win = Biddings::select('bidamt', 'uname','prod_id', Biddings::raw('MAX(bidamt)'))
+        //                 ->where('bidstatus', 1)
+		// 				->where('endDate','<=',$currentdate)
+		// 				->where('retractstat',0)
+		// 				->where('orderstatus',0)
+        //                 ->groupBy('prod_id')
+        //                 ->get();
+		
+		// $win = Biddings::selectRaw('prod_id, MAX(bidamt) as bidamt, uname')
+		// 				->whereRaw('bidstatus =  1')
+		// 				->groupBy('prod_id')
+		// 				->first();
+		
+        // $win = Biddings::groupBy('prod_id')->max('bidamt');
+		// $win = Biddings::select('*')
+		// ->whereRaw('bidamt = (select max(bidamt) from bidtransactions b
+		// 		where bidtransactions.prod_id = b.prod_id)')
+		// // ->whereRaw('id = (select min(id) from bidtransactions b
+		// // 			where bidtransactions.prod_id = b.prod_id)' )
+		// ->where('bidstatus', 1)
+		// ->where('retractstat',0)
+		// ->where('orderstatus',0)
+		// ->get();
+        $currentdate = Carbon::now()->format('Y-m-d');
+        $win = Biddings::select('bidamt','uname','prod_id')
+        ->whereRaw('bidamt in (select max(bidamt) from bidtransactions b
+                where bidtransactions.prod_id = b.prod_id and id in (select min(id) from bidtransactions b
+                where bidtransactions.prod_id = b.prod_id)) ')
+        // ->whereRaw('id = (select min(id) from bidtransactions b
+        // 			where bidtransactions.prod_id = b.prod_id)' )
+        // ->whereRaw('id in (select min(id) from bidtransactions c
+        // where bidtransactions.prod_id = c.prod_id)')
+        ->where('bidstatus', 1)
+        ->where('retractstat',0)
+        ->where('orderstatus',0)
+        ->where('endDate','<',$currentdate)
+        ->get();
+		
 
-       
+       	// dd($win);
+
+        return view('profile.test', compact('win','title'));
     }
 
     static function won_qty(){
@@ -301,7 +344,7 @@ class BiddingController extends Controller
                             <i class="bi bi-bag-check me-2" style="color:white;"></i>
                             CHECKOUT
                         </button>
-                        <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#bidresults'.$row->prod_id.'">
+                        <button type="button" class="info-btn mb-3" data-bs-toggle="modal" data-bs-target="#bidresults'.$row->prod_id.'">
                             View Bidding Results
                         </button>
                     </div>

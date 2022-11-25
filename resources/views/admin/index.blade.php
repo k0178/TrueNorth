@@ -1,6 +1,6 @@
 @extends('layout.admin')
     @section('content')
- 
+
     <div class="d-flex justify-content-center align-items-center ">
         <div class="add-auc ms-5 my-5 w-75"  style="background-color:#f0eeee;">
                     <div class="ms-2 mt-3  py-4">
@@ -39,7 +39,7 @@
                                 {{Form::select('category',[
                                     'M' => 'Men', 
                                     'W' => 'Women',
-                                    'A' => 'Accessories',
+                                    'A' => 'Assorted (Bulk)',
                                     'O' => 'Others'], 
                                     null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 ms-3','placeholder' => 'Choose Category']
                                 )}}
@@ -56,36 +56,71 @@
                             </div>
                             <div class="row ms-2 mb-2">
                                 <label style="font-size: small;">Condition</label>
-                                {{Form::select('cond',[
+                                {{-- {{Form::select('cond',[
                                     'Pre-Loved' => 'Pre-Loved', 
                                     'Brand New' => 'Brand New',
                                     'Bulk' => 'Bulk',
                                     ], 
                                     null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3','placeholder' => 'Choose Condition']
-                                )}}
+                                )}} --}}
+
+                                <select name="cond" id="cond" onchange="showMe(this.value)" class="btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3">
+                                    <option value="pre">Pre-Loved</option>
+                                    <option value="bnew">Brand New</option>
+                                    <option value="bulk">Bulk</option>
+                                </select> 
+                                
+                                {{-- {!! Form::select('cond', [
+                                    'Pre-Loved' => 'Pre-Loved', 
+                                    'Brand New' => 'Brand New',
+                                    'Bulk' => 'Bulk',
+                                    ], null, ['name'=>'cond', 'id'=>'cond', 'onchange'=>{{showMe(this.value)}}, 'class'=>'btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3']) !!} --}}
+                                <div id="bulk" class="" style="display:none;">
+                                    <label style="font-size: small;">Weight</label>
+                                    {{Form::number('weight','',
+                                        ['class'=>' form-control  mt-2 ',
+                                        'placeholder'=>'Enter Weight in KG'
+                                        ])}}
+                                </div>
+                                
+                                <script>
+                                    function showMe(value) {
+                                        if(value=="bulk"){
+                                            document.getElementById('bulk').style.display="block";
+                                            // document.getElementById('b').style.display="none";
+                                        }
+                                        else{
+                                            document.getElementById('bulk').style.display="none";
+                                        }
+                                        
+                                    }
+                                </script>
+                            
                             </div>
-                            <div class="row ms-2 w-100" style="">
+                            <div class="row ms-2 mt-3 w-100" style="">
                                 <label style="font-size: small;">Initial Price</label>
                                 {{Form::number('initialPrice','',
                                 ['class'=>' form-control  mb-3 ms-3',
                                 'placeholder'=>'Initial Price'
                                 ])}}
+                                
                             </div>
-                            <div class="row ms-2">
+                            {{-- <div class="row ms-2">
                                 <label style="font-size: small;">Buyout Price</label>
                                 {{Form::number('buyPrice','',
                                 ['class'=>'form-control mt-1  ms-3 mb-3',
                                 'placeholder'=>'Buy Out Price'])}}
-                            </div>
+                            </div> --}}
                             <div class="row ms-2" style="">
                                 <label style="font-size: small;">Quantity</label>
                                 {{Form::number('qty','',
                                 ['class'=>'form-control mt-1 mb-3 ms-3',
                                 'placeholder'=>'Quantity'])}}
-                                {{Form::submit('ADD ITEM',['class'=>'form-btn ms-3 mt-3'])}}
+                            {{Form::submit('ADD ITEM',['class'=>'form-btn ms-3 mt-3'])}}
+                            
+                            {!! Form::close() !!}
                             </div>
                         </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

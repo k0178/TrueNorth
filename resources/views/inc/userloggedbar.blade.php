@@ -13,10 +13,7 @@ $username = Auth::user()->username;
 $bag_qty = BagController::bag_qty();
 
 $data = User::where('username',$username)->first();
-$messages = Messages::select('*')
-                            ->where('user_id',Auth::user()->id)
-                            ->orderBy('created_at','DESC')
-                            ->get();
+
 $users = User::select('*')
         ->where('id', Auth::user()->id)
         ->first();
@@ -71,69 +68,12 @@ $users = User::select('*')
                     {{-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill">
                         {{$bag_qty}}
                     </span> --}}
-                    <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#msg" aria-controls="msg">
+                    <button class="btn " onclick="location.href='/chatify'" type="button" data-bs-toggle="offcanvas" data-bs-target="#msg" aria-controls="msg">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                         <i class="bi bi-chat-dots-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
                         <span class="badge bg-none " style="color: #E7BB41;"></span>
                     </button> 
-                    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="msg" aria-labelledby="offcanvasNavbarLightLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="msg">
-                                <i class="bi bi-chat-dots" style="font-size: 18px;"></i>
-                                <b> Messages |
-                                <img src="/userPFP/{{Auth::user()->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle ms-1" >
-                                <label for="" style="font-size: 18px;">{{Auth::user()->username}}</label>
-                            </h5></b>  
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            
-                        </div>
-                        <div class="offcanvas-body">
-                            YOUR MESSAGES
-
-                            {{-- <div class="border mx-5 mb-5  " style="margin-top: 150px;">
-                                <div class="bg-white mb-5" style="margin:0%; width: 400px; border-right:1px #f0eeee solid; border-left:1px #f0eeee solid;">
-                                    <div class="list-grouplist-group-flush border-bottom scrollarea " style="overflow:auto;">
-                                        
-                                        @if(count($messages)>0)
-                                        @foreach ($messages as $user)
-
-                                            <a href="/admin/messages/{{$user->id}}" class="px-3 list-group-item list-group-item-action  py-3" aria-current="true">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="me-3">
-                                                        <img src="/userPFP/{{$user->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-1" >
-                                                    </div>
-                                                    <label for="" class="fw-bold me-2" style="font-size: 16px;">{{$user->username}}</label>
-                                                    <label for="" class="">{{$user->fname. ' '. $user->lname}}</label>
-                                                    @php
-                                                            $latest_msg = Messages::select('*')
-                                                                                ->where('user_id',$user->id)
-                                                                                ->orderBy('created_at','DESC')
-                                                                                ->first();
-                                                    @endphp
-                                                </div>
-                                                <div class="d-flex mt-2 align-items-center">
-                                                    <label for="" class="me-2" style="font-size: 16px;">{{$latest_msg->message}} </label>
-                                                    <label for="" class="text-secondary">- {{$latest_msg->created_at}} </label>
-                                                </div>
-                                                
-                                                
-                                            </a>
-                                            @endforeach
-                                            @else
-                                                <p class="m-auto"> No Messages </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                            </div>
-                            <div>
-                                {!! Form::open(['action'=>['App\Http\Controllers\MessagesController@store'],
-                                'method'=>'POST']) !!} 
-                                {!! Form::text('message', '', ['class' => 'form-control', 'style' => 'background:none; ; border-radius:0%; border:none;','placeholder' => 'Enter your message here.', 'required '] )!!}
-                                    
-                                {!! Form::close() !!}
-                            </div> --}}
-                        </div> 
-                    </div>
+                   
                     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                         <i class="bi bi-bag-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
@@ -279,7 +219,7 @@ $users = User::select('*')
                                             <label><h5>Sub-Total: <b>{{number_format($sub_total,2)}}</b></h5> </label><br>
                                             <label>Shipping Fee: <b>{{$del_fee}}</b></label><br>
                                             <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
-                                            <hr>
+                                            
                                             <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
                                             @if(count($products)>0)
                                 
