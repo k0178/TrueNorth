@@ -9,6 +9,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\itemListController;
 use App\Http\Controllers\BiddingController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -142,6 +143,13 @@ Route::get('/company','App\Http\Controllers\PagesController@company');
 //mail
 Route::get('/mailex','App\Http\Controllers\MailController@sendMail');
 
+
+//paypal
+Route::post('/mempay','App\Http\Controllers\PaymentController@memPay');
+Route::post('/fndPay','App\Http\Controllers\PaymentController@fndPay');
+Route::get('fndsuccess',[PaymentController::class, 'fndsuccess']);
+Route::get('success', [PaymentController::class, 'success']);
+Route::get('error', [PaymentController::class, 'error']);
 
 
 Auth::routes();
