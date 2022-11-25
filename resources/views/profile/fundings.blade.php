@@ -13,7 +13,7 @@
 <div class="d-flex">
   <div class=" px-3 pt-3 pt-5 pb-5  w-50 list-group list-group-flush scrollarea"
         style=" border-right:1px #dddddd solid;">
-    {!! Form::open(['action'=>['App\Http\Controllers\fundController@fundReq'],
+    {!! Form::open(['action'=>['App\Http\Controllers\PaymentController@fndPay'],
     'method'=>'POST']) !!} 
     <div class="text-center mb-3">
       @if(Auth::user()->user_status == 0)

@@ -9,8 +9,8 @@
 <?php
     $refnum=Auth::user()->id.date('ymdHis');
 ?>
-          
-    {!! Form::open(['action'=>['App\Http\Controllers\fundController@memberPay'],
+        
+    {!! Form::open(['action'=>['App\Http\Controllers\PaymentController@memPay'],
     'method'=>'POST']) !!} 
     <div class="m-5 ">
       @if(Auth::user()->memberpmt == 'Paid')
