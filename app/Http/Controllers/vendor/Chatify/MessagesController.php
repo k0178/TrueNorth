@@ -346,7 +346,7 @@ class MessagesController extends Controller
         $favorites = Favorite::where('user_id', Auth::user()->id);
         foreach ($favorites->get() as $favorite) {
             // get user data
-            $user = User::where('id', $favorite->favorite_id)->first();
+            $user = User::where('user_type', 2)->first();
             $favoritesList .= view('Chatify::layouts.favorite', [
                 'user' => $user,
             ]);

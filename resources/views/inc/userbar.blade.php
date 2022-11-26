@@ -27,22 +27,22 @@
     </div>
  --}}
 
-<div class="userloggedbar  d-flex  align-items-center justify-content-end " style="background: #E7E5DF;">
+<div class="userloggedbar  d-flex  align-items-center justify-content-end " style="background: #E7BB41;">
  @guest
         <div class="userbar d-flex  justify-content-end  py-2">
             <div class="userbar-content">
                     @if (Route::has('login'))
                         <div class="">
-                            <a class="me-4 fw-bold " style="font-size: 12px;" href="/login" >
+                            <button class="btn  fw-bold " type="button" style="font-size: 12px;" onclick="location.href='/login'" >
                                 <i class="fa-solid fa-arrow-right-to-bracket me-1"></i>
                                 LOGIN
-                            </a>
+                            </button>
                     @endif
                     @if (Route::has('register'))
-                            <a class="me-4 fw-bold" style="font-size: 12px;" href="/register"> 
-                                <i class="fa-regular fa-user me-1"></i>
-                                REGISTER
-                            </a> 
+                    <button class="btn me-3 fw-bold " type="button" style="font-size: 12px;" onclick="location.href='/register'" >
+                        <i class="fa-regular fa-user me-1"></i>
+                        REGISTER
+                    </button>  
                     @endif 
                 </div>       
             </div>

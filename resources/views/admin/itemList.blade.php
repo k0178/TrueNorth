@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('content') 
-<div class=" d-flex w-100 flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+<div class=" d-flex w-100 flex-shrink-0 py-3 link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold text-center w-100">Item List</span>
 </div>
 <div align="right" class="my-3 mx-3 d-flex align-items-center">

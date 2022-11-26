@@ -12,17 +12,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-   private $gateway;
+private $gateway;
 
-   public function __construct() {
+public function __construct() {
     $this->gateway = Omnipay::create('PayPal_Rest');
     $this->gateway->setClientId('AdOjwNsuTIeJhGSBj91pw05g_eq9Mse3vEUeUp2syhu7ocEF0F1QGCy4-mOfEqXL4UzWwviAfh49Am7v');
     $this->gateway->setSecret('EORme3MfTHx4ziM-wGhMy5cwoiT2OcNs_t7xnpxTvo64IKqJH4aTtXNPjtRA-UjwpDDk5fB-tjAc1Tq5');
     $this->gateway->setTestMode(true);
-   }
+    }
 
-   public function memPay(Request $request)
-   {
+    public function memPay(Request $request)
+    {
         try {
             $response = $this->gateway->purchase(array(
                 'amount'=>1000,
@@ -39,7 +39,7 @@ class PaymentController extends Controller
             }
         } catch (\Throwable $th) {
             
-           return $th;
+            return $th;
         }
 
    }

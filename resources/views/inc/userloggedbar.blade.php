@@ -60,7 +60,7 @@ $users = User::select('*')
 
  --}}
 
-<nav class="navbar pt-2 " style="background: #393E41;" aria-label="Light offcanvas navbar">
+<nav class="navbar pt-2 " style="background: #E7BB41;" aria-label="Light offcanvas navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"></a>
         <div class="d-flex align-items-center">
@@ -70,22 +70,22 @@ $users = User::select('*')
                     </span> --}}
                     <button class="btn " onclick="location.href='/chatify'" type="button" data-bs-toggle="offcanvas" data-bs-target="#msg" aria-controls="msg">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
-                        <i class="bi bi-chat-dots-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
-                        <span class="badge bg-none " style="color: #E7BB41;"></span>
+                        <i class="bi bi-chat-dots-fill " style="font-size: 20px; font-weight:bold; color:#393E41;"></i>
+                        <span class="badge bg-none " style="color: #393E41;"></span>
                     </button> 
                    
                     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
-                        <i class="bi bi-bag-fill " style="font-size: 20px; font-weight:bold; color:#E7BB41;"></i>
+                        <i class="bi bi-bag-fill " style="font-size: 20px; font-weight:bold; color:#393E41;"></i>
                         
-                        <span class="badge bg-none " style="color: #E7BB41;">{{$bag_qty}}</span>
+                        <span class="badge bg-none " style="color: #393E41;">{{$bag_qty}}</span>
                         
                     </button> 
             </div> 
             <button class="btn" style="text-decoration: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
                 {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                 
-                <img src="/userPFP/{{Auth::user()->profileImage}}" width="40px" height="40px" style="object-fit: cover; border: 3px #E7BB41 solid;" class="rounded-circle me-1 "  >
+                <img src="/userPFP/{{Auth::user()->profileImage}}" width="40px" height="40px" style="object-fit: cover; border: 3px #393E41 solid;" class="rounded-circle me-1 "  >
                 {{-- <label for="" class="fw-bold text-white" style="font-size: 14px;">{{strtoupper(Auth::user()->username)}}</label> --}}
             </button> 
             

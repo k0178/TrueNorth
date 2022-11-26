@@ -149,13 +149,13 @@
                                     {{ __('REGISTER') }}
                                 </button> <br>
                                 <p class="userloggedbtn mb-2">By registering, you agree to pay an amount of <b>1000.00 PHP</b>  as a membership fee at True North Garments Auction System.</p>
-                               
-                                <a href="/termsandcondition" style="font-size: 11px;"> <b>VIEW OUR Terms & Condition</b> </a>
+                                
+                                <a class="" href="/termsandcondition" style="font-size: 11px; text-decoration:underline; text-underline-offset: 4px;"> VIEW OUR Terms & Condition</a>
                         </div>
 
                         <div class="text-center px-5 mx-5">
-                            <a href="/login" style="font-size: 11px;">
-                                Already have an account? <b>Log in</b> instead.
+                            <a href="/login" style="font-size: 11px; ">
+                                Already have an account? Log in instead.
                             </a>
                         </div>
                     </form>

@@ -3,12 +3,12 @@
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView">
         {{-- Header and search bar --}}
-        <div class="m-header">
+        <div class="m-header" >
             <nav>
-                <div><i class="fas fa-inbox"></i> <span class="messenger-headTitle">TRUE NORTH CHAT</span> </div>
+                <button class="btn" onclick="location.href='/home'"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">TRUE NORTH CHAT</span></button>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
-                    {{-- <a href="#"><i class="fas fa-cog settings-btn"></i></a> --}}
+                    <a href="#"><i class="fas fa-cog settings-btn"></i></a>
                     <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
             </nav>
@@ -62,21 +62,20 @@
     </div>
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="messenger-messagingView">
+    <div class="messenger-messagingView" >
         {{-- header title [conversation name] amd buttons --}}
-        <div class="m-header m-header-messaging">
+        <div class="m-header m-header-messaging" style="background-color: #E7BB41;">
             <nav class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                 {{-- header back button, avatar and user name --}}
                 <div class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
                     <a href="#" class="show-listView"><i class="fas fa-arrow-left"></i></a>
                     <div class="avatar av-s header-avatar" style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                     </div>
-                    <a href="#" class="user-name">{{ config('chatify.name') }}</a>
+                    <div class="user-name">{{ config('chatify.name') }}</div>
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     {{-- <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a> --}}
-                    <button class="btn" type="button" onclick="location.href='/home'"><i class="fas fa-home"></i></button>
                     <button type="button" class="show-infoSide btn"><i class="fas fa-info-circle"></i></button>
                 </nav>
             </nav>
@@ -109,7 +108,7 @@
         </div>
     </div>
     {{-- ---------------------- Info side ---------------------- --}}
-    <div class="messenger-infoView app-scroll">
+    <div class="messenger-infoView app-scroll" >
         {{-- nav actions --}}
         <nav>
             <a href="#"><i class="fas fa-times"></i></a>

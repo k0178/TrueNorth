@@ -16,7 +16,9 @@ body {
 .internet-connection span {
   display: none;
 }
-
+.i{
+  color: #E7BB41!important;
+}
 /*green background RGBA*/
 .successBG-rgba {
   background: rgba(54, 180, 36, 0.76) !important;

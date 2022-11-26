@@ -158,7 +158,7 @@ class itemListController extends Controller
                     }
 
                     $output .= '
-                    <div class="list-group list-group-flush scrollarea mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
+                    <div class="list-group list-group-flush scrollarea mx-3 " style="border-bottom:1px #dddddd solid;">
                         <div class="d-flex align-items-center">
                             <img src="/itemImages/'.$row->itemImg.' "width="160px" height="160px" 
                             style="object-fit: cover; 
@@ -168,7 +168,7 @@ class itemListController extends Controller
                             <div class="pt-3">
                                 <ul style="list-style: none;">
                                     <li>#<b>'.$row->id.'</b></li>
-                                    <li class="d-flex align-items-center"><h3><b>'.$row->prodName.'</b></h3>
+                                    <li class="d-flex align-items-center " style="text-overflow: ellipsis;"><h3><b>'.$row->prodName.'</b></h3>
                                     '.$qty.'
                                         <form action = "/deleteitem" method="GET">
                                             <input type = "hidden" name="product_id" value="'.$row->id.'">
@@ -187,7 +187,6 @@ class itemListController extends Controller
                                     <li>Condition: <b>'.$row->cond.'</b></li>
                                     <li>Stock: <b>'.$row->qty.'</b></li>
                                     <li>Starting Price: <b>'. number_format($row->initialPrice,2).' PHP</b></li>
-                                    <li>Buyout Price: <b>'.number_format($row->buyPrice,2).' PHP</b></li> 
                                     
                                     <button class="form-btn my-3 " style="background: #D3D0CB;" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop'.$row->id.'">
                                         SHOW DETAILS

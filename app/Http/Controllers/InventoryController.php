@@ -51,7 +51,7 @@ class InventoryController extends Controller
             'type'=>'required',
             'cond'=>'required',
             'initialPrice'=>'required',
-            'buyPrice'=>'required',
+            // 'buyPrice'=>'required',
             'qty'=>'required',
         ]);
         
@@ -79,7 +79,7 @@ class InventoryController extends Controller
         }
 
         $data->initialPrice=$request->input('initialPrice');
-        $data->buyPrice=$request->input('buyPrice');
+        // $data->buyPrice=$request->input('buyPrice');
         $data->qty=$request->input('qty');
 
         $data->save();

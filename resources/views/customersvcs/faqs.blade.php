@@ -3,32 +3,28 @@
 <div class="m-5 py-5 justify-content-center" style="background: #f0eeee;">
     <div class="d-flex ps-5 align-items-center ">
         <h3 class="w-100"><b> Frequently Asked Questions (FAQs)</b> </h3>
-        <div align='right' class="w-100">
-            <svg class="me-5" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48.165 48.165">
-                <path id="Icon_awesome-icons" data-name="Icon awesome-icons" d="M10.973,20.635a1.475,1.475,0,0,0,2.131,0l9.1-9.391a6.741,6.741,0,0,0-.462-9.772,6.432,6.432,0,0,0-8.775.64l-.928.954-.927-.954a6.433,6.433,0,0,0-8.776-.64,6.754,6.754,0,0,0-.47,9.772Zm13.539,9.453H20l-.666-1.34a2.577,2.577,0,0,0-2.414-1.673H10.171a2.577,2.577,0,0,0-2.414,1.673L7.1,30.088H2.583A2.582,2.582,0,0,0,0,32.671V45.582a2.581,2.581,0,0,0,2.58,2.582H24.512a2.582,2.582,0,0,0,2.58-2.582V32.671a2.582,2.582,0,0,0-2.58-2.583ZM13.546,44.026a4.892,4.892,0,1,1,4.892-4.892A4.892,4.892,0,0,1,13.546,44.026Zm33.433-10.9h-5.7l2.1-4.774c.2-.626-.37-1.243-1.146-1.243H35.127a1.138,1.138,0,0,0-1.176.856l-1.58,10.059a1.07,1.07,0,0,0,1.176,1.119h5.862l-2.277,7.808c-.178.626.4,1.214,1.151,1.214a1.247,1.247,0,0,0,1.027-.494L48,34.6c.459-.65-.109-1.477-1.023-1.477ZM44.974.031,31,2.18a2.947,2.947,0,0,0-2.4,2.978V15.2a7.831,7.831,0,0,0-1.505-.16c-3.325,0-6.021,2.021-6.021,4.515s2.7,4.515,6.021,4.515,6-2.006,6.021-4.483V9.375l10.536-1.62v4.438a7.832,7.832,0,0,0-1.505-.16c-3.325,0-6.021,2.021-6.021,4.515s2.7,4.515,6.021,4.515,6-2.006,6.021-4.483V3.01A2.872,2.872,0,0,0,44.974.031Z" transform="translate(0 0)"/>
-            </svg>
+        <div align='right' class="w-100 me-5">
+            <a class="navbar-brand" href="/home">   <img src="/img/tnglogo.png" alt="" class="" width="213px" height= "73px" ></a>
         </div>
     </div>
     <div class="justify-content-center align-items-center w-75">
         <div class="px-5 my-5">
-            <h5><b>How can I participate in Bidding?</b></h5>
+            <h5 class="mb-3"><i class="bi bi-x-diamond-fill me-2"></i><b>How can I participate in Bidding?</b></h5>
             <p>To participate, you must register first. Your account will be activated if you have received the confirmation in your email. Once you have accepted the confirmation, your account can now be used. You must also have a certain balance in your account in order to participate. Login with your account and then start looking for the products you want to bid. If you have chosen an auction to participate, you can click it and it will direct you to the product page. You can now enter the amount you want to bid and submit it.
             </p>
         </div>
 
         <div class="ps-5 my-5">
-            <h5><b>How will I know if I have won the bid?</b></h5>
-            <p>A notification will appear once you have won the product in the auction. It will now go to the list of winning bids and will have a limited time. This limited time means that you need to pickup the product before it expires. It will then deliver to your address through you have filled up in the registration step.
+            <h5 class="mb-3"><i class="bi bi-x-diamond-fill me-2"></i><b>How will I know if I have won the bid?</b></h5>
+            <p>All the Won bids will appear on your Biddings Page once you have won the product in the auction. A limited time will be put on your winning and it means that you need to place an order for the product before the given date. Once you placed an order, it will be delivered to your address that you have filled up in the registration step.
             </p>
         </div>
 
         <div class="ps-5 my-5" >
-            <h5><b>How to add funds on my account?</b></h5>
+            <h5 class="mb-3"><i class="bi bi-x-diamond-fill me-2"></i><b>How to add funds on my account?</b></h5>
             <p> A user must pay a minimum 1000.00 php as a membership fee through Gcash or Paypal. Once paid, the admin must approve whether they paid correctly. Once approved, the user can now request for a fund in there account via Gcash or Paypal. Afterwards, the membership fee is now added to their funds. Users who did not paid the membership fee can only view the auction but cannot participate.
             </p>
         </div>
     </div>
-    
-    
 </div>
 @endsection
