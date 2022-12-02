@@ -6,6 +6,33 @@
     <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold text-center w-100">Reports</span>
     </a>
+
+    <div class="d-flex justify-content-center">
+        {{-- <div class="card w-50">
+            <div class="card-body">
+              @foreach ($hotItem as $item)
+                  <img src="/itemImages/{{$item->itemImg}}" style="Size:50%">
+              @endforeach
+            </div>
+        </div> --}}
+        
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                @foreach ($hotItem as $item)
+                <img src="/itemImages/{{$item->itemImg}}" class="img-fluid rounded-start" >
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">Most Popular Item</h5>
+                <p class="card-text">{{$item->prodName}}</p>
+                </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+    </div>
 <div class=" text-center pt-5">
     <i class="bi bi-box-seam pe-2" style="font-size: 20px;"></i>
     <b>INVENTORY REPORT</b>  

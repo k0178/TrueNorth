@@ -15,9 +15,20 @@ use Illuminate\Support\Facades\Auth;
 class reportsController extends Controller
 {
     public function index()
-    {
+    {   
+        $look = Biddings::orderBy('prodname')
+        ->orderByRaw('COUNT(*)DESC')
+        ->limit(1)
+        ->get();
+
+        $val=$look[0]->prodname;
+
+        $hotItem = Inventory::where('prodName','=',$val)->get();
+
         $title = "Admin | Reports";
-        return view('admin.reports',compact('title'));
+        return view('admin.reports',compact('title'))->with('hotItem',$hotItem);
+
+
     }
 
     public function invreport()
