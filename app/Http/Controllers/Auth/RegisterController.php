@@ -32,22 +32,22 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     public function showRegistrationForm(){
         $title = "True North Auction | Create your Account";
         return view('auth.register',compact('title'));
     }
     
-    protected function redirectTo()
-    {
-        if (auth()->user()->user_type = 0) {
-            return '/admin';
-        }
-        else{
-            return '/membershippay';
-        }
-    }
+    // protected function redirectTo()
+    // {
+    //     if (auth()->user()->user_type = 0) {
+    //         return '/admin';
+    //     }
+    //     else{
+    //         return '/verify';
+    //     }
+    // }
     /**
      * Create a new controller instance.
      *

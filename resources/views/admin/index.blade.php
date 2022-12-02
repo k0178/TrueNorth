@@ -13,9 +13,19 @@
                             <i class="bi bi-file-image" style="font-size: 90px;"></i>
                         </div>
                         <br>
-                            <div class="up-photo" style="padding-top: 5px; ">
-                            <h4> <label for="uploadpic">Upload Item Picture</label></h4>
-                                {{Form::file('itemImg',['class'=>'form-control w-75'])}}
+                            <div class="up-photo mb-3" style="padding-top: 5px; ">
+                            <h4> <label for="uploadpic">Upload 1st Item Picture (Front View)</label></h4>
+                                {{Form::file('itemImg',['class'=>'form-control w-75','required'])}}
+                            </div>
+
+                            <div class="up-photo mb-3" style="padding-top: 5px; ">
+                                <h4> <label for="uploadpic">Upload 2nd Item Picture (Back View)</label></h4>
+                                {{Form::file('itemImg2',['class'=>'form-control w-75'])}}
+                            </div>
+
+                            <div class="up-photo mb-3" style="padding-top: 5px; ">
+                                <h4> <label for="uploadpic">Upload 3rd Item Picture</label></h4>
+                                {{Form::file('itemImg3',['class'=>'form-control w-75'])}}
                             </div>
                     </div>
 
@@ -23,13 +33,14 @@
                         <div class="col-5">
                             <div class="row ms-2 pb-2">
                                 <label style="font-size: small;">Product Name</label>
-                                {{Form::text('prodName','',['class'=>'form-control','placeholder'=>'Product Name'])}}
+                                {{Form::text('prodName','',['class'=>'form-control','placeholder'=>'Product Name','required'])}}
                             </div>
                             <div class="row ms-2 mt-3">
                                 <label style="font-size: small;">Product Details</label>
                                 {{Form::textArea('prodDeets','',
                                 ['class'=>'form-control',
-                                'placeholder'=>'Product Details'
+                                'placeholder'=>'Product Details',
+                                'required'
                                 ])}}
                             </div>
                         </div>
@@ -41,17 +52,17 @@
                                     'W' => 'Women',
                                     'A' => 'Assorted (Bulk)',
                                     'O' => 'Others'], 
-                                    null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 ms-3','placeholder' => 'Choose Category']
+                                    null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 ms-3','placeholder' => 'Choose Category','required']
                                 )}}
                             </div>
                             <div class="row ms-2 mb-2">
                                 <label style="font-size: small;">Type</label>
                                 {{Form::select('type',[
-                                    'T' => 'Tees', 
+                                    'T' => 'Tops', 
                                     'P' => 'Pants',
                                     'S' => 'Shorts',
                                     ], 
-                                    null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3','placeholder' => 'Choose Type']
+                                    null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3','placeholder' => 'Choose Type','required']
                                 )}}
                             </div>
                             <div class="row ms-2 mb-2">
@@ -64,7 +75,7 @@
                                     null, ['class'=> 'btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3','placeholder' => 'Choose Condition']
                                 )}} --}}
 
-                                <select name="cond" id="cond" onchange="showMe(this.value)" class="btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3">
+                                <select name="cond" id="cond" onchange="showMe(this.value)" class="btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3" required>
                                     <option value="pre">Pre-Loved</option>
                                     <option value="bnew">Brand New</option>
                                     <option value="bulk">Bulk</option>
@@ -101,7 +112,7 @@
                                 <label style="font-size: small;">Initial Price</label>
                                 {{Form::number('initialPrice','',
                                 ['class'=>' form-control  mb-3 ms-3',
-                                'placeholder'=>'Initial Price'
+                                'placeholder'=>'Initial Price','required'
                                 ])}}
                                 
                             </div>
@@ -116,7 +127,7 @@
                                 {{Form::number('qty','',
                                 ['class'=>'form-control mt-1 mb-3 ms-3',
                                 'placeholder'=>'Quantity'])}}
-                            {{Form::submit('ADD ITEM',['class'=>'form-btn ms-3 mt-3'])}}
+                            {{Form::submit('ADD ITEM',['class'=>'form-btn ms-3 mt-3','required'])}}
                             
                             {!! Form::close() !!}
                             </div>

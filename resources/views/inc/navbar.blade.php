@@ -35,7 +35,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Men
                     </p>
-                    <a href="/store/PreLoved/men/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/PreLoved/men/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/PreLoved/men/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/PreLoved/men/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>
@@ -45,7 +45,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Women
                     </p>
-                    <a href="/store/PreLoved/women/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/PreLoved/women/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/PreLoved/women/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/PreLoved/women/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>
@@ -69,7 +69,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Men
                     </p>
-                    <a href="/store/BrandNew/men/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/BrandNew/men/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/BrandNew/men/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/BrandNew/men/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>
@@ -79,7 +79,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Women
                     </p>
-                    <a href="/store/BrandNew/women/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/BrandNew/women/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/BrandNew/women/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/BrandNew/women/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>
@@ -102,7 +102,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Men
                     </p>
-                    <a href="/store/Bulk/men/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/Bulk/men/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/Bulk/men/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/Bulk/men/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>
@@ -112,7 +112,7 @@
                     <p class="mb-0 list-group-item  fw-bold">
                       Women
                     </p>
-                    <a href="/store/Bulk/women/tops" class="list-group-item list-group-item-action">Tees</a>
+                    <a href="/store/Bulk/women/tops" class="list-group-item list-group-item-action">Tops</a>
                     <a href="/store/Bulk/women/bottoms" class="list-group-item list-group-item-action">Pants</a>
                     <a href="/store/Bulk/women/shorts" class="list-group-item list-group-item-action">Shorts</a>
                   </div>

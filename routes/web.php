@@ -142,7 +142,7 @@ Route::get('/company','App\Http\Controllers\PagesController@company');
 
 //mail
 Route::get('/mailex','App\Http\Controllers\MailController@sendMail');
-
+Route::get('/mailrec','App\Http\Controllers\MailController@sendReceipt');
 
 //paypal
 Route::post('/mempay','App\Http\Controllers\PaymentController@memPay');
@@ -152,6 +152,6 @@ Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 
 
-Auth::routes();
+Auth::routes(['verify'=> true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

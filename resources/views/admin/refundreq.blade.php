@@ -14,7 +14,7 @@
             <th scope="col">Amount</th>
             <th scope="col">Gcash Number</th>
             <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Status</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
             <tr>
             <th>{{$rf->id}}</th>
             <td>{{$rf->uname}}</td>
-            <td>{{$rf->amount}}</td>
+            <td>{{number_format($rf->amount,2)}} PHP</td>
             <td>{{$rf->gcashnum}}</td>
 
             @if ($rf->status!="pending")
@@ -38,14 +38,14 @@
             {!! Form::open(['action'=>['App\Http\Controllers\RefundController@update',$rf->id],
             'method'=>'PUT','enctype'=>'multipart/form-data'])!!}
 
-            
+
 
             <td>{{Form::radio('apr','Refunded',[
                 ])}} <small class="text-info">Mark as Refunded</small></td>
                 <td> {{Form::radio('apr','Denied',[
                 ])}} <small class="text-danger">Deny</small></td>
-                 <td>
-                    {{Form::textArea('refundmsg','We have Refunded PHP '.$rf->amount.'.00 to your Gcash Account:'.$rf->gcashnum.'. Ref No:',
+                <td>
+                    {{Form::textArea('refundmsg','We have Refunded PHP '.number_format($rf->amount,2).'PHP to your Gcash Account:'.$rf->gcashnum.'. Ref No:',
                     ['class'=>'form-control',
                     'style'=>'height:50px;'
                     ])}}

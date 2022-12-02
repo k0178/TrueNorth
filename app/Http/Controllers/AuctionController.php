@@ -46,8 +46,11 @@ class AuctionController extends Controller
         return redirect()->back()->withInput();
     }
     else{
+
         $input = new Auction;
         $input->itemImg=$request->itemImg;
+        $input->itemImg2=$request->itemImg2;
+        $input->itemImg3=$request->itemImg3;
         $input->prodName=$request->prodName;
         $input->prodDeets=$request->prodDeets;
         $input->cond=$request->cond;

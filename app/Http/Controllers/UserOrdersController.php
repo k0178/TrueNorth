@@ -39,9 +39,9 @@ class UserOrdersController extends Controller
         // ->where('order_id',$d)
         // ->get();
         
+   
         
-        
-        return view('profile.myorders', compact('title', 'data'));
+        return view('profile.myorders', compact('title','data'));
     }
 
     /**
@@ -128,18 +128,29 @@ class UserOrdersController extends Controller
                         ->get();
             }
             
-            $order = '';
+        
+       
+
             $total_row = $data->count();
+            $items = '';
+
+         
+          
+         
+
             if($total_row > 0){
                 foreach ($data as $row) {
+                
                     $orders = Auction::join('order_items','auctions.id','=','order_items.prod_id')
-                            ->select('auctions.prodName')
+                            ->select('auctions.*')
                             ->where('order_items.user_id','=',Auth::user()->id)
                             ->where('order_items.order_id',$row->id)
                             ->get();
+                            
                     foreach($orders as $item){
-                        $order = $item->prodName;
-                    }
+                        $items .=  '<div>'.$item->prodName.'</div>';
+                    }      
+                
                     $delstat = '';
                     if($row->del_stat == "Pending"){
                         $delstat = '<td class="fw-bold text-warning">'.$row->del_stat.'</td>';
@@ -150,20 +161,63 @@ class UserOrdersController extends Controller
                     elseif($row->del_stat == "Delivered"){
                         $delstat = '<td class="fw-bold text-success">'.$row->del_stat.'</td>';
                     }
+                    
+                    
                     $output .= '
                         <tr>
                             <th scope="row">'.$row->id.'</th>
-                            <td>'.$order.'</td>
+                            <td> 
+                            <button type="button" class="info-btn mb-3" data-bs-toggle="modal" data-bs-target="#items'.$row->id.'">
+                                VIEW ITEMS
+                            </button>
+                           
+                            </td>
                             <td>'.$row->del_address.'</td>
                             <td>'.number_format($row->total,2) .' PHP</td>
                             <td>'.$row->refnum.'</td>
                             <td>'.$row->del_date.'</td>
                             '.$delstat.'
                             <td>'.$row->tracknum.'</td>
+
+                            <td>
+                                <form action = "/mailrec" method="GET">
+                                    <input type = "hidden" name="id" value="'.$row->id.'">
+                                    <input type = "hidden" name="refnum" value="'.$row->refnum.'">
+                                    <input type = "hidden" name="total" value="'.number_format($row->total,2).'">
+                                    <input type = "hidden" name="tracknum" value="'.$row->tracknum.'">
+
+                                    <input type = "hidden" name="items" value="'.$items.'">
+
+
+                                    <button type="submit" class="info-btn w-100" ><i class="bi bi-envelope me-1"></i>SEND</button>
+                                </form>
+                            </td>
                         </tr>
                         ';
                         
                 }
+                $html = ' <div class="modal fade" id="items'.$row->id.'"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">ORDER ID#: <b>'.$row->id.'</b></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            '.$items.'
+                                Thank you for auctioning with us! Kindly wait for the delivery of your item/s. If you want more details about the delivery status of your parcel, you can track the parcel using the tracking number provided or you can also <b><a href="/contactus" class="">Contact Us</a></b>.
+                                <br>
+                                <br>
+                                <b><a href="https://www.jtexpress.ph/index/query/gzquery.html" class="">Track your order.</a></b>
+                        </div>
+                    
+                    <div class="modal-footer justify-content-center  align-items-center">
+                        <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        {{$html;}}
             }
             else{
                 $output = '

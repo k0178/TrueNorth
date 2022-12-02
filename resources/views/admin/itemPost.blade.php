@@ -10,6 +10,8 @@
                 <div class="py-1">
                     <img src="/itemImages/{{$data->itemImg}}" width="150px" height="150px" >
                     {{Form::hidden('itemImg', $data->itemImg)}}
+                    {{Form::hidden('itemImg2', $data->itemImg2)}}
+                    {{Form::hidden('itemImg3', $data->itemImg3)}}
                     {{Form::hidden('id', $data->id)}}
                 </div>
                 <br>

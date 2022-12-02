@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-
+use Session;
 class VerificationController extends Controller
 {
     /*
@@ -26,13 +26,29 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+        protected function redirectTo()
+        {
+            if (auth()->user()->user_type = 0) {
+                return '/admin';
+            }
+            else{
+                Session::flash('success', "Welcome to True North Auction. Email has been successfully verified.");
+                return '/membershippay';
+            }
+        }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+
+    public function show(){
+        $title = "True North Auction | Verify Email";
+        return view('auth.verify',compact('title'));
+    }
+    
     public function __construct()
     {
         $this->middleware('auth');

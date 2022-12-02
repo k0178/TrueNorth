@@ -9,11 +9,13 @@
     </div>
     <div class="justify-content-center align-items-center w-75">
         <div class="px-5 my-5">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit corporis asperiores vitae molestias quaerat nostrum ab magni distinctio alias itaque ea eveniet, officia rem sunt maiores adipisci! Necessitatibus, iusto rerum.
-
-            </p>
+            
+            <ul class="list-unstyled">
+                <li class="ms-3 mb-3"><a class="link-dark" href="#"><i class="bi bi-envelope-fill me-3" style="font-size: 22px;"></i>tnorthgarmentssubcon@gmail.com</a></li>
+                <li class="ms-3 mb-3"><a class="link-dark" href="#"><i class="bi bi-telephone-fill me-3" style="font-size: 22px;"></i>374-45-43</a></li>
+                <li class="ms-3 mb-3"><a class="link-dark" href="#"><i class="bi bi-facebook me-3" style="font-size: 22px;"></i></a>True North Garments</li>
+            </ul>
         </div>
-       
     </div>
 </div>
 @endsection

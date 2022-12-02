@@ -9,8 +9,8 @@
     </div>
     <div class="justify-content-center align-items-center w-75">
         <div class="px-5 my-5">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit corporis asperiores vitae molestias quaerat nostrum ab magni distinctio alias itaque ea eveniet, officia rem sunt maiores adipisci! Necessitatibus, iusto rerum.
-
+            <p>
+                TRUE NORTH GARMENTS AND SUBCONTRACT INC. is a Services - Garment-sub Contractor located at L16 INDT. BLDG. LAPU-LAPU AVE. ST. BANGKULASI Navotas Metro Manila.
             </p>
         </div>
     </div>

@@ -51,15 +51,34 @@ class InventoryController extends Controller
             'type'=>'required',
             'cond'=>'required',
             'initialPrice'=>'required',
-            // 'buyPrice'=>'required',
             'qty'=>'required',
         ]);
         
         $filename= $request->input('prodName').".".$request->file('itemImg')->getClientOriginalExtension();
         $request->file('itemImg')->storeAs('itemImages',$filename,'public_uploads');
 
+
+        if($request->file('itemImg2') !== null){
+            $filename2= $request->input('prodName')."2.".$request->file('itemImg2')->getClientOriginalExtension();
+            $request->file('itemImg2')->storeAs('itemImages',$filename2,'public_uploads');
+        }
+        else{
+            $filename2 = 'None';
+        }
+
+        if($request->file('itemImg3') !== null){
+            $filename3= $request->input('prodName')."3.".$request->file('itemImg3')->getClientOriginalExtension();
+            $request->file('itemImg3')->storeAs('itemImages',$filename3,'public_uploads');
+        }
+        else{
+            $filename3 = 'None';
+        }
+        
+
         $data=new Inventory;
         $data->itemImg=$filename;
+        $data->itemImg2=$filename2;
+        $data->itemImg3=$filename3;
         $data->prodName=$request->input('prodName');
         $data->prodDeets=$request->input('prodDeets');
         $data->category=$request->category;

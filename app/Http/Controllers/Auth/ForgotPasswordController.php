@@ -19,4 +19,9 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    public function showLinkRequestForm(){
+        $title = "True North Auction | Forgot Password";
+        return view('auth.passwords.email',compact('title'));
+    }
 }

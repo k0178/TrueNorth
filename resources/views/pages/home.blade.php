@@ -12,10 +12,10 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="5000" >
-        <img src="\img\sample.jpg" class="d-block w-100" alt="...">
+        <img src="\img\Default.png" class="d-block w-100" alt="..." style=" filter:blur(3px);">
         <span style=" position: absolute; top: 200px; left: 200px;">
           @if(Auth::check())
-            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 60px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
+            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 45px !important;">Welcome to <br> True North Auction,<br> <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
             <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
               VIEW OUR AUCTIONS
             </button>
@@ -33,44 +33,24 @@
       </div>
 
       <div class="carousel-item" data-bs-interval="5000" >
-        <img src="\img\sample2.jpg" class="d-block w-100" alt="...">
+        <img src="\img\PreLoved.png" class="d-block w-100" alt="..." >
         <span style=" position: absolute; top: 200px; left: 200px;">
-          @if(Auth::check())
-            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
-            <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
-              VIEW OUR AUCTIONS
-            </button>
-          @else
-          <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to <label for="" style="color: #E7BB41;">True North Auction.</label> </h1> <br>
-            <button class="form-btn text-dark fw-bold ms-2" onclick="location.href='/store'" style="font-size: 16px;  ">
-              VIEW OUR AUCTIONS
-            </button>
-          @endif
+            <h1 style="font-weight: bold; color:#fff; font-size:60px;">True North Auction</h1>
         </span>
-        {{-- <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div> --}}
+        <div class="carousel-caption d-none d-md-block">
+          <h5>TRUE NORTH AUCTIONS</h5>
+          <p>Bid on Brand-New or Pre-Loved Apparel Products.</p>
+        </div>
       </div>
       <div class="carousel-item" data-bs-interval="500" >
-        <img src="\img\sample3.jpg" class="d-block w-100" alt="...">
+        <img src="\img\Bulk.png" class="d-block w-100" alt="..." >
         <span style=" position: absolute; top: 200px; left: 200px;">
-          @if(Auth::check())
-            <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to True North Auction, <label for="" style="color: #E7BB41;">{{Auth::user()->username}}</label> .</h1> <br>
-            <button class="form-btn  fw-bold" onclick="location.href='/store'" style="font-size: 16px;">
-              VIEW OUR AUCTIONS
-            </button>
-          @else
-          <h1 class="text-white fw-bold me-5 pe-3" style="font-size: 80px !important;">Welcome to <label for="" style="color: #E7BB41;">True North Auction.</label> </h1> <br>
-            <button class="form-btn text-dark fw-bold ms-2" onclick="location.href='/store'" style="font-size: 16px;">
-              VIEW OUR AUCTIONS
-            </button>
-          @endif
-        </span>
-        {{-- <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div> --}}
+          <h1 style="font-weight: bold; color:#fff; font-size:60px;">True North Auction</h1>
+      </span>
+        <div class="carousel-caption d-none d-md-block">
+          <h5>TRUE NORTH AUCTIONS</h5>
+          <p>Bid on Bulk Apparel Products.</p>
+        </div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

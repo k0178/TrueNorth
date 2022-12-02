@@ -8,7 +8,7 @@ use App\Models\OrderItems;
 use App\Models\Auction;
 @endphp
 
-    <div class="bg-white my-5 mx-5 " style=" border-right:1px #dddddd solid; border-top:1px #dddddd solid; border-left:1px #dddddd solid;">
+    <div class="bg-white my-5 " style=" border-right:1px #dddddd solid; border-top:1px #dddddd solid; border-left:1px #dddddd solid;">
       <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none " style="border-bottom:1px #dddddd solid;">
         <span class="fs-5 fw-bold text-center w-100">My Orders</span>
       </div>
@@ -31,6 +31,7 @@ use App\Models\Auction;
               <th scope="col">Delivery Date</th>
               <th scope="col">Status</th>
               <th scope="col">Tracking Number</th>
+              <th scope="col">Send Receipt to Email</th>
             </tr>
           </thead>
           <tbody>

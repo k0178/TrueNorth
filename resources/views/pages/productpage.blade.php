@@ -50,10 +50,10 @@ if(distance < 0){
                                         </div>
                                     </div>
                                     <div class="carousel-item" data-bs-interval="5000" >
-                                        <img src="\img\sample2.jpg" class="d-block w-100" alt="...">
+                                        <img src="/itemImages/{{$item->itemImg2}}" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item" data-bs-interval="5000" >
-                                        <img src="\img\sample3.jpg" class="d-block w-100" alt="...">
+                                        <img src="/itemImages/{{$item->itemImg3}}" class="d-block w-100" alt="...">
                                     </div>
                                 
                             <script>
@@ -61,7 +61,7 @@ if(distance < 0){
                                     const img = document.getElementById("prod");
 
                                     container.addEventListener("mousemove",(e)=>{
-                                        const x = e.clientX - e.target.offsetLeft;
+                                        const x = e.clientX- e.target.offsetLeft;
                                         const y = e.clientY - e.target.offsetTop;
                                         
                                         img.style.transformOrigin = `${x}px ${y}px`;
@@ -106,7 +106,7 @@ if(distance < 0){
                             Type: <h5 class="mb-3">
                                     <b>
                                         @if($item->type == 'T')
-                                            T-Shirt
+                                            Tops
                                         @elseif($item->type == 'P')
                                             Pants
                                         @elseif($item->type == 'S')

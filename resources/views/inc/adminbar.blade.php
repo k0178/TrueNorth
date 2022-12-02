@@ -98,7 +98,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/biddings"><i class="bi bi-exclamation-circle me-2"></i>UNORDERED AUCTIONS</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chatify"><i class="bi bi-chat-left-dots me-2"></i>MESSAGES</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/refundreq"><i class="bi bi-piggy-bank me-2"></i>REFUND REQUESTS</a>
                     </li>

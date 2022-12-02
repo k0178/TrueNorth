@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Refund;
 use App\Http\Requests\StoreRefundRequest;
 use App\Http\Requests\UpdateRefundRequest;
-
+use App\Models\Biddings;
+use App\Models\Bag;
 use App\Models\Messages;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class RefundController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $title = "Refunds";
         return view('pages.refund', compact('title'));
     }
@@ -47,20 +48,33 @@ class RefundController extends Controller
             'gcashnum'=>['required','regex:/^(09|\+639)\d{9}$/u']
         ]);
 
-        $in = new Refund;
-        $in->uname=Auth::User()->username;
-        $in->uid=Auth::User()->id;
-        $in->amount=Auth::User()->funds;
-        $in->gcashnum=$request->input('gcashnum');
-        $in->email=Auth::User()->email;
-        $in->save();
+        $bid_stat = Biddings::where('winstatus','Pending')
+                            ->where('uname', Auth::user()->username)
+                            ->get();
+        $bag_stat = Bag::where('user_id', Auth::user()->id)
+        ->get();
+ 
+        if(Auth::user()->funds < 500 ||  $bid_stat !== null || $bag_stat !== null){
+            Session::flash('error', "Inillegible for a refund. Please check the guidelines.");
+                    return redirect()->back()->withInput();
+        }
+        else{
+            $in = new Refund;
+                    $in->uname=Auth::User()->username;
+                    $in->uid=Auth::User()->id;
+                    $in->amount=Auth::User()->funds;
+                    $in->gcashnum=$request->input('gcashnum');
+                    $in->email=Auth::User()->email;
+                    $in->save();
 
-        $up = User::find(Auth::User()->id);
-        $up->user_status=3;
-        $up->save();
+                    $up = User::find(Auth::User()->id);
+                    $up->user_status=3;
+                    $up->save();
 
-        Session::flash('success', "Request successfully submitted. Your Account is now Frozen ");
-        return redirect('/refund');
+                    Session::flash('success', "Request successfully submitted. Your Account is now Frozen ");
+                    return redirect('/refund');
+
+        }
     }
 
     /**
@@ -100,7 +114,7 @@ class RefundController extends Controller
 
         $fnd = User::find($request->uid);
         
-        $fnd->user_status=1;
+        $fnd->user_status = 1;
         $fnd->funds = $fnd->funds-$request->input('amt');
         $fnd->save();
 
@@ -136,7 +150,7 @@ class RefundController extends Controller
         $title = "Admin | Refund Requests";
 
         $data = Refund::orderBy('created_at','DESC')
-                    ->paginate(20);
+                    ->get();
 
         return view('admin.refundreq', compact('title','data'));
     }
