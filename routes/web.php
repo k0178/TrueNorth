@@ -128,6 +128,7 @@ Route::resource('/history','App\Http\Controllers\UserPurchaseHistoryController')
 //reports
     Route::get('/invReport','App\Http\Controllers\reportsController@invreport');
     Route::post('/fndreport','App\Http\Controllers\reportsController@fndreport');
+    Route::post('/rfdreport','App\Http\Controllers\reportsController@rfdreport');
 
 
 //footer

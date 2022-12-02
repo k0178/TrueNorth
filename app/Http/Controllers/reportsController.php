@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Inventory;
 use App\Models\Funds;
 use App\Models\Biddings;
+use App\Models\Refund;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -25,8 +26,20 @@ class reportsController extends Controller
 
         $hotItem = Inventory::where('prodName','=',$val)->get();
 
+        $data = Funds::orderBy('created_at','desc')
+        ->where('status','=','approved')
+        ->get();
+
+        $rfnd = Refund::orderBy('created_at','desc')
+        ->where('status','=','Refunded')
+        ->get();
+
         $title = "Admin | Reports";
-        return view('admin.reports',compact('title'))->with('hotItem',$hotItem);
+        return view('admin.reports',compact('title'))->with('hotItem',$hotItem)
+        ->with('data',$data)
+        ->with('refund',$rfnd);
+
+
 
 
     }
@@ -54,5 +67,18 @@ class reportsController extends Controller
         ->where('created_at','<=',$to)
         ->get();
         return view('reports.fndRep',compact('title'))->with('data',$data);
+    }
+
+    public function rfdreport(Request $request)
+    {   
+        $from = $request->from.' 00.00.00';
+        $to = $request->to.' 00.00.00';
+        $title = "Admin | Fund Reports";
+        $data = Refund::orderBy('created_at','desc')
+        ->where('status','=','Refunded')
+        ->where('created_at','>=',$from)
+        ->where('created_at','<=',$to)
+        ->get();
+        return view('reports.rfdRep',compact('title'))->with('data',$data);
     }
 }

@@ -20,7 +20,7 @@
       <thead>
         <tr class="text-center">
           <th scope="col">Name</th>
-          <th scope="col">Reference Number</th>
+          <th scope="col">Gcash Account</th>
           <th scope="col">Amount</th>
           <th scope="col">Time of Request</th>
         </tr>
@@ -30,7 +30,7 @@
         @foreach ($data as $rep)
           <tr class="text-center">
               <th scope="row">{{$rep->uname}}</th>
-              <td>{{$rep->refnum}}</td>
+              <td>{{$rep->gcashnum}}</td>
               <td>{{$rep->amount}}</td>
               <td>{{\Carbon\Carbon::parse($rep->created_at)->toDayDateTimeString()}}</td>
           </tr>
@@ -49,7 +49,7 @@
     </table>
 </div>
 <div class="d-flex justify-content-center pt-3 pb-3 ">
-  <h5>Total: <b> {{$total}} PHP</b></h5>
+    <h5>Total: <b> {{$total}} PHP</b></h5>
 </div>
 </div>
 @endsection
