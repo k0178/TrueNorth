@@ -94,9 +94,12 @@ class UserOrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Order::where('id',$request->id)
+        ->update(['del_stat'=>'Received']);
+        Session::flash('success', "Order marked as received.");
+        return redirect()->back(); 
     }
 
     /**
@@ -159,7 +162,16 @@ class UserOrdersController extends Controller
                     }
                     elseif($row->del_stat == "Delivered"){
                         $delstat = '<td class="fw-bold text-success">'.$row->del_stat.'</td>';
-                        $rcv = '<td class="fw-bold text-success">Mark as Received</td>';
+                        $rcv = '<td class="fw-bold text-success">
+                                <form action = "/received" method="GET">
+                                    <button class="btn"><i class="bi bi-bookmark-check-fill me-1"></i>Mark as Received</button>
+                                    <input type = "hidden" name="id" value="'.$row->id.'">
+                                </form>
+                                </td>';
+                    }
+                    elseif($row->del_stat == "Received"){
+                        $delstat = '<td class="fw-bold text-dark">'.$row->del_stat.'</td>';
+                        $rcv = '<td></td>';
                     }
                     
                     
@@ -211,7 +223,7 @@ class UserOrdersController extends Controller
                                     <input type = "hidden" name="total" value="'.number_format($row->total,2).'">
                                     <input type = "hidden" name="tracknum" value="'.$row->tracknum.'">
                                     <input type = "hidden" name="placed_at" value="'.$row->created_at.'">
-                                    <button type="submit" class="info-btn w-100" ><i class="bi bi-envelope me-1"></i>SEND</button>
+                                    <button type="submit" class="info-btn w-100" ><i class="bi bi-receipt me-1"></i>SEND</button>
                                 </form>
                             </td>
                         </tr>

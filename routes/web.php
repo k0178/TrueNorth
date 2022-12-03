@@ -36,6 +36,7 @@ Route::get("invsearch",[reportsController::class,'invsearch'])->name('invsearch'
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');
 Route::resource('/refund','App\Http\Controllers\RefundController');
+Route::get('/received','App\Http\Controllers\UserOrdersController@update');
 Route::resource('/item','App\Http\Controllers\InventoryController');
 Route::get('/logout','App\Http\Controllers\LogoutController@logout');
 Route::get('/historypage','App\Http\Controllers\PagesController@historypage');
