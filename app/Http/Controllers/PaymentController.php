@@ -41,6 +41,7 @@ public function __construct() {
             
             return $th;
         }
+     
 
    }
 
@@ -67,7 +68,7 @@ public function __construct() {
            User::where('id', Auth::user()->id)
                ->update(['memberpmt'=>'Approved']);
 
-           return redirect('/fundings');
+            return redirect('/mailmem');
         }
         else{
             return $response->getMessage();
@@ -102,6 +103,7 @@ public function __construct() {
             
         return $th;
         }
+        
    }
 
    public function fndsuccess(Request $request){
@@ -135,7 +137,7 @@ public function __construct() {
            $data->status='Approved';
            $data->save();
    
-           return redirect('/fundings');
+           return redirect('/mailfnd');
         }
         else{
             return $response->getMessage();

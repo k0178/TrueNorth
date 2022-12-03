@@ -41,19 +41,19 @@ class fundController extends Controller
 
     public function memberPay(Request $request){
 
-        $data = new Funds;
-        $data->uname=$request->accname;
-        $data->refnum=$request->refnum;
-        $data->type='Membership';
-        $data->amount=1000;
-        $data->status='Approved';
-        $data->save();
+        // $data = new Funds;
+        // $data->uname=$request->accname;
+        // $data->refnum=$request->refnum;
+        // $data->type='Membership';
+        // $data->amount=1000;
+        // $data->status='Approved';
+        // $data->save();
 
-        User::where('id', Auth::user()->id)
-            ->update(['memberpmt'=>'Approved']);
+        // User::where('id', Auth::user()->id)
+        //     ->update(['memberpmt'=>'Approved']);
 
-        Session::flash('success', "Membership Paid Successfully! Welcome!");
-        return redirect('/home');
+
+        return redirect('/mailmem');
         
     }
 }

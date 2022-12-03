@@ -146,6 +146,8 @@ Route::get('/company','App\Http\Controllers\PagesController@company');
 //mail
 Route::get('/mailex','App\Http\Controllers\MailController@sendMail');
 Route::get('/mailrec','App\Http\Controllers\MailController@sendReceipt');
+Route::get('/mailmem','App\Http\Controllers\MailController@sendMember');
+Route::get('/mailfnd','App\Http\Controllers\MailController@sendFund');
 
 //paypal
 Route::post('/mempay','App\Http\Controllers\PaymentController@memPay');
