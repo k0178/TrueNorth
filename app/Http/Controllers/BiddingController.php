@@ -421,6 +421,7 @@ class BiddingController extends Controller
                 $data = Auction::join('bidtransactions','bidtransactions.prod_id','=','auctions.id')
                 ->where('bidtransactions.user_id','=',Auth::user()->id)
                 ->where('bidtransactions.winstatus','Pending')
+                ->where('bidtransactions.retractstat',0)
                 ->orderBy('bidtransactions.created_at','DESC')
                 ->get();
             }
