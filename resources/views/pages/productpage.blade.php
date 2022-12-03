@@ -168,7 +168,7 @@ if(distance < 0){
                                                             As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}
                                                         </div>
                                                     @endif
-                                                    <div class=" ">
+                                                    {{-- <div class=" ">
                                                             @php
                                                                 $total_bid = Biddings::where('prod_id',$item->id)
                                                                                     ->where('retractstat',0)
@@ -180,7 +180,7 @@ if(distance < 0){
                                                             <label for="">Total Current Biddings:</label><h4><b class="text-success">{{number_format($total_bid, 2)}} PHP</b></h4> 
                                                             @endif
                                                             
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 @if($bid_data === null || $bid_status = 0)
                                                     @if(empty($pfp))
