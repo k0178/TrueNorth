@@ -117,7 +117,6 @@ class UserFundingsController extends Controller
                                         <th scope="row">'.number_format($row->amount,2).' PHP</th>
                                         <td>'. $row->type.'</td>
                                         <td class=text-success>'. $row->status.'</td>
-                                        <td></td>
                                         <td>'. $row->refnum.'</td>
                                         <td>'. $row->created_at.'</td>
                                     </tr>
@@ -129,7 +128,6 @@ class UserFundingsController extends Controller
                             <th scope="row">'.number_format($row->amount,2).' PHP</th>
                             <td>'. $row->type.'</td>
                             <td class=text-warning>'. $row->status.'</td>
-                            <td></td>
                             <td>'. $row->refnum.'</td>
                             <td>'. $row->created_at.'</td>
                         </tr>
@@ -141,7 +139,6 @@ class UserFundingsController extends Controller
                             <th scope="row">'.number_format($row->amount,2).' PHP</th>
                             <td>'. $row->type.'</td>
                             <td class=text-danger>'. $row->status.'</td>
-                            <td></td>
                             <td>'. $row->refnum.'</td>
                             <td>'. $row->created_at.'</td>
                         </tr>

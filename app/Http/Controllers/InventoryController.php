@@ -89,8 +89,9 @@ class InventoryController extends Controller
         else{
             $data->type=$request->type;
         }
-        if($request->cond == "bulk"){
-            $data->cond=$request->cond;
+
+        if($request->cond == "Bulk"){
+            $data->cond='Bulk';
             $data->weight = $request->weight;
         }
         else{

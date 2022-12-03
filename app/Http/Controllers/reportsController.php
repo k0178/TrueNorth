@@ -56,6 +56,56 @@ class reportsController extends Controller
         // return $pdf->stream();
     }
 
+    public function invsearch(Request $request){
+    
+        if($request->ajax()){
+
+            $output = '';
+            $query = $request->get('query');
+            if($query != ''){
+                $data = Inventory::where('prodName','like','%'.$query.'%')
+                                ->orderBy('category','desc')
+                                ->get();
+            }
+            else{
+                $data = Inventory::orderBy('category','desc')->get();
+            }
+
+            $total_row = $data->count();
+            if($total_row > 0){
+                foreach ($data as $row) {
+                        $output .= '
+                        <tr style="text-align:center;">
+                            <th scope="row">'.$row->prodName.'</th>
+                            <td>'. $row->cond.'</td>
+                            <td>'. $row->category.'</td>
+                            <td>'.$row->type.'</td>
+                            <td>'. number_format($row->initialPrice,2) .' PHP</td>
+                            <td>'. $row->qty.'</td>
+                        </tr>
+                        
+                        ';
+                    }
+
+                
+            }
+            else{
+                $output = '
+                    <tr>
+                        <td colspan=6 class=text-center> NO DATA FOUND</td>
+                    </tr>
+                '; 
+            }
+            $data = array(
+                'table_data'=> $output,
+                'total_data'=> $total_row
+            );
+            echo json_encode($data);
+        }
+    
+    }
+
+
     public function fndreport(Request $request)
     {   
         $from = $request->from.' 00.00.00';

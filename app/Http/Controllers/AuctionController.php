@@ -57,7 +57,8 @@ class AuctionController extends Controller
         $input->category=$request->category;
         $input->type=$request->type;
         $input->initialPrice=$request->initialPrice;
-        $input->buyPrice=$request->buyPrice;
+        $input->weight=$request->weight;
+        // $input->buyPrice=$request->buyPrice;
         $input->aucStatus=1;
     
         $newQty = $request->qty - 1;

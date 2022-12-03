@@ -50,7 +50,7 @@
                             </ul>
                         </div>
                         <p style="text-transform: none!important;">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ea voluptates id recusandae, minus consequatur. Officiis, soluta earum. Aut sequi alias saepe reiciendis commodi! Placeat dolore hic quasi inventore provident?
+                            Took Information Communications and Technology (ICT) track for my Senior High School program in University of the East Caloocan. I am Currently taking the program of Information Technology in Adamson University. He aims to be an efficient fullstack developer once he graduates from university.
                         </p>
                     </div>
                 </div>
@@ -98,15 +98,12 @@
                             </ul>
                         </div>
                         <p style="text-transform: none!important;">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit repellat dignissimos adipisci nam optio quibusdam hic laborum. Excepturi perspiciatis nam veniam, illum qui nulla error sunt itaque laboriosam, quos impedit?
+                            He was born in July 12th, 2000 and lives in Cavite City with his parents at the time of writing. He studied and finished Junior Highschool and Senior Highschool in St Joseph College of Cavite Inc. Currently studying at Adamson University taking up the course Bachelor of Science in Information Technology, he has taken a liking to repairing peripherals and likes to play games on his free time.
                         </p>
                     </div>
                 </div>
             </div>
-
-            
         </div>
-    
     </div>
 </div>
 @endsection

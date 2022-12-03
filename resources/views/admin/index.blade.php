@@ -76,9 +76,9 @@
                                 )}} --}}
 
                                 <select name="cond" id="cond" onchange="showMe(this.value)" class="btn btn-white border-dark dropdown-toggle mt-1 mb-2 ms-3" required>
-                                    <option value="pre">Pre-Loved</option>
-                                    <option value="bnew">Brand New</option>
-                                    <option value="bulk">Bulk</option>
+                                    <option value="Pre-Loved">Pre-Loved</option>
+                                    <option value="Brand New">Brand New</option>
+                                    <option value="Bulk">Bulk</option>
                                 </select> 
                                 
                                 {{-- {!! Form::select('cond', [
@@ -96,7 +96,7 @@
                                 
                                 <script>
                                     function showMe(value) {
-                                        if(value=="bulk"){
+                                        if(value=="Bulk"){
                                             document.getElementById('bulk').style.display="block";
                                             // document.getElementById('b').style.display="none";
                                         }

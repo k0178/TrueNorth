@@ -12,6 +12,7 @@
                     {{Form::hidden('itemImg', $data->itemImg)}}
                     {{Form::hidden('itemImg2', $data->itemImg2)}}
                     {{Form::hidden('itemImg3', $data->itemImg3)}}
+                    {{Form::hidden('weight', $data->weight)}}
                     {{Form::hidden('id', $data->id)}}
                 </div>
                 <br>
@@ -39,7 +40,7 @@
                             'W' => 'Women',
                             'A' => 'Accessories',
                             'O' => 'Others'], 
-                            $data->category, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3']
+                            $data->category, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3','readonly']
                         )}}
                     </div>
                     <div class="row ms-2 mb-2">
@@ -49,7 +50,7 @@
                             'P' => 'Pants',
                             'S' => 'Shorts',
                             'Sh' => 'Shoes'], 
-                            $data->type, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3']
+                            $data->type, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 mb-2 ms-3','readonly']
                         )}}
                     </div>
                     <div class="row ms-2 mb-2">
@@ -58,8 +59,10 @@
                             'Pre-Loved' => 'Pre-Loved', 
                             'Brand New' => 'Brand New',
                             'Bulk' => 'Bulk'], 
-                            $data->cond, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 ms-3']
+                            $data->cond, ['class'=> 'info-btn fw-bold dropdown-toggle mt-1 ms-3','readonly']
                         )}}
+
+                        {{-- {{{!! Form::select($name, $list, $selected, [$options]) !!}}} --}}
                     </div>
                     <div class="row ms-2 mt-3 w-100" style="">
                         <label>Initial Price</label>
@@ -68,13 +71,13 @@
                         'placeholder'=>'Initial Price','readonly'
                         ])}}
                     </div>
-                    <div class="row ms-2">
+                    {{-- <div class="row ms-2">
                         <label>Buyout Price</label>
                         {{Form::text('buyPrice', $data->buyPrice,
                         ['class'=>'form-control fw-bold mt-1 pt-1 ms-3 my-3',
                         'placeholder'=>'Buy Out Price','readonly'
                         ])}}
-                    </div>
+                    </div> --}}
                     <div class="row ms-2" style="">
                         <label>Quantity</label>
                         {{Form::number('qty',$data->qty,

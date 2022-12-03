@@ -68,7 +68,7 @@
             <th scope="col">Amount</th>
             <th scope="col">Type</th>
             <th scope="col">Status</th>
-            <th scope="col">Payment Method</th>
+            {{-- <th scope="col">Payment Method</th> --}}
             <th scope="col">Reference #</th>
             <th scope="col">Date</th>
           </tr>

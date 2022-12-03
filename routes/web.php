@@ -10,6 +10,7 @@ use App\Http\Controllers\UserOrdersController;
 use App\Http\Controllers\itemListController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\reportsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,7 @@ Route::get("itemsearch",[itemListController::class,'search'])->name('itemsearch'
 Route::get("wonsearch",[BiddingController::class,'wonsearch'])->name('wonsearch');
 Route::get("lostsearch",[BiddingController::class,'lostsearch'])->name('lostsearch');
 Route::get("pendsearch",[BiddingController::class,'pendsearch'])->name('pendsearch');
+Route::get("invsearch",[reportsController::class,'invsearch'])->name('invsearch');
 
 
 Route::get('/index','App\Http\Controllers\storePagesController@index');

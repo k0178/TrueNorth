@@ -157,6 +157,14 @@ class itemListController extends Controller
                         ';
                     }
 
+                    $weight='';
+                    if($row->cond == 'Bulk'){
+                        $weight .='<li>Weight: <b>'.number_format($row->weight,2).' KG</b></li>';
+                    }
+                    else{
+                        $weight .=' ';
+                    }
+
                     $output .= '
                     <div class="list-group list-group-flush scrollarea mx-3 " style="border-bottom:1px #dddddd solid;">
                         <div class="d-flex align-items-center">
@@ -185,6 +193,7 @@ class itemListController extends Controller
                                     <li>Type: <b>'.$row->type.'</b></li>
                                     <li>Category: <b>'.$row->category.'</b></li>
                                     <li>Condition: <b>'.$row->cond.'</b></li>
+                                    '.$weight.'
                                     <li>Stock: <b>'.$row->qty.'</b></li>
                                     <li>Starting Price: <b>'. number_format($row->initialPrice,2).' PHP</b></li>
                                     

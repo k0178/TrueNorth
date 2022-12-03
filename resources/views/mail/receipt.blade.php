@@ -11,9 +11,9 @@
             Order #: {{Session::get('id')}} <br>
             Reference #: {{Session::get('refnum')}} <br>
             Tracking #: {{Session::get('tracknum')}} <br>
-            Total: {{Session::get('total')}} PHP
-
-            Items:{{Session::get('items')}}
+            Total: {{Session::get('total')}} PHP 
+            <br>
+            Order Placed at: {{Session::get('placed_at')}} 
         </p>
         <p class="h4">
             Thank you and kind regards!

@@ -128,15 +128,9 @@ class UserOrdersController extends Controller
                         ->get();
             }
             
-        
-       
 
             $total_row = $data->count();
             $items = '';
-
-         
-          
-         
 
             if($total_row > 0){
                 foreach ($data as $row) {
@@ -147,19 +141,25 @@ class UserOrdersController extends Controller
                             ->where('order_items.order_id',$row->id)
                             ->get();
                             
+                            
                     foreach($orders as $item){
-                        $items .=  '<div>'.$item->prodName.'</div>';
+                        $items .=  '<div class="mb-2"><img src="/itemImages/'.$item->itemImg.'" width="40px" height="40px" style="object-fit: cover; border: 3px #393E41 solid;" class="rounded-circle me-1">'.$item->prodName.'</div>';
+
                     }      
                 
                     $delstat = '';
+                    $rcv = '';
                     if($row->del_stat == "Pending"){
                         $delstat = '<td class="fw-bold text-warning">'.$row->del_stat.'</td>';
+                        $rcv = '<td></td>';
                     }
                     elseif($row->del_stat == "Shipped"){
                         $delstat = '<td class="fw-bold text-info">'.$row->del_stat.'</td>';
+                        $rcv = '<td></td>';
                     }
                     elseif($row->del_stat == "Delivered"){
                         $delstat = '<td class="fw-bold text-success">'.$row->del_stat.'</td>';
+                        $rcv = '<td class="fw-bold text-success">Mark as Received</td>';
                     }
                     
                     
@@ -170,7 +170,31 @@ class UserOrdersController extends Controller
                             <button type="button" class="info-btn mb-3" data-bs-toggle="modal" data-bs-target="#items'.$row->id.'">
                                 VIEW ITEMS
                             </button>
-                           
+                            <div class="modal fade" id="items'.$row->id.'"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">ORDER ID#: <b>'.$row->id.'</b> Placed At: '.$row->created_at.'</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <h3>ITEMS:</h3>
+                                            '.$items.'
+                                            <br>
+                                            <div class="text-center">
+                                                Thank you for auctioning with us! Kindly wait for the delivery of your item/s. If you want more details about the delivery status of your parcel, you can track the parcel using the tracking number provided or you can also <b><a href="/contactus" class="">Contact Us</a></b>.
+                                                    <br>
+                                                    <br>
+                                                    <b><a href="https://www.jtexpress.ph/index/query/gzquery.html" class="">Track your order.</a></b>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class="modal-footer justify-content-center  align-items-center">
+                                        <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             </td>
                             <td>'.$row->del_address.'</td>
                             <td>'.number_format($row->total,2) .' PHP</td>
@@ -178,6 +202,7 @@ class UserOrdersController extends Controller
                             <td>'.$row->del_date.'</td>
                             '.$delstat.'
                             <td>'.$row->tracknum.'</td>
+                            '.$rcv.'
 
                             <td>
                                 <form action = "/mailrec" method="GET">
@@ -185,39 +210,13 @@ class UserOrdersController extends Controller
                                     <input type = "hidden" name="refnum" value="'.$row->refnum.'">
                                     <input type = "hidden" name="total" value="'.number_format($row->total,2).'">
                                     <input type = "hidden" name="tracknum" value="'.$row->tracknum.'">
-
-                                    <input type = "hidden" name="items" value="'.$items.'">
-
-
+                                    <input type = "hidden" name="placed_at" value="'.$row->created_at.'">
                                     <button type="submit" class="info-btn w-100" ><i class="bi bi-envelope me-1"></i>SEND</button>
                                 </form>
                             </td>
                         </tr>
                         ';
-                        
                 }
-                $html = ' <div class="modal fade" id="items'.$row->id.'"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">ORDER ID#: <b>'.$row->id.'</b></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            '.$items.'
-                                Thank you for auctioning with us! Kindly wait for the delivery of your item/s. If you want more details about the delivery status of your parcel, you can track the parcel using the tracking number provided or you can also <b><a href="/contactus" class="">Contact Us</a></b>.
-                                <br>
-                                <br>
-                                <b><a href="https://www.jtexpress.ph/index/query/gzquery.html" class="">Track your order.</a></b>
-                        </div>
-                    
-                    <div class="modal-footer justify-content-center  align-items-center">
-                        <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
-                    </div>
-                </div>
-            </div>
-        </div>';
-        {{$html;}}
             }
             else{
                 $output = '

@@ -158,8 +158,8 @@ class BiddingController extends Controller
         
     
 
-        if(Auth::user()->funds < $request->bid_amt){
-            Session::flash('error', "Insufficient Funds. (Funds Needed: ".( $request->bid_amt - Auth::user()->funds ).')');
+        if(Auth::user()->funds < 500.00){
+            Session::flash('error', "You have atleast 500.00 PHP worth of funds to bid. (Funds Needed: ".( 500.00 - Auth::user()->funds ).')');
             return redirect()->back()->withInput();   
             
         }

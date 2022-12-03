@@ -35,13 +35,18 @@ $ref_num = Auth::user()->id.date('ymdHis');
             <div class="d-flex w-100">
                 <div class="d-flex w-75 align-items-center">
                     <ul class="pe-3" style="list-style: none;   margin-bottom:auto;">
-                        <li><h5><b>{{$item->prodName}} </b></h5></li>
+                        <li class="mb-2"><h5><b>{{$item->prodName}} </b></h5></li>
                         @if($price === null)
                         <li><h6><b>{{number_format($item->buyPrice,2)}} PHP </b></h6></li>
                         @else
-                        <li><h6><b>{{number_format($price->bidamt,2)}} PHP</b></h6></li>
+                        <li><h6>Price: <b>{{number_format($price->bidamt,2)}} PHP</b></h6></li>
                         @endif
                         <li>Condition: <b>{{$item->cond}}</b></li>
+                        @if($item->weight > 10)
+                            <li>Weight: <b>{{number_format($item->weight,2)}} KG</b> <label for="" style="font-size: 11px;"><b>(+40.00 PHP on Delivery Fee)</b></label> </li>
+                        @else
+                            <li>Weight: <b>{{number_format($item->weight,2)}} KG</b></li>
+                        @endif
                     </small>
                     </ul>
                 </div>
@@ -112,9 +117,17 @@ $ref_num = Auth::user()->id.date('ymdHis');
                             @endif
                         </small>
                         </ul>
+
+                        @php
+                        $del_fee =  number_format(45, 2);
+                            if($item->weight > 10){
+                                $del_fee =  number_format(45, 2) + 40;
+                            }
+                        @endphp
                     @endforeach
                     @php
-                        $del_fee =  number_format(45, 2);
+                   
+                        
                         $sub_total = $total_bids + $total_buy;
                         $total_amt = $sub_total + $del_fee ;
                     @endphp
@@ -128,8 +141,9 @@ $ref_num = Auth::user()->id.date('ymdHis');
                         $penalty = number_format(0,2);
                         $total_amt = $total + $total_sgl + $del_fee + $penalty;
                     @endphp --}}
-                    <label>Shipping Fee: <b>{{$del_fee}} PHP</b></label><br>
-                    <label class="mb-2 " style="font-size: small;"> (J&T Express Delivery)</label> <br>
+                    <label>Shipping Fee: <b>{{number_format($del_fee,2) }} PHP</b></label><br>
+                    <label for="" style="font-size: 11px;">Shipping Fee varies on weight of the Item</label><br>
+                    <label class="mb-2 fw-bold " style="font-size: small;"> (J&T Express Delivery)</label> <br>
                     
                     <label class= "p-2" style="border:1px #3eb952 solid; "><h5>Total: <b style="color: #3eb952;">{{number_format($total_amt, 2)}} PHP</b></h5>  </label>
                 </div>

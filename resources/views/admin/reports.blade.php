@@ -51,9 +51,9 @@
                 @endphp
             @endforeach
 
-              <h6 class="card-subtitle mb-2 text-muted">total: {{$total,2}} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">total: {{$total,2}} PHP </h6>
               <h5 class="card-title mt-3">Refunded</h5>
-              <h6 class="card-subtitle mb-2 text-muted">total: {{$rfnd,2}} </h6>
+              <h6 class="card-subtitle mb-2 text-muted">total: {{$rfnd,2}} PHP</h6>
             </div>
           </div>
 

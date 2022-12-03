@@ -73,7 +73,7 @@ $users = User::select('*')
                         <i class="bi bi-chat-dots-fill " style="font-size: 20px; font-weight:bold; color:#393E41;"></i>
                         <span class="badge bg-none " style="color: #393E41;"></span>
                     </button> 
-                   
+                
                     <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#bag" aria-controls="bag">
                         {{-- <span class="bi bi-three-dots-vertical"></span> --}}
                         <i class="bi bi-bag-fill " style="font-size: 20px; font-weight:bold; color:#393E41;"></i>

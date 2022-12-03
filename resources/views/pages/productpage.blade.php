@@ -116,6 +116,14 @@ if(distance < 0){
                                         @endif
                                     </b>
                                 </h5>
+                                
+                            @if($item->cond == 'Bulk')
+                                Weight: <h5 class="mb-3"><b>{{number_format($item->weight,2)}} KG</b></h5>
+                            @else
+                                
+                            @endif
+                            
+                                
                             <p>
                                 <button class="form-btn w-100 mb-3" style="background: #D3D0CB;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                     SHOW DETAILS

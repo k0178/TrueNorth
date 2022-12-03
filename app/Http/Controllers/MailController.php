@@ -33,10 +33,9 @@ class MailController extends Controller
         Session::put('refnum',$request->refnum);
         Session::put('total',$request->total);
         Session::put('tracknum',$request->tracknum);
-        Session::put('items',$request->items);
+        Session::put('placed_at',$request->placed_at);
         $name=Auth::user()->username;
         $mail=Auth::user()->email;
-     
         Mail::to($mail)->send(new Receipt($msg, $name,$mail));
         
         Session::flash('success', "Check your email to view your receipt.");

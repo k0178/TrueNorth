@@ -31,6 +31,7 @@ use App\Models\Auction;
               <th scope="col">Delivery Date</th>
               <th scope="col">Status</th>
               <th scope="col">Tracking Number</th>
+              <th scope="col"></th>
               <th scope="col">Send Receipt to Email</th>
             </tr>
           </thead>
