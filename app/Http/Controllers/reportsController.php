@@ -8,6 +8,8 @@ use App\Models\Funds;
 use App\Models\Biddings;
 use App\Models\Refund;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Session;
+use Response;
 
 
 use Illuminate\Http\Request;
@@ -131,4 +133,110 @@ class reportsController extends Controller
         ->get();
         return view('reports.rfdRep',compact('title'))->with('data',$data);
     }
+
+    public function exportinv(){
+
+
+        $data = Inventory::all();
+        $columns = array('Name','Details','Condition','Category','Type','Added At');
+
+            $file = fopen('inv.csv', 'w');
+
+            fputcsv($file, $columns);
+
+            foreach ($data as $task) {
+                $row['Name']  = $task->prodName;
+                $row['Details']    = $task->prodDeets;
+                $row['Condition']    = $task->cond;
+                $row['Category']  = $task->category;
+                $row['Type']  = $task->type;
+                $row['Added At']  = $task->created_at;
+
+                fputcsv($file, array($row['Name'], $row['Details'], $row['Condition'], $row['Category'], $row['Type'],$row['Added At']));
+            }
+
+            fclose($file);
+
+            $filepath = public_path('/inv.csv');
+            return Response::download($filepath); 
+
+   Session::flash('success', "CSV Generated. Check Root Folder");
+   return back();
+
+    }
+
+    public function exportfnd(){
+
+     
+             $data = Funds::all();
+             $columns = array('Username', 'Reference #', 'Amount', 'Type', 'Requested At', 'Total');
+     
+                 $file = fopen('fund.csv', 'w');
+     
+                 fputcsv($file, $columns);
+                    $total = 0;
+                 foreach ($data as $task) {
+                     $row['Username']  = $task->uname;
+                     $row['Reference #']    = $task->refnum;
+                     $row['Amount']    = $task->amount;
+                     $row['Type']  = $task->type;
+                     $row['Requested At']  = $task->created_at;
+
+                     $total = $total + $task->amount;
+
+                     fputcsv($file, array($row['Username'],$row['Reference #'], $row['Amount'], $row['Type'], $row['Requested At']));
+                 }
+                 $row['Total'] = $total;
+                 $row['Username']  = "/";
+                 $row['Reference #']    = "/";
+                $row['Amount']    = "/";
+                $row['Type']  = "/";
+                $row['Requested At']  = "/";
+                 fputcsv($file, array($row['Username'],$row['Reference #'], $row['Amount'], $row['Type'], $row['Requested At'],$row['Total']));
+                 fclose($file);
+     
+                 $filepath = public_path('/fund.csv');
+                 return Response::download($filepath); 
+     
+        Session::flash('success', "CSV Generated. Check Root Folder");
+        return back();
+     
+         }
+
+         public function exportrfd(){
+
+     
+            $data = Refund::all();
+            $columns = array('Username', 'Gcash #', 'Amount', 'Requested At', 'Total');
+    
+                $file = fopen('refund.csv', 'w');
+    
+                fputcsv($file, $columns);
+                   $total = 0;
+                foreach ($data as $task) {
+                    $row['Username']  = $task->uname;
+                    $row['Gcash #']    = $task->gcashnum;
+                    $row['Amount']    = $task->amount;
+                    $row['Requested At']  = $task->created_at;
+
+                    $total = $total + $task->amount;
+
+                    fputcsv($file, array($row['Username'],$row['Gcash #'], $row['Amount'], $row['Requested At']));
+                }
+                $row['Total'] = $total;
+                $row['Username']  = "/";
+                $row['Gcash #']    ="/";
+                $row['Amount']    = "/";
+                $row['Requested At']  = "/";
+
+                fputcsv($file, array($row['Username'],$row['Gcash #'], $row['Amount'], $row['Requested At'],$row['Total']));
+                fclose($file);
+    
+                $filepath = public_path('/refund.csv');
+                return Response::download($filepath); 
+    
+       Session::flash('success', "CSV Generated. Check Root Folder");
+       return back();
+    
+        }
 }

@@ -157,6 +157,10 @@ Route::get('fndsuccess',[PaymentController::class, 'fndsuccess']);
 Route::get('success', [PaymentController::class, 'success']);
 Route::get('error', [PaymentController::class, 'error']);
 
+//CSV
+Route::get('export-inv',[reportsController::class,'exportinv'])->name('export-inv');
+Route::get('export-fnd',[reportsController::class,'exportfnd'])->name('export-fnd');
+Route::get('export-rfd',[reportsController::class,'exportrfd'])->name('export-rfd');
 
 Auth::routes(['verify'=> true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
