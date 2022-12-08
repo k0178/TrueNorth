@@ -1,4 +1,7 @@
 @extends('layout.admin')
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
 @section('content') 
 @php
     $total = 0;
@@ -24,43 +27,44 @@
         <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
         </div>
   </div> --}}
-<div class="d-flex justify-content-center">
 
-  <table class="table table-striped">
+
+  <table class="table" id="fundrep">
       <thead>
         <tr class="text-center">
           <th scope="col">Name</th>
           <th scope="col">Reference Number</th>
           <th scope="col">Amount</th>
+          <th scope="col">Type</th>
+          <th scope="col">Status</th>
           <th scope="col">Time of Request</th>
         </tr>
       </thead>
       <tbody>
-        @if (count($data)>0)
         @foreach ($data as $rep)
-          <tr class="text-center">
-              <th scope="row">{{$rep->uname}}</th>
+          <tr>
+              <td>{{$rep->uname}}</td>
               <td>{{$rep->refnum}}</td>
-              <td>{{$rep->amount}}</td>
+              <td>{{number_format($rep->amount,2)}} PHP</td>
+              <td>{{$rep->type}}</td>
+              <td class="text-success">{{$rep->status}}</td>
               <td>{{\Carbon\Carbon::parse($rep->created_at)->toDayDateTimeString()}}</td>
           </tr>
           @endforeach
-          
-        @else
-        <tr class="text-center">
-          <td colspan="100">      
-              <p class="h3">
-                No Records Found.
-              </p>
-          </td>
-        </tr>  
-        @endif
-         
       </tbody>
     </table>
    
-</div>
+
 {{-- <div class="justify-content-center  w-100 d-flex ">{{$data->links()}}</div> --}}
 </div>
 
 @endsection
+@section('javascripts')
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#fundrep').DataTable();
+    });
+
+  </script>
+  @endsection

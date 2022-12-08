@@ -9,6 +9,9 @@ $pend_qty = BiddingController::pend_qty();
 $lost_qty = BiddingController::lost_qty();
 
 ?>
+@section('styles')
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
 
     @section('content')
 
@@ -42,303 +45,312 @@ $lost_qty = BiddingController::lost_qty();
           </div>
         </nav>
         <div class="tab-content " id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-            <div align="right" class="my-3 mx-3 d-flex align-items-center">
-              <i class="bi bi-search me-3"></i>
-              <input type="search" class="form-control me-3"  name="search" id="pend-search" placeholder="Search for Item Name">
-              <div class="d-flex align-items-center">
-                  Showing
-                  <p id="pend_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-              </div>
-            </div>
-
-            <div class="" id="pend_tbl">
-              
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-            <div align="right" class="my-3 mx-3 d-flex align-items-center">
-              <i class="bi bi-search me-3"></i>
-              <input type="search" class="form-control me-3"  name="search" id="won-search" placeholder="Search for Item Name">
-              <div class="d-flex align-items-center">
-                  Showing
-                  <p id="won_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-                  </div>
-            </div>
-          
-            <div class="" id="won_tbl">
-              
-            </div>
-            {{-- @if(count($won) > 0)
-            @foreach($won as $info)
-            <div class="list-group list-group-flush scrollarea mt-3 mx-3 align-items-center" style="border-bottom:1px #dddddd solid;">
-              <div class="d-flex align-items-center">
-                <div class="d-flex">
-                  <img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
-                    style="object-fit: cover; 
-                            border:3px #56A06E solid; 
-                            
-                            margin-top :20px;
-                            margin-bottom :20px;" 
-                    class="rounded-circle ">
-                </div>
-                <div class="pt-3">
-                  
-                    <ul style="list-style: none;">
-                      <li class="d-flex align-items-center"><h5><b>{{$info->prodName}}</b> </h5>
-                        {!! Form::open(['action'=>['App\Http\Controllers\BagController@addToBag',$info->product_id],
-                          'method'=>'GET'])!!}
-                          {{ Form::hidden('product_id',$info->prod_id) }}
-                            <button class="btn" style="border-radius: 0%;"
-                            data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-title="Add to Bag">
-                        <i class="bi bi-bag-plus " style="font-size: 20px;"></i>
-                      </button>
-                      {!! Form::close() !!}
-                      
-                      </li> 
-                      <li>Type: <b>{{$info->type}}</b></li>
-                      <li>Category: <b>{{$info->category}}</b></li>
-                      <li>Condition: <b>{{$info->cond}}</b></li>
-                      <li>End Date: <b>{{Carbon\Carbon::parse($info->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
-                    </ul>
-                </div>
-                <div class="w-50">
-                  <ul  style="list-style: none;">
-                      <li><h5>Bid Placed: <b>{{number_format($info->bidamt,2)}} PHP</b></h5></li>
-                      <li class="mb-1"> Placed at: <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
-                      <li class="mb-1 mt-3"> Must place order before: <br> <b>{{\Carbon\Carbon::parse($info->orderDate)->format('l, jS \of F Y (h:i:s A)')}} </b></li>
-                      <li>Reference #: <b>{{$info->refnum}}</b> </li>
-                  </ul>
-                </div>
-              
-                  @if(\Carbon\Carbon::parse($info->endDate)->subDays(1) <= (\Carbon\Carbon::today()) )
-                  
-                  <button type="button" class="form-btn text-white ms-3 d-flex" style="border-radius: 0%; background:#56A06E;"
-                      data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-title="Checkout"
-                      onclick="location.href='/checkout/{{$info->prod_id}}'">
-                      <i class="bi bi-bag-check me-1" style="color:white;"></i>
-                      CHECKOUT
-                    </button>
-                    @else
-                    <div class=" text-center mx-3">
-                      {!! Form::open(['action'=>['App\Http\Controllers\BiddingController@retractbid',$info->id],
-                        'method'=>'POST'])!!}
-                        {{ Form::hidden('id',$info->id) }}
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                          <button class="btn btn-danger "  style="border-radius:0%;">
-                            <i class="bi bi-x-circle me-1" style="color: white;"></i> Retract Bid
-                          </button>
+          <div class="tab-pane fade show active mt-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <table class="display " id="pending">
+              <thead>
+                <tr>
+                  <th>ITEMS (Alphabetical Order)</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($pending as $item)
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <img src="/itemImages/{{$item->itemImg}} " width="130px" height="130px" 
+                            style="object-fit: cover; 
+                                  border:3px #E7BB41 solid; 
+                                  margin-top :20px;
+                                  margin-bottom :20px;" 
+                            class="rounded-circle ">
+                          <div class="pt-3 d-flex">
+                            <ul style="list-style: none;">
+                              <li><h5><b>{{$item->prodName}}</b></h5></li>
+                              <li>Type: <b>{{$item->type}}</b></li>
+                              <li>Category: <b>{{$item->category}}</b></li>
+                              <li>Condition: <b>{{$item->cond}}</b></li>
+                              <li>Ends on: <b>{{Carbon\Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
+                            </ul>
+                            <ul style="list-style: none;">
+                              
+                              <li>Bid Placed: <b>{{number_format($item->bidamt,2)}} PHP</b></li>
+                              <li>Reference #: <b>{{$item->refnum}}</b></li>
+                              <li>Placed at: <b>{{Carbon\Carbon::parse($item->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
+                            </ul>
+                          </div>
                         </div>
-                      
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-                @endif
-                <hr class="text-secondary">
-              </div>
-              
-              <button type="button" class="info-btn my-3" data-bs-toggle="modal" data-bs-target="#bidresults">
-                  View Bidding Results
-              </button>
-              
-              
-              <div class="modal fade" id="bidresults" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Bidding Results: <b>{{$info->prodName}}</b></h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body text-center">
-                            <table class="table">
-                              <div class="d-flex  flex-shrink-0  link-dark text-decoration-none border-bottom">
-                                <span class="fs-6 fw-semibold text-center w-100"><b>List of Bidders</b> </span>
-                              </div>
-                              <thead>
-                                <tr>
-                                  <th scope="col">Username</th>
-                                  <th scope="col">Bid Amount</th>
-                                  <th scope="col">Time Placed</th>
-                                  <th scope="col">Reference #</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                @php
-
-                                    $bids = Biddings::where('prod_id',$info->prod_id)
-                                                    ->orderBy('bidamt','DESC')
-                                                    ->get();
-                                  @endphp                                  
-                                  @foreach ($bids as $item)
-                                <tr>
-                                    <th scope = "row">{{$item->uname}}</th>
-                                    <td>{{number_format($item->bidamt,2) }} PHP</td>
-                                    <td>{{$item->created_at}}</td>
-                                    <td>{{$item->refnum}}</td>  
-                                </tr> 
-                                @endforeach
-                              </tbody>
-                            </table>
-                              Make sure to secure an order for this item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
-                              You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
-                              <br>
-                              <br>
-                              <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
-                          </div>
-                          
-                          
-                          <div class="modal-footer justify-content-center  align-items-center">
-                              <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
-                          </div>
+                        @if(\Carbon\Carbon::parse($item->endDate)->subDays(1)< (\Carbon\Carbon::today()))
+                        <label align="center" class="text-danger my-3 w-100" style="font-size:11px;">
+                          <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                          You are not allowed to retract anymore if there are <b class="text-danger">
+                            24 hours or less
+                          </b>left on the timer.
+                        </label>
+                      @else
+                      <div align="center" class="w-100">
+                        <button type="button" class="form-btn mt-3 mb-2" style="background:#C76D6D;" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$item->id}}">
+                            <i class="bi bi-x-circle me-1 text-white"></i>
+                            <b class="text-white">RETRACT</b> 
+                        </button>
                       </div>
-                  </div>
-              </div>
-            </div>
-            @endforeach
-            
-            @else
-              <h3 class="m-5 text-center">Nothing to show.</h3>
-            @endif
-            <div class="justify-content-center mt-3 w-100 d-flex ">{{$won->links()}}</div> --}}
-          </div>
-          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-            <div align="right" class="my-3 mx-3 d-flex align-items-center">
-              <i class="bi bi-search me-3"></i>
-              <input type="search" class="form-control me-3"  name="search" id="lost-search" placeholder="Search for Item Name">
-              <div class="d-flex align-items-center">
-                  Showing
-                  <p id="lost_total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-                  </div>
-            </div>
-            <div class="" id="lost_tbl">
-              
-            </div>   
-
-            {{-- @if(count($lost) > 0)
-            @foreach($lost as $info)
-            <div class="list-group list-group-flush scrollarea align-items-center" style="border-bottom:1px #dddddd solid;">
-              <div class="d-flex align-items-center">
-                <div class="d-flex">
-                  <img src="/itemImages/{{$info->itemImg}} " width="130px" height="130px" 
-                    style="object-fit: cover; 
-                            border:3px #C76D6D solid; 
-                            margin-top :20px;
-                            margin-bottom :20px;" 
-                    class="rounded-circle ">
-                </div>
-                <div class="pt-3">
-                    <ul style="list-style: none;">
-                      <li><h5><b>{{$info->prodName}}</b> </h5></li> 
-                      <li>Type: <b>{{$info->type}}</b></li>
-                      <li>Category: <b>{{$info->category}}</b></li>
-                      <li>Condition: <b>{{$info->cond}}</b></li>
-                      <li>End Date: <b>{{Carbon\Carbon::parse($info->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
-                    </ul>
-                </div>
-                <div class="mt-3">
-                  <ul  style="list-style: none;">
-                      @php
-                        $winner = Biddings::join('users','users.username','bidtransactions.uname')
-                                          ->where('bidtransactions.prod_id', '=', $info->prod_id)
-                                          ->where('bidtransactions.winstatus', '=','Won')
-                                          ->first();
-                        $win_bid = Biddings::where('bidtransactions.prod_id', '=', $info->prod_id)
-                                    ->where('bidtransactions.winstatus', '=','Won')
-                                    ->first();
-                      @endphp
                         
-                      <br>
-                      <li>Reference #: <b>{{$info->refnum}}</b> </li>
-                      <li>Your Bid: <b>{{number_format($info->bidamt,2)}} PHP</b></li>
-                      <li>Placed at: <b>{{\Carbon\Carbon::parse($info->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            @endforeach
-            
-            @else
-              <h3 class="m-5 text-center">Nothing to show.</h3>
-            @endif
-            <div class="justify-content-center mt-3 w-100 d-flex ">{{$lost->links()}}</div> --}}
+
+                        <div class="modal fade" id="staticBackdrop{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fw-bold fs-5" id="staticBackdropLabel">Retract your Bid. ({{$item->prodName}})</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                            <h4>ARE YOU SURE YOU WANT TO RETRACT YOUR BID FOR THIS ITEM?</h4>
+                                            <br>
+                                            <small class = "mb-3">
+                                                Retracting means withrawing the bid you placed. You can retract if you accidentally bid the wrong amount. 
+                                                If you retracted too many times, the system can prevent you from retracting. So always check the amount you entered before placing a bid.
+                                                You can also retract if the product description have been changed.
+                                            </small>
+                                            <br>
+                                            <br>
+                                        <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
+                                    </div>
+                                    <div class="modal-footer justify-content-center  align-items-center">
+                                        <form action="/retractbid" method="get">
+                                            <input type="hidden" name="product_id" value="{{$item->id}}">
+                                            <button type="submit" class="form-btn" data-bs-dismiss="modal">Retract Bid</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      @endif
+                      </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
-    </div>
+        <div class="tab-content " id="nav-tabContent">
+          <div class="tab-pane fade show mt-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <table class="display " id="won">
+              <thead>
+                <tr>
+                  <th>ITEMS (Alphabetical Order)</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($won as $item)
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <img src="/itemImages/{{$item->itemImg}} " width="130px" height="130px" 
+                            style="object-fit: cover; 
+                                  border:3px #59A14F solid; 
+                                  margin-top :20px;
+                                  margin-bottom :20px;" 
+                            class="rounded-circle ">
+                          <div class="pt-3 d-flex">
+                            <ul style="list-style: none;">
+                              <li><h5><b>{{$item->prodName}}</b></h5></li>
+                              <li>Type: <b>{{$item->type}}</b></li>
+                              <li>Category: <b>{{$item->category}}</b></li>
+                              <li>Condition: <b>{{$item->cond}}</b></li>
+                              <li>Ends on: <b>{{Carbon\Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
+                            </ul>
+                            <ul style="list-style: none;">
+                              
+                              <li>Bid Placed: <b>{{number_format($item->bidamt,2)}} PHP</b></li>
+                              <li>Reference #: <b>{{$item->refnum}}</b></li>
+                              <li>Placed at: <b>{{Carbon\Carbon::parse($item->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
+                            </ul>
+                          </div>
+                        </div>
+                      <div align="center" class="w-100">
+                        <button type="button" class="form-btn text-white mb-3 d-flex" style="border-radius: 0%; background:#56A06E;"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Checkout"
+                            onclick="location.href='/checkout/{{$item->prod_id}}'" >
+                            <i class="bi bi-bag-check me-2" style="color:white;"></i>
+                            CHECKOUT
+                        </button>
+                        <button type="button" class="info-btn mb-3" data-bs-toggle="modal" data-bs-target="#bidresults{{$item->prod_id}}">
+                            View Bidding Results
+                        </button>
+                      </div>
+                      <div class="modal fade" id="bidresults{{$item->prod_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Bidding Results: <b>{{$item->prodname}}</b></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
-    <script>
-      
-      $(document).ready(function(){
+                                @php
+                                  $bids = Biddings::where('prod_id',$item->prod_id)
+                                                  ->orderBy('bidamt','DESC')
+                                                  ->get();
+                                @endphp
+                                <div class="modal-body text-center">
+                                    <table class="table">
+                                        <div class="d-flex  flex-shrink-0  link-dark text-decoration-none border-bottom">
+                                            <span class="fs-6 fw-semibold text-center w-100"><b>List of Bidders</b> </span>
+                                        </div>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Bid Amount</th>
+                                            <th scope="col">Time Placed</th>
+                                            <th scope="col">Reference #</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody>
+                                          @foreach ($bids as $item)
+                                              <tr>
+                                                <td>{{$item->uname}}</td>
+                                                <td>{{number_format($item->bidamt,2)}} PHP</td>
+                                                <td>{{$item->created_at}}</td>
+                                                <td>{{$item->refnum}}</td>
+                                              </tr>
+                                          @endforeach
+                                        </tbody>
+                                    </table>
+                                        Make sure to secure an order for this item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
+                                        You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
+                                        <br>
+                                        <br>
+                                        <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
+                            </div>
+                            
+                            <div class="modal-footer justify-content-center  align-items-center">
+                                <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                      </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-        
-              fetch_wonbids_data();
-              fetch_lostbids_data();
-              fetch_pendbids_data();
+        <div class="tab-content " id="nav-tabContent">
+          <div class="tab-pane fade show mt-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <table class="display " id="lost">
+              <thead>
+                <tr>
+                  <th>ITEMS (Alphabetical Order)</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($lost as $item)
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <img src="/itemImages/{{$item->itemImg}} " width="130px" height="130px" 
+                            style="object-fit: cover; 
+                                  border:3px #C76D6D solid; 
+                                  margin-top :20px;
+                                  margin-bottom :20px;" 
+                            class="rounded-circle ">
+                          <div class="pt-3 d-flex">
+                            <ul style="list-style: none;">
+                              <li><h5><b>{{$item->prodName}}</b></h5></li>
+                              <li>Type: <b>{{$item->type}}</b></li>
+                              <li>Category: <b>{{$item->category}}</b></li>
+                              <li>Condition: <b>{{$item->cond}}</b></li>
+                              <li>Ends on: <b>{{Carbon\Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></li>
+                            </ul>
+                            <ul style="list-style: none;">
+                              
+                              <li>Bid Placed: <b>{{number_format($item->bidamt,2)}} PHP</b></li>
+                              <li>Reference #: <b>{{$item->refnum}}</b></li>
+                              <li>Placed at: <b>{{Carbon\Carbon::parse($item->created_at)->format('l, jS \of F Y (h:i:s A)')}}</b></li>
+                            </ul>
+                          </div>
+                        </div>
+                      <div align="center" class="w-100">
+                        <button type="button" class="info-btn mb-3" data-bs-toggle="modal" data-bs-target="#bidresults{{$item->prod_id}}">
+                            View Bidding Results
+                        </button>
+                      </div>
+                      <div class="modal fade" id="bidresults{{$item->prod_id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Bidding Results: <b>{{$item->prodname}}</b></h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
-              function fetch_wonbids_data(query = ''){
-                  
-                  $.ajax({
-                      url:"{{ route('wonsearch')}}",
-                      method:'GET',
-                      data:{query:query},
-                      dataType:'json',
-                      success:function(data){
-                          $('#won_tbl').html(data.table_data);
-                          $('#won_total_records').text(data.total_data);
-                      }
-                  })
-              }
-
-              function fetch_lostbids_data(query = ''){
-                  
-                  $.ajax({
-                      url:"{{ route('lostsearch')}}",
-                      method:'GET',
-                      data:{query:query},
-                      dataType:'json',
-                      success:function(data){
-                          $('#lost_tbl').html(data.table_data);
-                          $('#lost_total_records').text(data.total_data);
-                      }
-                  })
-              }
-
-              
-              function fetch_pendbids_data(query = ''){
-                  
-                  $.ajax({
-                      url:"{{ route('pendsearch')}}",
-                      method:'GET',
-                      data:{query:query},
-                      dataType:'json',
-                      success:function(data){
-                          $('#pend_tbl').html(data.table_data);
-                          $('#pend_total_records').text(data.total_data);
-                      }
-                  })
-              }
-
-           
-      
-              $(document).on('keyup','#won-search',function(){
-                  var query  = $(this).val();
-                  fetch_wonbids_data(query);
-              })
-
-              $(document).on('keyup','#lost-search',function(){
-                  var query  = $(this).val();
-                  fetch_lostbids_data(query);
-              })
-
-              $(document).on('keyup','#pend-search',function(){
-                  var query  = $(this).val();
-                  fetch_pendbids_data(query);
-              })
-
-              
-          })
-        </script>
+                                @php
+                                  $bids = Biddings::where('prod_id',$item->prod_id)
+                                                  ->orderBy('bidamt','DESC')
+                                                  ->get();
+                                @endphp
+                                <div class="modal-body text-center">
+                                    <table class="table">
+                                        <div class="d-flex  flex-shrink-0  link-dark text-decoration-none border-bottom">
+                                            <span class="fs-6 fw-semibold text-center w-100"><b>List of Bidders</b> </span>
+                                        </div>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Username</th>
+                                            <th scope="col">Bid Amount</th>
+                                            <th scope="col">Time Placed</th>
+                                            <th scope="col">Reference #</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody>
+                                          @foreach ($bids as $item)
+                                              <tr>
+                                                <td>{{$item->uname}}</td>
+                                                <td>{{number_format($item->bidamt,2)}} PHP</td>
+                                                <td>{{$item->created_at}}</td>
+                                                <td>{{$item->refnum}}</td>
+                                              </tr>
+                                          @endforeach
+                                        </tbody>
+                                    </table>
+                                        Make sure to secure an order for this item within 2 weeks or else, it will be <b class="text-danger"> DELETED</b> from your biddings.
+                                        You can also be <b class="text-danger">BLOCKED</b> by the Administrator from bidding on other auctions.
+                                        <br>
+                                        <br>
+                                        <b><a href="/termsandcondition" class="">View our Terms & Condition</a></b>
+                            </div>
+                            
+                            <div class="modal-footer justify-content-center  align-items-center">
+                                <button type="button" class="info-btn" data-bs-dismiss="modal">Got It</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                      </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+   
 
 @endsection
+
+@section('javascripts')
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#pending').DataTable();
+    });
+    $(document).ready( function () {
+      $('#won').DataTable();
+    });
+    $(document).ready( function () {
+      $('#lost').DataTable();
+    });
+    
+    
+  </script>
+  @endsection
   

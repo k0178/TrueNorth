@@ -138,12 +138,30 @@ if(distance < 0){
                             {{-- <small class=""><p  style="width:500px; max-width:100%;">{{$item->prodDeets}}</p></small> --}}
                             @if(empty($orderstat))
                                 Auction Ends on: <h5><b> {{ Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></h5>
+                                @if(\Carbon\Carbon::parse($item->endDate)->subDays(1)< (\Carbon\Carbon::today()))
+                                    <label align="center" class="text-danger my-3 w-100" style="font-size:11px;">
+                                    <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                                    You are not allowed to retract anymore if there are <b class="text-danger">
+                                        24 hours or less
+                                    </b>left on the timer.
+                                    </label>
+                                @else
+                                <div align="center" class="w-100">
+                                    <label align="center" class="text-success fw-bold my-3 w-100" style="font-size:11px;">
+                                        <i class="bi bi-info-circle-fill text-success"></i>
+                                        After you place a bid, you are allowed to retract.
+                                    </label>
+                                </div>
+                                @endif
+
+                                
                                 <p id="end_date"></p>
                             @elseif(!empty($orderstat) && $orderstat = 1)
                                 <h4><b class="text-danger">ITEM SOLD</b></h4>
                             @else
                                 <h5>Auction Ends on:<b> {{ Carbon::parse($item->endDate)->isoFormat('MMM D, YYYY')}} (11:59 PM)</b></h5>
                                 <p id="end_date" class=""></p>
+                                
                             @endif
                             <div class="">
                                             {{-- @if(Auth::user()->funds > $item->initialPrice)
@@ -164,8 +182,8 @@ if(distance < 0){
 
                                                     @else
                                                         <div class=" mb-3">
-                                                            Current Bidder/s:<h4>  <b>{{$datacount}}</b></h4>
-                                                            As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}
+                                                            <i class="bi bi-people-fill me-1"></i>Current Bidder/s:<h4>  <b>{{$datacount}}</b></h4>
+                                                            <label for="" style="font-size: 11px;"> As of {{\Carbon\Carbon::now()->toDayDateTimeString()}}</label>
                                                         </div>
                                                     @endif
                                                     {{-- <div class=" ">

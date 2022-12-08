@@ -14,6 +14,7 @@
     <title>{{$title}}</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" href="/img/favicon.ico">
+    @yield('styles')
 </head>
 <body class="">
     <div class="sticky-top">
@@ -314,5 +315,6 @@ tabTrigger.show()
 })
 
 </script>
+@yield('javascripts')
 </body>
 </html>

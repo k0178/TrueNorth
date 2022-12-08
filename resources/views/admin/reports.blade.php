@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="bg-white  mx-5 mb-5 " style=" margin-top: 150px; border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-bottom:1px #f0eeee solid;border-left:1px #f0eeee solid;">
+<div class="bg-white  mx-5 mb-5 border mt-5" >
     <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold text-center w-100">Reports</span>
     </a>
@@ -51,9 +51,9 @@
                 @endphp
             @endforeach
 
-              <h6 class="card-subtitle mb-2 text-muted">total: {{$total,2}} PHP </h6>
+              <h6 class="card-subtitle mb-2 text-muted">total: {{number_format($total,2)}} PHP </h6>
               <h5 class="card-title mt-3">Refunded</h5>
-              <h6 class="card-subtitle mb-2 text-muted">total: {{$rfnd,2}} PHP</h6>
+              <h6 class="card-subtitle mb-2 text-muted">total: {{number_format($rfnd,2)}} PHP</h6>
             </div>
           </div>
 
@@ -63,7 +63,7 @@
     <b>INVENTORY REPORT</b>  
     {!! Form::open(['action'=>['App\Http\Controllers\reportsController@invreport'],
     'method'=>'GET', 'enctype'=>'multipart/form-data']) !!}
-        {{Form::submit('Generate Report',['class'=>'btn btn-dark  mt-3 mb-5','style'=>'border-radius:0%;'])}}
+        {{Form::submit('Generate Report',['class'=>'form-btn  mt-3 mb-5','style'=>'border-radius:0%;'])}}
     {!! Form::close() !!}
 </div>
 <hr>
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-        {{Form::submit('Generate Report',['class'=>'btn btn-dark  mb-5','style'=>'border-radius:0%;'])}}
+        {{Form::submit('Generate Report',['class'=>'form-btn  mb-5','style'=>'border-radius:0%;'])}}
     {!! Form::close() !!}
     </div>
     <hr>
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-            {{Form::submit('Generate Report',['class'=>'btn btn-dark  mb-5','style'=>'border-radius:0%;'])}}
+            {{Form::submit('Generate Report',['class'=>'form-btn mb-5','style'=>'border-radius:0%;'])}}
         {!! Form::close() !!}
         </div>
 </div>

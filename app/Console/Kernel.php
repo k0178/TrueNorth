@@ -21,10 +21,10 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('auctions:auctionExp')->daily();
+        $schedule->command('auctions:auctionExp')->cron('* * * * *');
         $schedule->command('bid:winStatus')->cron('* * * * *');
-        $schedule->command('order:SetOrderDate')->dailyAt('00:02');
-        $schedule->command('order:OrderDeclined')->dailyAt('00:03');
+        $schedule->command('order:SetOrderDate')->cron('* * * * *');
+        $schedule->command('order:OrderDeclined')->cron('* * * * *');
     }
 
     /**

@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/273827b7bf.js" crossorigin="anonymous"></script>
     
     <link rel="icon" href="/img/favicon.ico">
+    @yield('styles')
   </head>
   <body class="">
     <div class="sticky-top">
@@ -95,27 +96,12 @@
 
 
 
-  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-  
-  const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-myModal.addEventListener('shown.bs.modal', () => {
-myInput.focus()
-})
-const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
-if (toastTrigger) {
-toastTrigger.addEventListener('click', () => {
-const toast = new bootstrap.Toast(toastLiveExample)
 
-toast.show()
-})
-}
-    
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
 const alert = (message, type) => {
@@ -331,5 +317,7 @@ tabTrigger.show()
 })
 
 </script>
+
+@yield('javascripts')
   </body>
 </html>

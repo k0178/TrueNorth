@@ -47,18 +47,19 @@ class RefundController extends Controller
         $this->validate($request,[
             'gcashnum'=>['required','regex:/^(09|\+639)\d{9}$/u']
         ]);
-
-        $bid_stat = Biddings::where('winstatus','Pending')
+        $current_date = \Carbon\Carbon::now()->format('Y/m/d');
+        $bid_stat = Biddings::where('retractstat',0)
+                            ->where('endDate','<',$current_date)
                             ->where('uname', Auth::user()->username)
                             ->get();
         $bag_stat = Bag::where('user_id', Auth::user()->id)
         ->get();
- 
-        if(Auth::user()->funds < 500 ||  $bid_stat !== null || $bag_stat !== null){
-            Session::flash('error', "Inillegible for a refund. Please check the guidelines.");
-                    return redirect()->back()->withInput();
-        }
-        else{
+
+        // if(Auth::user()->funds < 500 ||  $bid_stat !== null || $bag_stat !== null){
+        //     Session::flash('error', "Inillegible for a refund. Please check the guidelines.");
+        //             return redirect()->back()->withInput();
+        // }
+        // else{
             $in = new Refund;
                     $in->uname=Auth::User()->username;
                     $in->uid=Auth::User()->id;
@@ -73,8 +74,7 @@ class RefundController extends Controller
 
                     Session::flash('success', "Request successfully submitted. Your Account is now Frozen ");
                     return redirect('/refund');
-
-        }
+        // }
     }
 
     /**
@@ -115,7 +115,7 @@ class RefundController extends Controller
         $fnd = User::find($request->uid);
         
         $fnd->user_status = 1;
-        $fnd->funds = $fnd->funds-$request->input('amt');
+        $fnd->funds = 0;
         $fnd->save();
 
         $msg = $request->input('refundmsg');

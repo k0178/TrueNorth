@@ -1,6 +1,10 @@
 
 @extends('layout.app')
-    @section('content')
+@section('styles')
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
+
+@section('content')
 
 @php 
 use Illuminate\Support\Facades\Auth;
@@ -12,44 +16,43 @@ use App\Models\Auction;
       <div class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none " style="border-bottom:1px #dddddd solid;">
         <span class="fs-5 fw-bold text-center w-100">My Orders</span>
       </div>
-      <div align="right" class="my-3 mx-3 d-flex align-items-center">
-        <i class="bi bi-search me-3"></i>
-        <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Reference Number or Tracking Number">
-        <div class="d-flex align-items-center">
-            Showing
-            <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-            </div>
-      </div>
-        <table class="table">
+      <div class="m-5">
+        <table class="display" id="orders">
           <thead>
             <tr>
-              <th scope="col">Order ID</th>
-              <th scope="col">Item/s</th>
-              <th scope="col">Delivery Address </th>
-              <th scope="col">Total</th>
-              <th scope="col">Reference Number</th>
-              <th scope="col">Delivery Date</th>
-              <th scope="col">Status</th>
-              <th scope="col">Tracking Number</th>
-              <th scope="col"></th>
-              <th scope="col">Send Receipt to Email</th>
+              <th>Order ID</th>
+              <th>Item/s</th>
+              <th >Delivery Address </th>
+              <th>Total</th>
+              <th>Reference Number</th>
+              <th>Delivery Date</th>
+              <th>Status</th>
+              <th>Tracking Number</th>
+              <th>Tracking Number</th>
+              <th>Send Receipt to Email</th>
             </tr>
           </thead>
           <tbody>
-            {{-- @if(count($data) > 0)
+            @if(count($data) > 0)
               @foreach ($data as $info)
                 @php
                   $orders = Auction::join('order_items','auctions.id','=','order_items.prod_id')
-                  ->select('auctions.prodName')
+                  ->select('auctions.*')
                   ->where('order_items.user_id','=',Auth::user()->id)
                   ->where('order_items.order_id',$info->id)
                   ->get();
                 @endphp
               <tr>
-                <th scope="row">{{$info->id}}</th> 
+                <td>{{$info->id}}</td> 
                 <td>
                   @foreach($orders as $item)
+                  <div class="mb-2 d-flex">
+                    <img src="/itemImages/{{$item->itemImg}}" 
+                    width="40px" height="40px" 
+                    style="object-fit: cover; border: 3px #393E41 solid;" 
+                    class="rounded-circle me-1">
                     {{$item->prodName}}
+                  </div>
                     @if( !$loop->last)
                         ,
                     @endif
@@ -61,55 +64,38 @@ use App\Models\Auction;
                 <td>{{$info->refnum}}</td>
                 <td>{{\Carbon\Carbon::parse($info->del_date)->isoFormat('MMM D, YYYY')}}</td>
                 @if($info->del_stat == "Pending")
-                  <td class="text-warning">{{$info->del_stat}}</td>
+                  <td><span class="badge text-bg-warning"><i class="bi bi-hourglass-split me-1"></i>{{$info->del_stat}}</span></td>
                 @elseif($info->del_stat == "Shipped")
-                  <td class="text-success">{{$info->del_stat}}</td>
+                  <td><span class="badge text-bg-success"><i class="bi bi-truck me-1"></i>{{$info->del_stat}}</span></td>
                 @elseif($info->del_stat == "Delivered")
-                <td class="text-success">{{$info->del_stat}}</td>
+                <td><span class="badge text-bg-warning"><i class="bi bi-bookmark-check-fill me-1"></i>{{$info->del_stat}}</span></td>
                 @endif
                 
                 <td>{{$info->tracknum}}</td>
                 <td>
                   <a href="https://www.jtexpress.ph/index/query/gzquery.html" class="btn userloggedbtn text-success " > <i class="bi bi-truck text-success">Track Order</i></a>
                 </td>
+                <td>{{$info->tracknum}}</td>
             @endforeach
             @else
-              <td colspan="8" class="text-center"> 
+              <td> 
                 <h5><b>You have no orders yet.</b> </h5>
               </td>
             @endif
-            </tr> --}}
-
-
+            </tr>
           </tbody>
         </table>   
+      </div>
+        
     </div>
     {{-- <div class="justify-content-center  w-100 d-flex ">{{$data->links()}}</div> --}}
-    
-    <script>
-      $(document).ready(function(){
-          fetch_myorders_data();
-      
-              function fetch_myorders_data(query = ''){
-                  
-                  $.ajax({
-                      url:"{{ route('mosearch')}}",
-                      method:'GET',
-                      data:{query:query},
-                      dataType:'json',
-                      success:function(data){
-                          $('tbody').html(data.table_data);
-                          $('#total_records').text(data.total_data);
-                      }
-                  })
-              }
-      
-              $(document).on('keyup','#form-search',function(){
-                  var query  = $(this).val();
-                  fetch_myorders_data(query);
-              })
-          })
-        </script>
-  
     @endsection
-  
+  @section('javascripts')
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#orders').DataTable();
+    });
+    
+  </script>
+  @endsection

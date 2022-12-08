@@ -106,6 +106,10 @@ class PagesController extends Controller
         $title = "Shipping and Payments";
         return view('customersvcs.ships&payments',compact('title'));
     }
+    function policies(){
+        $title = "Policies";
+        return view('legal.policies',compact('title'));
+    }
 
     function privacypolicy(){
         $title = "Privacy Policy";

@@ -1,4 +1,9 @@
 @extends('layout.app')
+
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
+
 @section('content')
 
 <div class="bg-white my-5 mx-5 " style="border: 1px #dddddd solid;">
@@ -52,58 +57,43 @@
   </div>
 </div>
 
+
   <div class="w-100 mx-3">
-    <div align="right" class="my-3 d-flex align-items-center">
-      <i class="bi bi-search me-3"></i>
-      <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Reference Number or Date (yyyy-mm-dd)">
-      <div class="d-flex align-items-center">
-          Showing
-          <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-          </div>
-    </div>
+    <h4 class="mt-3 text-center">Fund Request History</h4>
 <hr>
-      <table class="table">
+      <table class="display" id="funds">
         <thead>
           <tr>
-            <th scope="col">Amount</th>
-            <th scope="col">Type</th>
-            <th scope="col">Status</th>
-            {{-- <th scope="col">Payment Method</th> --}}
-            <th scope="col">Reference #</th>
-            <th scope="col">Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Payment ID</th>
+            <th>Date Requested</th>
           </tr>
         </thead>
         <tbody>
-          
+          @foreach ($data as $item)
+              <tr>
+                <td>{{number_format($item->amount,2)}} PHP</td>
+                <td>{{$item->type}}</td>
+                <td class="text-success d-flex"><i class="bi bi-check-circle-fill me-1 text-success"></i>{{$item->status}}</td>
+                <td>{{$item->refnum}}</td>
+                <td>{{$item->created_at}}</td>
+              </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-<script>
-$(document).ready(function(){
-        fetch_fund_data();
-
-        function fetch_fund_data(query = ''){
-            // console.log('load data = ' + query);
-            
-            $.ajax({
-                url:"{{ route('frmsearch')}}",
-                method:'GET',
-                data:{query:query},
-                dataType:'json',
-                success:function(data){
-                    $('tbody').html(data.table_data);
-                    $('#total_records').text(data.total_data);
-                }
-            })
-        }
-
-        $(document).on('keyup','#form-search',function(){
-            var query  = $(this).val();
-            fetch_fund_data(query);
-        })
-    })
-  </script>
 @endsection
+
+@section('javascripts')
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#funds').DataTable();
+    });
+
+  </script>
+  @endsection

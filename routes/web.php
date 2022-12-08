@@ -23,7 +23,7 @@ use App\Http\Controllers\reportsController;
 */
 
 
-Route::get("frmsearch",[UserFundingsController::class,'search'])->name('frmsearch');
+// Route::get("frmsearch",[UserFundingsController::class,'search'])->name('frmsearch');
 Route::get("bhsearch",[BidHistoryController::class,'search'])->name('bhsearch');
 Route::get("mosearch",[UserOrdersController::class,'search'])->name('mosearch');
 Route::get("usersearch",[UserManagementController::class,'search'])->name('usersearch');
@@ -139,6 +139,7 @@ Route::get('/contactus','App\Http\Controllers\PagesController@contactus');
 Route::get('/faqs','App\Http\Controllers\PagesController@faqs');
 Route::get('/shipsandpayments','App\Http\Controllers\PagesController@shipsandpayments');
 Route::get('/privacypolicy','App\Http\Controllers\PagesController@privacypolicy');
+Route::get('/policies','App\Http\Controllers\PagesController@policies');
 Route::get('/cookiepolicy','App\Http\Controllers\PagesController@cookiepolicy');
 Route::get('/termsandcondition','App\Http\Controllers\PagesController@termsandcondition');
 Route::get('/developers','App\Http\Controllers\PagesController@developers');

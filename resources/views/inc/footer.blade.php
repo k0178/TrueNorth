@@ -87,8 +87,8 @@
       <div class="col-6 col-md-2 mb-3">
         <h5><b>Legal</b></h5>
         <ul class="nav flex-column">
-          <li class="nav-item mt-2"><a href="/privacypolicy" class="nav-link p-0 text-muted">Privacy Policy</a></li>
-          <li class="nav-item my-2"><a href="/cookiepolicy" class="nav-link p-0 text-muted">Cookie Policy</a></li>
+          <li class="nav-item my-2"><a href="/policies" class="nav-link p-0 text-muted">Policies</a></li>
+          
           <li class="nav-item mb-2"><a href="/termsandcondition" class="nav-link p-0 text-muted">Terms & Condition</a></li>
         </ul>
       </div>

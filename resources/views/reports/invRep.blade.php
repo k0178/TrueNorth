@@ -1,61 +1,51 @@
 @extends('layout.admin')
+@section('styles')
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
 @section('content')
   
 <div class="bg-white my-5 mx-5 " style=" border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-bottom:1px #f0eeee solid;border-left:1px #f0eeee solid;">
   <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-      <span class="fs-5 fw-bold text-center w-100">Inventory Reports</span>
+      <span class="fs-5 fw-bold text-center w-100">Item Reports</span>
   </a>
-  <div align="right" class="my-3 mx-3 d-flex align-items-center">
-    <i class="bi bi-search me-3"></i>
-    <input type="search" class="form-control me-3"  name="search" id="form-search" placeholder="Search for Item Name">
-    <div class="d-flex align-items-center">
-        Showing
-        <p id="total_records" class="mx-2 my-2 fw-bold text-success"> </p>  Records.
-        </div>
-  </div>
-<div class="d-flex ">
- 
-  <table class="table table-striped">
-      <thead>
-        <tr class="text-center">
-          <th scope="col">Name</th>
-          <th scope="col">Condition</th>
-          <th scope="col">Category</th>
-          <th scope="col">Type</th>
-          <th scope="col">Starting Price</th>
-          <th scope="col">Stock Left</th>
-        </tr>
-      </thead>
-      <tbody>
-      
-      </tbody>
-    </table>
-</div>
-</div>
-<script>
-  $(document).ready(function(){
-          fetch_inv_data();
+
   
-          function fetch_inv_data(query = ''){
-              // console.log('load data = ' + query);
-              
-              $.ajax({
-                  url:"{{ route('invsearch')}}",
-                  method:'GET',
-                  data:{query:query},
-                  dataType:'json',
-                  success:function(data){
-                      $('tbody').html(data.table_data);
-                      $('#total_records').text(data.total_data);
-                      
-                  }
-              })
-          }
+    <table class="table " id="inventory">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">Name</th>
+            <th scope="col">Condition</th>
+            <th scope="col">Category</th>
+            <th scope="col">Type</th>
+            <th scope="col">Starting Price</th>
+            <th scope="col">Stock Left</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($data as $item)
+            <tr>
+              <td>{{$item->prodName}}</td>
+              <td>{{$item->cond}}</td>
+              <td>{{$item->category}}</td>
+              <td>{{$item->type}}</td>
+              <td>{{number_format($item->initialPrice,2)}} PHP</td>
+              <td>{{$item->qty}}</td>
+            </tr>
+          @endforeach
+       
+        </tbody>
+      </table>
   
-          $(document).on('keyup','#form-search',function(){
-              var query  = $(this).val();
-              fetch_inv_data(query);
-          })
-      })
-    </script>
+</div>
+
 @endsection
+
+@section('javascripts')
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+      $('#inventory').DataTable();
+    });
+
+  </script>
+  @endsection
