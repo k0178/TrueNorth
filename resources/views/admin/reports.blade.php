@@ -2,7 +2,18 @@
 
 @section('content')
 
+<<<<<<< HEAD
 <div class="bg-white  mx-5 mb-5 border mt-5" >
+=======
+    {{-- <script>
+        function exportTasks(_this) {
+        let _url = $(_this).data('href');    
+        window.location.href = _url;
+        }
+    </script> --}}
+
+<div class="bg-white  mx-5 mb-5 " style=" margin-top: 150px; border-right:1px #f0eeee solid; border-top:1px #f0eeee solid; border-bottom:1px #f0eeee solid;border-left:1px #f0eeee solid;">
+>>>>>>> 2bb398daac924c7e8c1ce68ff97c365455ea2d8e
     <a href="" class="d-flex  flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
         <span class="fs-5 fw-bold text-center w-100">Reports</span>
     </a>
@@ -65,6 +76,8 @@
     'method'=>'GET', 'enctype'=>'multipart/form-data']) !!}
         {{Form::submit('Generate Report',['class'=>'form-btn  mt-3 mb-5','style'=>'border-radius:0%;'])}}
     {!! Form::close() !!}
+
+    <a href="{{ route('export-inv')}}" id="export" class="btn btn-primary">Get CSV</a>
 </div>
 <hr>
 <div class=" text-center pt-5">
@@ -89,6 +102,7 @@
     </div>
         {{Form::submit('Generate Report',['class'=>'form-btn  mb-5','style'=>'border-radius:0%;'])}}
     {!! Form::close() !!}
+    <a href="{{ route('export-fnd')}}" id="export" class="btn btn-primary">Get CSV</a>
     </div>
     <hr>
     <div class=" text-center pt-5">
@@ -113,6 +127,7 @@
         </div>
             {{Form::submit('Generate Report',['class'=>'form-btn mb-5','style'=>'border-radius:0%;'])}}
         {!! Form::close() !!}
+        <a href="{{ route('export-rfd')}}" id="export" class="btn btn-primary">Get CSV</a>
         </div>
 </div>
 
