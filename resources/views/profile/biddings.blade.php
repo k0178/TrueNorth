@@ -88,10 +88,28 @@ $lost_qty = BiddingController::lost_qty();
                         </label>
                       @else
                       <div align="center" class="w-100">
-                        <button type="button" class="form-btn mt-3 mb-2" style="background:#C76D6D;" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$item->id}}">
+                        @php
+                          $retract_count = Biddings::where('retractstat', 1)
+                                                    ->where('user_id', Auth::user()->id)
+                                                    ->count();
+                        @endphp
+                        @if($retract_count >= 10)
+                          <label align="center" class="text-danger mt-3 w-100" style="font-size:11px;">
+                            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                              You are at risk of being <b class="text-danger">blocked by the system</b> due to your multiple retractions on this item. 
+                          </label>
+                          <label for="" align="center" class="mt-2 mb-3 text-decoration-underline">
+                            <a href="/policies" class="fw-bold" style="font-size: 11px;">View our Blocking Policy</a>
+                          </label>
+                          <br>
+                          
+                        @else
+                          <button type="button" class="form-btn mt-3 mb-2" style="background:#C76D6D;" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$item->id}}">
+                            
                             <i class="bi bi-x-circle me-1 text-white"></i>
                             <b class="text-white">RETRACT</b> 
-                        </button>
+                          </button>
+                        @endif
                       </div>
                         
 
@@ -117,6 +135,7 @@ $lost_qty = BiddingController::lost_qty();
                                     <div class="modal-footer justify-content-center  align-items-center">
                                         <form action="/retractbid" method="get">
                                             <input type="hidden" name="product_id" value="{{$item->id}}">
+                                            <input type="hidden" name="retract_count" value="{{$item->retract_count}}">
                                             <button type="submit" class="form-btn" data-bs-dismiss="modal">Retract Bid</button>
                                         </form>
                                     </div>

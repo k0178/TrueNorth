@@ -108,7 +108,7 @@
                                 <i class="bi bi-x-diamond-fill me-2"></i>   Upon three (3) non-checked out auctions won by the user, said user will be banned by the system.
                             </p>
                             <p>
-                                <i class="bi bi-x-diamond-fill me-2"></i>    Retracting three (3) or more bids within a day will put the user at risk of a ban.
+                                <i class="bi bi-x-diamond-fill me-2"></i>    Retracting ten (10) or more times on a single item within a day will put the user at risk of a ban.
                             </p>
                             <p>
                                 <i class="bi bi-x-diamond-fill me-2"></i>    To reappeal for an unban, kindly contact the company through their contact information located on the website.

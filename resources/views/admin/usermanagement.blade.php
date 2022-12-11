@@ -1,3 +1,6 @@
+@php
+  use App\Models\Biddings;   
+@endphp
 @extends('layout.admin')
 @section('styles')
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
@@ -20,6 +23,7 @@
             <th scope="col">Address</th>
             <th scope="col">Funds</th>
             <th scope="col">Account Created at</th>
+            <th scope="col">Total Retractions</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -32,13 +36,24 @@
               <td>{{$user->address}}</td>
               <td>{{number_format($user->funds,2)}} PHP</td>
               <td>{{$user->created_at}}</td>
-              <td>
-                {!! Form::open(['action'=>['App\Http\Controllers\UserManagementController@update',$user->id],
-                'method'=>'PUT'])!!}
-                {{ Form::hidden('id',$user->id) }}
-                {{ Form::submit('Block User',['class' => 'btn userloggedbtn text-danger'])}}
-                {!! Form::close() !!}
-            </td>
+              @php
+              $retract_count = Biddings::where('retractstat', 1)
+                                        ->where('user_id', $user->id)
+                                        ->count();
+              @endphp
+              <td>{{$retract_count}}</td>
+              @if($retract_count >= 10)
+                <td>
+                  {!! Form::open(['action'=>['App\Http\Controllers\UserManagementController@update',$user->id],
+                  'method'=>'PUT'])!!}
+                  {{ Form::hidden('id',$user->id) }}
+                  {{ Form::submit('Block User',['class' => 'btn userloggedbtn text-danger'])}}
+                  {!! Form::close() !!}
+                </td>
+              @else
+                <td> </td>
+              @endif
+            
             </tr>
           @endforeach
         </tbody>

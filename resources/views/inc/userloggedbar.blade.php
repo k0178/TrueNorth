@@ -284,7 +284,7 @@ $users = User::select('*')
                         <a class="nav-link" href="/orders"><i class="bi bi-basket3 me-2"></i>MY ORDERS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/refund"><i class="bi bi-piggy-bank me-2"></i>REQUEST A REFUND</a>
+                        <a class="nav-link" href="/refund"><i class="bi bi-piggy-bank me-2"></i>FUND WITHDRAWAL</a>
                     </li>
                 </ul>  
                 <hr>

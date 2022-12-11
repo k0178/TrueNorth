@@ -151,9 +151,10 @@ if(distance < 0){
                                         <i class="bi bi-info-circle-fill text-success"></i>
                                         After you place a bid, you are allowed to retract.
                                     </label>
+                                    <label for="" style="font-size: 11px;"> Note: You can be <b class="text-danger">blocked</b>  if you try to retract multiple times on a single item. </label>
                                 </div>
                                 @endif
-
+                                
                                 
                                 <p id="end_date"></p>
                             @elseif(!empty($orderstat) && $orderstat = 1)
@@ -204,7 +205,7 @@ if(distance < 0){
                                                     @if(empty($pfp))
                                                         <h5><b>No Bidders yet.</b></h5>
                                                     @else
-                                                        <h5>Highest Bidder: <img src="/userPFP/{{$pfp->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-2" ><b>{{$max_bidder->uname}}</b></h5>
+                                                        {{-- <h5>Highest Bid: <img src="/userPFP/{{$pfp->profileImage}}" width="30px" height="30px" style="object-fit: cover;" class="rounded-circle me-2" ><b>{{$max_bidder->uname}}</b></h5> --}}
                                                     @endif
                                                     {!! Form::open(['action'=>'App\Http\Controllers\BiddingController@store','method'=>'POST',$item->id]) !!}
                                                         {{Form::hidden('id',$item->id)}}
