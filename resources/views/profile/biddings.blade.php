@@ -88,15 +88,19 @@ $lost_qty = BiddingController::lost_qty();
                         </label>
                       @else
                       <div align="center" class="w-100">
+                        
                         @php
                           $retract_count = Biddings::where('retractstat', 1)
                                                     ->where('user_id', Auth::user()->id)
+                                                    ->where('prod_id', $item->prod_id)
                                                     ->count();
                         @endphp
+                        
                         @if($retract_count >= 10)
-                          <label align="center" class="text-danger mt-3 w-100" style="font-size:11px;">
-                            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
-                              You are at risk of being <b class="text-danger">blocked by the system</b> due to your multiple retractions on this item. 
+                          <i class="bi bi-exclamation-triangle-fill text-danger"></i><label align="center" class="text-danger mt-1 w-100" style="font-size:11px;">
+                            
+                              <b class="text-danger" style="font-size: 15px;"> You already retracted {{$retract_count}} times on this item.</b>              <br>
+                              You are at risk of being <b class="text-danger">blocked by the system</b> due to your <br> multiple retractions on this item. 
                           </label>
                           <label for="" align="center" class="mt-2 mb-3 text-decoration-underline">
                             <a href="/policies" class="fw-bold" style="font-size: 11px;">View our Blocking Policy</a>
